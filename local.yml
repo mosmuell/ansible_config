@@ -12,15 +12,15 @@
 
   - name: copy wallpaper file
     copy:
-      src: files/Horizon_single.jpg
-      dest: /usr/share/backgrounds/Horizon_single.jpg
+      src: files/Horizons_Single.jpg
+      dest: /usr/share/backgrounds/Horizons_Single.jpg
       owner: root
       group: root
 
   - name: set wallpaper
     dconf:
       key: "/org/gnome/desktop/background/picture-uri"
-      value: "'file:///usr/share/backgrounds/Horizon_single.jpg'"
+      value: "'file:///usr/share/backgrounds/Horizons_Single.jpg'"
 
 
   - name: set wallpaper position
