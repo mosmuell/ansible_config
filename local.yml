@@ -1,4 +1,27 @@
 ---
+
+- hosts: localhost
+  tags: always
+  become: true
+  pre_tasks:
+    - name: pre-run | update package cache (arch)
+      tags: always
+      pacman: update_cache=yes
+      changed_when: False
+      when: ansible_distribution == "Archlinux"
+
+    - name: pre-run | update package cache (fedora)
+      tags: always
+      dnf: update_cache=yes
+      changed_when: False
+      when: ansible_distribution == "Fedora"
+
+    - name: pre-run | update package cache (debian, etc)
+      tags: always
+      apt: update_cache=yes
+      changed_when: False
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+
 - hosts: localhost # running the playbook against the host machine
   connection: local #use local connection -> no ssh
   become: true # using sudo
@@ -43,16 +66,30 @@
       key: "/org/gnome/desktop/background/picture-options"
       value: "'zoom'"
 
-  - name: copy .bashrc
-    copy:
-      src: files/bashrc
-      dest: /home/mose/.bashrc
+  - name: users | mose | create personal config directories
+    tags: dotfiles,dotfiles-mose
+    file:
+      path: /home/mose/{{ item.dir }}
+      state: directory
       owner: mose
       group: mose
+      mode: 0700
+    with_items:
+      - { dir: .config }
+      - { dir: .config/nvim }
+      - { dir: .local }
+      - { dir: .local/share }
+      - { dir: .local/share/applications }
 
-  - name: enable git prompt
+  - name: users | mose | copy personal config files
     copy:
-      src: files/git-prompt.sh
-      dest: /home/mose/.git-prompt.sh
+      src: users/mose/{{ item.src }}
+      dest: /home/mose/{{ item.dest }}
       owner: mose
       group: mose
+      mode: 0600
+    with_items:
+      - { src: 'git-prompt.sh', dest: '.git-prompt.sh'}
+      - { src: 'bashrc', dest: '.bashrc'}
+      - { src: 'vimrc', dest: '.vimrc' }
+      - { src: 'init.vim', dest: '.config/nvim/init.vim'}
