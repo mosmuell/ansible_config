@@ -1,0 +1,9 @@
+---
+- hosts: localhost # running the playbook against the host machine
+  connection: local #use local connection -> no ssh
+  become: true # using sudo
+
+  tasks:
+  - name: install htop
+    package:
+      name: htop
