@@ -64,17 +64,48 @@
   - include_tasks: tasks/desktop_environments/gnome/terminal.yml
 
   ## install software (flatpak)
-  - name: Remove the flathub remote from the system installation
-    flatpak_remote:
-      name: flathub
-      state: absent
+  - name: software | flatpak | configure flatpak (doesn't work on first install ..)
+    block:
+      # set up flatpak support
+      - name: system setup | tweaks | add flatpak support
+        package:
+          name: flatpak
+          state: present
 
-#  - name: Add the flathub flatpak repository remote to the user installation
-#    flatpak_remote:
-#      name: flathub
-#      state: present
-#      flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-#      method: user
+      - name: system setup | tweaks | flatpak | add flathub remote
+        tags: packages,flatpak,workstation-packages
+        become_user: mose
+        flatpak_remote:
+          name: flathub
+          flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+          method: user
+          state: present
+            #       - name: ensure folders exist
+            #         file:
+            #           path: /var/lib/flatpak/repo/{{ item }}
+            #           state: directory
+            #           owner: root
+            #           group: root
+            #           mode: 0755
+            #         loop:
+            #           - tmp
+            #           - objects
+            # 
+            #       - name: flatpak config
+            #         copy:
+            #           dest: /var/lib/flatpak/repo/config
+            #           content: |
+            #             [core]
+            #             repo_version=1
+            #             mode=bare-user-only
+            #             min-free-space-size=500MB
+            # 
+            #   - name: Add the flathub flatpak repository remote to the user installation
+            #     flatpak_remote:
+            #       name: flathub
+            #       state: present
+            #       flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+            #       method: user
 
   - import_tasks: tasks/software/anki.yml
   - import_tasks: tasks/software/audacity.yml
