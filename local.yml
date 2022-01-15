@@ -4,6 +4,18 @@
   become: true # using sudo
 
   tasks:
+  - name: install python environment
+    package:
+      name:
+        - python3-numpy
+        - python3-scipy
+        - python3-matplotlib
+        - python3-ipython
+        - python3-pandas
+        - python3-sympy
+        - python3-nose
+        - atlas-devel
+
   - name: install htop and nvim
     package:
       name:
@@ -27,3 +39,4 @@
     dconf:
       key: "/org/gnome/desktop/background/picture-options"
       value: "'zoom'"
+
