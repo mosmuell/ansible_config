@@ -1,0 +1,7 @@
+- name: software | anki | install package
+  tags: packages,flatpak,anki,workstation-packages
+  become_user: mose
+  flatpak:
+    name: net.ankiweb.Anki
+    method: user
+    state: present

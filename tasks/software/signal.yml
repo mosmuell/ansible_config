@@ -1,0 +1,17 @@
+- name: software | signal | install package
+  tags: packages,flatpak,signal,workstation-packages
+  become_user: mose
+  flatpak:
+    name: org.signal.Signal
+    method: user
+    state: present
+
+- name: software | signal | enable autostart
+  tags: packages,flatpak,signal,workstation-packages
+  file:
+    src: /home/mose/.local/share/flatpak/exports/share/applications/org.signal.Signal.desktop
+    dest: /home/mose/.config/autostart/org.signal.Signal.desktop
+    owner: mose
+    group: mose
+    state: link
+  when: signal_autostart is defined and signal_autostart == true

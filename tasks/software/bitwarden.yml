@@ -1,0 +1,7 @@
+- name: software | bitwarden | install package
+  tags: bitwarden,packages,flatpak,workstation-packages
+  become_user: mose
+  flatpak:
+    name: flathub com.bitwarden.desktop
+    method: user
+    state: present
