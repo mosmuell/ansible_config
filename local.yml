@@ -92,4 +92,11 @@
       - { src: 'git-prompt.sh', dest: '.git-prompt.sh'}
       - { src: 'bashrc', dest: '.bashrc'}
       - { src: 'vimrc', dest: '.vimrc' }
-      - { src: 'init.vim', dest: '.config/nvim/init.vim'}
+
+  - name: users | mose | create symbolic links
+    file:
+      src: /home/mose/{{ item.src }}
+      dest: /home/mose/{{ item.dest }}
+      state: link
+    with_items:
+      - { src: '.vimrc', dest: '.config/nvim/init.vim'}
