@@ -1,0 +1,19 @@
+# Terminal
+  - name: gnome | terminal | set terminal configuration
+    tags: gnome,gnome-terminal
+    become_user: mose
+    dconf:
+      key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/{{ item.key }}"
+      value: "{{ item.value}}"
+    with_items:
+      - { key: "audible-bell", value: "false" }
+      - { key: "background-color", value: "'rgb(255,255,255)'" }
+      - { key: "background-transparency-percent", value: "14"}
+      - { key: "bold-is-bright", value: "false"}
+      - { key: "foreground-color", value: "'rgb(23,20,33)'"}
+      - { key: "use-theme-colors", value: "false"}
+      - { key: "use-transparent-background", value: "false"}
+      #- { key: use-system-font, value: "false" }
+      - { key: default-size-columns, value: "120" }
+      - { key: scrollback-unlimited, value: "true" }
+      - { key: scrollbar-policy, value: "'never'" }

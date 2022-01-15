@@ -54,110 +54,56 @@
         - htop
         - neovim
 
-# Wallpaper
-  - name: copy wallpaper file
-    copy:
-      src: files/Horizons_Single.jpg
-      dest: /usr/share/backgrounds/Horizons_Single.jpg
-      owner: root
-      group: root
+  - block:
+    ## User configs
+    - import_tasks: tasks/users/mose.yml
 
-  - name: set wallpaper
-    become_user: mose
-    dconf:
-      key: "/org/gnome/desktop/background/picture-uri"
-      value: "'file:///usr/share/backgrounds/Horizons_Single.jpg'"
+  ## desktop environments
+    - include_tasks: tasks/desktop_environments/gnome/appearance.yml
 
+    - include_tasks: tasks/desktop_environments/gnome/keybindings.yml
 
-  - name: set wallpaper position
-    become_user: mose
-    dconf:
-      key: "/org/gnome/desktop/background/picture-options"
-      value: "'zoom'"
+    - include_tasks: tasks/desktop_environments/gnome/nautilus.yml
 
-# Config files
-  - name: users | mose | create personal config directories
-    tags: dotfiles,dotfiles-mose
-    file:
-      path: /home/mose/{{ item.dir }}
-      state: directory
-      owner: mose
-      group: mose
-      mode: 0700
-    with_items:
-      - { dir: .config }
-      - { dir: .config/nvim }
-      - { dir: .local }
-      - { dir: .local/share }
-      - { dir: .local/share/applications }
+    - include_tasks: tasks/desktop_environments/gnome/terminal.yml
 
-  - name: users | mose | copy personal config files
-    copy:
-      src: users/mose/{{ item.src }}
-      dest: /home/mose/{{ item.dest }}
-      owner: mose
-      group: mose
-      mode: 0600
-    with_items:
-      - { src: 'git-prompt.sh', dest: '.git-prompt.sh'}
-      - { src: 'bashrc', dest: '.bashrc'}
-      - { src: 'vimrc', dest: '.vimrc' }
+#    ## install software
+#    - import_tasks: software/audacious.yml
+#    - import_tasks: software/audacity.yml
+#    - import_tasks: software/authy.yml
+#    - import_tasks: software/bitwarden.yml
+#    - import_tasks: software/caffeine.yml
+#    - import_tasks: software/codecs.yml
+#    - import_tasks: software/boto.yml
+#    - import_tasks: software/chromium.yml
+#    - import_tasks: software/darktable.yml
+#    - import_tasks: software/firefox.yml
+#    - import_tasks: software/foliate.yml
+#    - import_tasks: software/google_chrome.yml
+#    - import_tasks: software/glimpse.yml
+#    - import_tasks: software/kdenlive.yml
+#    - import_tasks: software/keepassxc.yml
+#    - import_tasks: software/libreoffice.yml
+#    - import_tasks: software/linode-cli.yml
+#    - import_tasks: software/lutris.yml
+#    - import_tasks: software/mattermost.yml
+#    - import_tasks: software/minecraft.yml
+#    - import_tasks: software/misc_games.yml
+#    - import_tasks: software/misc_packages.yml
+#    - import_tasks: software/openshot.yml
+#    - import_tasks: software/packer.yml
+#    - import_tasks: software/signal.yml
+#    - import_tasks: software/solaar.yml
+#    - import_tasks: software/spotify.yml
+#    - import_tasks: software/steam.yml
+#    - import_tasks: software/syncthing.yml
+#    - import_tasks: software/terraform.yml
+#    - import_tasks: software/thunderbird.yml
+#    - import_tasks: software/todoist.yml
+#    - import_tasks: software/ulauncher.yml
+#    - import_tasks: software/vagrant.yml
+#    - import_tasks: software/virtualbox.yml
+#    - import_tasks: software/vivaldi.yml
+#    - import_tasks: software/vlc.yml
+#    - import_tasks: software/xonotic.yml
 
-  - name: users | mose | create symbolic links
-    file:
-      src: /home/mose/{{ item.src }}
-      dest: /home/mose/{{ item.dest }}
-      state: link
-    with_items:
-      - { src: '.vimrc', dest: '.config/nvim/init.vim'}
-
-# Keybindings
-  - name: gnome | keybindings | set custom-keybindings
-    tags: gnome,keybindings
-    become_user: mose
-    dconf:
-      key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
-      value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
-
-  - name: gnome | keybindings | setting terminal keybinding
-    tags: gnome,keybindings
-    become_user: mose
-    dconf:
-      key: "{{ item.key }}"
-      value: "{{ item.value}}"
-    with_items:
-      - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name", value: "'Terminal'" }
-      - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding", value: "'<Primary><Alt>t'" }
-      - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command", value: "'gnome-terminal'" }
-
-# Terminal
-  - name: gnome | terminal | set terminal configuration
-    tags: gnome,gnome-terminal
-    become_user: mose
-    dconf:
-      key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/{{ item.key }}"
-      value: "{{ item.value}}"
-    with_items:
-      - { key: "audible-bell", value: "false" }
-      - { key: "background-color", value: "'rgb(255,255,255)'" }
-      - { key: "background-transparency-percent", value: "14"}
-      - { key: "bold-is-bright", value: "false"}
-      - { key: "foreground-color", value: "'rgb(23,20,33)'"}
-      - { key: "use-theme-colors", value: "false"}
-      - { key: "use-transparent-background", value: "false"}
-      #- { key: "visible-name", value: "Mose"}
-      #- { key: font, value: "'Fira Mono Regular 12'" }
-      #- { key: use-system-font, value: "false" }
-      - { key: default-size-columns, value: "120" }
-      - { key: scrollback-unlimited, value: "true" }
-      - { key: scrollbar-policy, value: "'never'" }
-
-#  - name: gnome | terminal | setting default terminal profile
-#    tags: gnome,keybindings
-#    become_user: mose
-#    dconf:
-#      key: "{{ item.key }}"
-#      value: "{{ item.value}}"
-#    with_items:
-#      - { key: "/org/gnome/terminal/legacy/profiles:/default", value: "'b1dcc9dd-5262-4d8d-a863-c897e6d979b9'" }
-#      - { key: "/org/gnome/terminal/legacy/profiles:/list", value: "['b1dcc9dd-5262-4d8d-a863-c897e6d979b9']" }

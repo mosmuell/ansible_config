@@ -1,0 +1,35 @@
+# Config files
+  - name: users | mose | create personal config directories
+    tags: dotfiles,dotfiles-mose
+    file:
+      path: /home/mose/{{ item.dir }}
+      state: directory
+      owner: mose
+      group: mose
+      mode: 0700
+    with_items:
+      - { dir: .config }
+      - { dir: .config/nvim }
+      - { dir: .local }
+      - { dir: .local/share }
+      - { dir: .local/share/applications }
+
+  - name: users | mose | copy personal config files
+    copy:
+      src: users/mose/{{ item.src }}
+      dest: /home/mose/{{ item.dest }}
+      owner: mose
+      group: mose
+      mode: 0600
+    with_items:
+      - { src: 'git-prompt.sh', dest: '.git-prompt.sh'}
+      - { src: 'bashrc', dest: '.bashrc'}
+      - { src: 'vimrc', dest: '.vimrc' }
+
+  - name: users | mose | create symbolic links
+    file:
+      src: /home/mose/{{ item.src }}
+      dest: /home/mose/{{ item.dest }}
+      state: link
+    with_items:
+      - { src: '.vimrc', dest: '.config/nvim/init.vim'}

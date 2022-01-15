@@ -1,0 +1,20 @@
+- name: gnome | nautilus | enable tree-view in nautilus
+  tags: gnome,nautilus
+  become_user: mose
+  dconf:
+    key: "/org/gnome/nautilus/list-view/use-tree-view"
+    value: "true"
+
+- name: gnome | nautilus | set list view in nautilus
+  tags: gnome,nautilus
+  become_user: mose
+  dconf:
+    key: "/org/gnome/nautilus/preferences/default-folder-viewer"
+    value: "'list-view'"
+
+- name: gnome | nautilus | set directories to be shown before files in nautilus
+  tags: gnome,nautilus
+  become_user: mose
+  dconf:
+    key: "/org/gtk/settings/file-chooser/sort-directories-first"
+    value: "true"
