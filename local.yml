@@ -4,6 +4,8 @@
   become: true # using sudo
 
   tasks:
-  - name: install htop
+  - name: install htop and nvim
     package:
-      name: htop
+      name: 
+        - htop
+        - neovim
