@@ -39,6 +39,12 @@
         - python3-nose
         - atlas-devel
         - python3-psutil
+        - python3-notebook
+
+  - name: installing qutip with pip
+    pip:
+      name:
+        - qutip
 
   - name: install htop and nvim
     package:
