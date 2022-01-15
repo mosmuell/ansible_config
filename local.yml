@@ -15,6 +15,7 @@
         - python3-sympy
         - python3-nose
         - atlas-devel
+        - python3-psutil
 
   - name: install htop and nvim
     package:
