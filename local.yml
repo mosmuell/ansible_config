@@ -64,6 +64,13 @@
   - include_tasks: tasks/desktop_environments/gnome/terminal.yml
 
   ## install software (flatpak)
+  - name: Add the flathub flatpak repository remote to the user installation
+    flatpak_remote:
+      name: flathub
+      state: present
+      flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+      method: user
+
   - import_tasks: tasks/software/anki.yml
   - import_tasks: tasks/software/audacity.yml
   - import_tasks: tasks/software/bitwarden.yml
