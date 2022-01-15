@@ -43,3 +43,16 @@
       key: "/org/gnome/desktop/background/picture-options"
       value: "'zoom'"
 
+  - name: copy .bashrc
+    copy:
+      src: files/bashrc
+      dest: /home/mose/.bashrc
+      owner: mose
+      group: mose
+
+  - name: enable git prompt
+    copy:
+      src: files/git-prompt.sh
+      dest: /home/mose/.git-prompt.sh
+      owner: mose
+      group: mose
