@@ -1,0 +1,21 @@
+# Python environment
+  - name: install python environment
+    package:
+      name:
+        - python3-numpy
+        - python3-scipy
+        - python3-matplotlib
+        - python3-ipython
+        - python3-pandas
+        - python3-sympy
+        - python3-nose
+        - atlas-devel
+        - python3-psutil
+        - python3-notebook
+      state: latest
+
+  - name: installing qutip with pip (not working at the moment)
+    pip:
+      name:
+        - qutip
+      state: absent

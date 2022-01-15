@@ -1,0 +1,30 @@
+# C++ tools
+  - name: install C++ tools
+    package:
+      name:
+        - lapack-devel
+        - gsl-devel
+        - make
+        - automake
+        - gcc
+        - gcc-c++
+        - kernel-devel
+      state: latest
+
+  - name: installing visualisation programms
+    package:
+      name:
+        - okular
+        - gimp
+        - inkscape
+      state: latest
+
+  - name: installing tools
+    package:
+      name:
+        - pavucontrol
+        - htop
+        - neovim
+        - libnsl
+        - gnome-tweaks
+      state: latest

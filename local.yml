@@ -27,32 +27,6 @@
   become: true # using sudo
 
   tasks:
-# Python environment
-  - name: install python environment
-    package:
-      name:
-        - python3-numpy
-        - python3-scipy
-        - python3-matplotlib
-        - python3-ipython
-        - python3-pandas
-        - python3-sympy
-        - python3-nose
-        - atlas-devel
-        - python3-psutil
-        - python3-notebook
-
-  - name: installing qutip with pip (not working at the moment)
-    pip:
-      name:
-        - qutip
-      state: absent
-
-  - name: install htop and nvim
-    package:
-      name:
-        - htop
-        - neovim
 
   ## User configs
   - import_tasks: tasks/users/mose.yml
@@ -63,50 +37,10 @@
   - include_tasks: tasks/desktop_environments/gnome/nautilus.yml
   - include_tasks: tasks/desktop_environments/gnome/terminal.yml
 
-  ## install software (flatpak)
-  - name: software | flatpak | configure flatpak (doesn't work on first install ..)
-    block:
-      # set up flatpak support
-      - name: system setup | tweaks | add flatpak support
-        package:
-          name: flatpak
-          state: present
+  ## add flatpak support and flathub remote
+  - import_tasks: tasks/software/flatpak.yml
 
-      - name: system setup | tweaks | flatpak | add flathub remote
-        tags: packages,flatpak,workstation-packages
-        become_user: mose
-        flatpak_remote:
-          name: flathub
-          flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-          method: user
-          state: present
-            #       - name: ensure folders exist
-            #         file:
-            #           path: /var/lib/flatpak/repo/{{ item }}
-            #           state: directory
-            #           owner: root
-            #           group: root
-            #           mode: 0755
-            #         loop:
-            #           - tmp
-            #           - objects
-            # 
-            #       - name: flatpak config
-            #         copy:
-            #           dest: /var/lib/flatpak/repo/config
-            #           content: |
-            #             [core]
-            #             repo_version=1
-            #             mode=bare-user-only
-            #             min-free-space-size=500MB
-            # 
-            #   - name: Add the flathub flatpak repository remote to the user installation
-            #     flatpak_remote:
-            #       name: flathub
-            #       state: present
-            #       flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-            #       method: user
-
+  ### installing flatpak software
   - import_tasks: tasks/software/anki.yml
   - import_tasks: tasks/software/audacity.yml
   - import_tasks: tasks/software/bitwarden.yml
@@ -116,3 +50,6 @@
   - import_tasks: tasks/software/thunderbird.yml
   - import_tasks: tasks/software/vlc.yml
   - import_tasks: tasks/software/zoom.yml
+
+  - import_tasks: tasks/software/python.yml
+  - import_tasks: tasks/software/package_utilities.yml

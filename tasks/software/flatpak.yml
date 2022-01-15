@@ -1,0 +1,34 @@
+  - name: software | flatpak | configure flatpak
+    block:
+      - name: system setup | tweaks | add flatpak support
+        package:
+          name: flatpak
+          state: present
+
+      - name: system setup | tweaks | flatpak | add flathub remote
+        tags: packages,flatpak,workstation-packages
+        become_user: mose
+        flatpak_remote:
+          name: flathub
+          flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+          method: user
+          state: present
+            #       - name: ensure folders exist
+            #         file:
+            #           path: /var/lib/flatpak/repo/{{ item }}
+            #           state: directory
+            #           owner: root
+            #           group: root
+            #           mode: 0755
+            #         loop:
+            #           - tmp
+            #           - objects
+            # 
+            #       - name: flatpak config
+            #         copy:
+            #           dest: /var/lib/flatpak/repo/config
+            #           content: |
+            #             [core]
+            #             repo_version=1
+            #             mode=bare-user-only
+            #             min-free-space-size=500MB
