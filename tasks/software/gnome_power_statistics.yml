@@ -1,0 +1,7 @@
+- name: software | gnome power statistics | install package
+  tags: packages,flatpak,anki,workstation-packages
+  become_user: mose
+  flatpak:
+    name: flathub org.gnome.PowerStats
+    method: user
+    state: present

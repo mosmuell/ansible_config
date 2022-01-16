@@ -39,6 +39,9 @@
   ## enable repositories
   - import_tasks: tasks/system_setup/repositories.yml
 
+  - import_tasks: tasks/software/python.yml
+  - import_tasks: tasks/software/package_utilities.yml
+
   ## add flatpak support and flathub remote
   - import_tasks: tasks/software/flatpak.yml
 
@@ -47,11 +50,11 @@
   - import_tasks: tasks/software/audacity.yml
   - import_tasks: tasks/software/bitwarden.yml
   - import_tasks: tasks/software/discord.yml
+  - import_tasks: tasks/software/gnome-power-statistics.yml
   - import_tasks: tasks/software/signal.yml
   - import_tasks: tasks/software/spotify.yml
   - import_tasks: tasks/software/thunderbird.yml
   - import_tasks: tasks/software/vlc.yml
   - import_tasks: tasks/software/zoom.yml
 
-  - import_tasks: tasks/software/python.yml
-  - import_tasks: tasks/software/package_utilities.yml
+  #- import_tasks: tasks/software/moneydance.yml

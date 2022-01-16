@@ -27,6 +27,7 @@
         - pavucontrol # sound control
         - htop
         - neovim
+        - wl-clipboard # needed for copy/paste to the system clipboard with wayland
         - libnsl # needed for some legacy programms?
         #- libusb # needed for USB devices
         - gnome-tweaks
@@ -34,4 +35,6 @@
         - rsync
         - screen
         - wget
+        - langpacks-de # german language pack for libreoffice
+        - langpacks-en_GB # british "
       state: latest

@@ -1,0 +1,19 @@
+- name: download and install moneydance
+  tasks:
+   - name: Create a Directory /opt/moneydance
+     become: yes
+     file:
+       path: /opt/moneydance
+       state: directory
+       mode: 0755
+       owner: mose
+       group: mose
+   - name: Download moneydance using get_url
+     become: yes
+     get_url:
+       url: https://infinitekind.com/stabledl/current/moneydance_linux_amd64.sh and execute
+       dest: /opt/moneydance
+       mode: 0755
+       group: mose
+       owner: mose
+       checksum: sha512:5bdea5414713c9ba39e226f062701fa14998b1a798c9750f956a0f59b5edabb8d83af9ec9f81cf9f47fa92c21b560c9b2be1b543d0bd8f1b49579b69101d3a8f
