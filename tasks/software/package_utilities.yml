@@ -22,9 +22,13 @@
   - name: installing tools
     package:
       name:
-        - pavucontrol
+        - pavucontrol # sound control
         - htop
         - neovim
-        - libnsl
+        - libnsl # needed for some legacy programms?
         - gnome-tweaks
+        - curl
+        - rsync
+        - screen
+        - wget
       state: latest
