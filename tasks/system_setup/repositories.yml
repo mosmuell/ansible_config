@@ -1,6 +1,6 @@
   - name: system setup | repositories | enable RPM Fusion repository on Fedora
     dnf:
       name: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm"
-    state: present
-    when: when: ansible_distribution == 'Fedora'
+      state: present
+    when: ansible_distribution == 'Fedora'
 
