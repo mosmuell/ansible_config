@@ -1,5 +1,4 @@
 ---
-
 - hosts: localhost
   tags: always
   become: true
@@ -36,6 +35,9 @@
   - include_tasks: tasks/desktop_environments/gnome/keybindings.yml
   - include_tasks: tasks/desktop_environments/gnome/nautilus.yml
   - include_tasks: tasks/desktop_environments/gnome/terminal.yml
+
+  ## enable repositories
+  - import_tasks: tasks/system_setup/repositories.yml
 
   ## add flatpak support and flathub remote
   - import_tasks: tasks/software/flatpak.yml
