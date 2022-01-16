@@ -33,7 +33,7 @@
       force: true
       owner: root
       group: root
-    when: not profile_picture.stat.exists
+    #when: not profile_picture.stat.exists
 
   - name: set profile picture
     become: true
