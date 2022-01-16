@@ -1,5 +1,5 @@
 # C++ tools
-  - name: install C++ tools
+  - name: install C/C++ tools
     package:
       name:
         - lapack-devel
@@ -9,6 +9,8 @@
         - gcc
         - gcc-c++
         - kernel-devel
+        #- libstdc++ # already installed
+        #- glibc # already installed
       state: latest
 
   - name: installing visualisation programms
@@ -26,6 +28,7 @@
         - htop
         - neovim
         - libnsl # needed for some legacy programms?
+        #- libusb # needed for USB devices
         - gnome-tweaks
         - curl
         - rsync
