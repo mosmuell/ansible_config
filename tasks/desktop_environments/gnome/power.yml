@@ -1,0 +1,27 @@
+  - name: gnome | power settings | time till blank screen
+    dconf:
+      key: "/org/gnome/desktop/session/idle-delay"
+      value: "uint32 900"
+
+  - name: gnome | power settings | inactive timeout
+    dconf:
+      key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type"
+      value: "'nothing'"
+
+  - name: gnome | power settings | inactive timeout on battery
+    dconf:
+      key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type"
+      value: "'nothing'"
+
+  - name: gnome | power settings | show battery percentage
+    dconf:
+      key: "/org/gnome/desktop/interface/show-battery-percentage"
+      value: "true"
+
+  - name: gnome | power settings | ignore lid close
+    become: true
+    lineinfile:
+      path: /etc/systemd/logind.conf
+      regexp: '^HandleLidSwitch='
+      insertafter: '^#HandleLidSwitch='
+      line: 'HandleLidSwitch=ignore'
