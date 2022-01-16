@@ -18,3 +18,26 @@
     dconf:
       key: "/org/gnome/desktop/background/picture-options"
       value: "'zoom'"
+
+# profile picture
+  - name: verify profile picture
+    stat:
+      path: /var/lib/AccountsService/icons/mose
+    register: profile_picture
+
+  - name: copy profile picture
+    become: true
+    copy:
+      src: files/users/mose/mose
+      dest: /var/lib/AccountsService/icons/mose
+      force: true
+      owner: root
+      group: root
+    when: not profile_picture.stat.exists
+
+  - name: set profile picture
+    become: true
+    lineinfile:
+      path: /var/lib/AccountsService/users/mose
+      regexp: '^Icon='
+      line: 'Icon=/var/lib/AccountsService/icons/mose'
