@@ -2,6 +2,6 @@
   tags: packages,flatpak,anki,workstation-packages
   become_user: mose
   flatpak:
-    name: flathub org.gnome.PowerStats
+    name: org.gnome.PowerStats
     method: user
     state: present

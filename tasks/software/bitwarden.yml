@@ -2,6 +2,6 @@
   tags: bitwarden,packages,flatpak,workstation-packages
   become_user: mose
   flatpak:
-    name: flathub com.bitwarden.desktop
+    name: com.bitwarden.desktop
     method: user
     state: present
