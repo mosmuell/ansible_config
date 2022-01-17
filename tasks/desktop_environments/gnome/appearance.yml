@@ -12,7 +12,6 @@
       key: "/org/gnome/desktop/background/picture-uri"
       value: "'file:///usr/share/backgrounds/Horizons_Single.jpg'"
 
-
   - name: set wallpaper position
     become_user: mose
     dconf:
@@ -41,3 +40,22 @@
       path: /var/lib/AccountsService/users/mose
       regexp: '^Icon='
       line: 'Icon=/var/lib/AccountsService/icons/mose'
+
+# desktop time and calendar settings
+  - name: gnome | appearance | desktop clock settings
+    tags: gnome,calendar,time
+    become_user: mose
+    dconf:
+      key: /org/gnome/desktop/interface/{{ item.key }}
+      value: "{{ item.value}}"
+    with_items:
+      - { key: "clock-show-seconds", value: "false" }
+      - { key: "clock-show-weekday", value: "true" }
+      - { key: "enable-hot-corners", value: "true" }
+
+  - name: gnome | appearance | calendar settings
+    tags: gnome,calendar,time
+    become_user: mose
+    dconf:
+      key: /org/gnome/desktop/calendar/show-weekdate
+      value: "true"
