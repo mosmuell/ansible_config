@@ -1,0 +1,6 @@
+  - name: gnome | shell settings | button-layout
+    tags: gnome,gnome-shell
+    become_user: mose
+    dconf:
+      key: "/org/gnome/desktop/wm/preferences/button-layout"
+      value: "'appmenu:minimize,maximize,close'"

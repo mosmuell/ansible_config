@@ -1,0 +1,41 @@
+  - name: gnome | peripherals | enable natural scrolling (mouse)
+    tags: gnome,mouse,peripherals
+    become_user: mose
+    dconf:
+      key: "/org/gnome/desktop/peripherals/mouse/natural-scroll"
+      value: "false"
+
+  - name: gnome | peripherals | set cursor speed (mouse)
+    tags: gnome,mouse,peripherals
+    become_user: mose
+    dconf:
+      key: "/org/gnome/desktop/peripherals/mouse/speed"
+      value: "1.0"
+
+  - name: gnome | peripherals | enable tap to click (touchpad)
+    tags: gnome,mouse,peripherals
+    become_user: mose
+    dconf:
+      key: "/org/gnome/desktop/peripherals/touchpad/tap-to-click"
+      value: "true"
+
+  - name: gnome | peripherals | enable two finger scolling (touchpad)
+    tags: gnome,mouse,peripherals
+    become_user: mose
+    dconf:
+      key: "/org/gnome/desktop/peripherals/touchpad/two-finger-scrolling-enabled"
+      value: "true"
+
+  - name: gnome | peripherals | set cursor speed (touchpad)
+    tags: gnome,mouse,peripherals
+    become_user: mose
+    dconf:
+      key: "/org/gnome/desktop/peripherals/touchpad/speed"
+      value: "1.0"
+
+  - name: gnome | peripherals | allow volume above 100 percent
+    tags: gnome,sound,peripherals
+    become_user: mose
+    dconf:
+      key: "/org/gnome/desktop/sound/allow-volume-above-100-percent"
+      value: "true"

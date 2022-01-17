@@ -34,7 +34,9 @@
   - include_tasks: tasks/desktop_environments/gnome/appearance.yml
   - include_tasks: tasks/desktop_environments/gnome/keybindings.yml
   - include_tasks: tasks/desktop_environments/gnome/nautilus.yml
+  - include_tasks: tasks/desktop_environments/gnome/peripherals.yml
   - include_tasks: tasks/desktop_environments/gnome/power.yml
+  - include_tasks: tasks/desktop_environments/gnome/shell-settings.yml
   - include_tasks: tasks/desktop_environments/gnome/terminal.yml
 
   ## enable repositories
