@@ -1,19 +1,38 @@
-- name: download and install moneydance
-  tasks:
-   - name: Create a Directory /opt/moneydance
-     become: yes
-     file:
-       path: /opt/moneydance
-       state: directory
-       mode: 0755
-       owner: mose
-       group: mose
-   - name: Download moneydance using get_url
-     become: yes
-     get_url:
-       url: https://infinitekind.com/stabledl/current/moneydance_linux_amd64.sh and execute
-       dest: /opt/moneydance
-       mode: 0755
-       group: mose
-       owner: mose
-       checksum: sha512:5bdea5414713c9ba39e226f062701fa14998b1a798c9750f956a0f59b5edabb8d83af9ec9f81cf9f47fa92c21b560c9b2be1b543d0bd8f1b49579b69101d3a8f
+  - name: download and install moneydance
+    block:
+     - name: Create a Directory /opt/moneydance
+       become: yes
+       file:
+         path: /opt/moneydance
+         state: directory
+         mode: 0755
+         owner: mose
+         group: mose
+     - name: Download moneydance using get_url
+       become: yes
+       get_url:
+         url: https://infinitekind.com/stabledl/current/moneydance_linux_amd64.sh
+         dest: /opt/moneydance/moneydance_linux_amd64.sh
+         mode: 0755
+         group: mose
+         owner: mose
+         checksum: sha512:3c4e3c8ccceeddd534db87c1c7a8c8d667f936040d5d3bf9fec2b7124fe40b3b7a4f4980e1deb42202e349b3102b3c1d1c82bdf26c6e66ddf90acd3528e310b8
+     - name: Install moneydance
+       shell:
+         cmd: bash moneydance_linux_amd64.sh
+         chdir: /opt/moneydance
+         creates: /opt/moneydance/Moneydance
+     - name: Create desktop file
+       copy:
+         dest: "/usr/local/share/applications/moneydance.desktop"
+         content: |
+           [Desktop Entry]
+           Version=1.0
+           Type=Application
+           Terminal=false
+           Exec=/opt/moneydance/Moneydance
+           Name=Moneydance
+           Icon=/opt/moneydance/resources/moneydance_icon512.png
+           Categories=Money-management
+           Comment=Money management software
+           StartupNotify=true

@@ -60,4 +60,4 @@
   - import_tasks: tasks/software/vlc.yml
   - import_tasks: tasks/software/zoom.yml
 
-  #- import_tasks: tasks/software/moneydance.yml
+  - import_tasks: tasks/software/moneydance.yml
