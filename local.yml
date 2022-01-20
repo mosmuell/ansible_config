@@ -35,6 +35,9 @@
   ## User configs
   - import_tasks: tasks/users/mose.yml
 
+  ## Installing python (needed for setup)
+  - import_tasks: tasks/software/python.yml
+
   ## desktop environments
   - include_tasks: tasks/desktop_environments/gnome/appearance.yml
   - include_tasks: tasks/desktop_environments/gnome/keybindings.yml
@@ -47,8 +50,8 @@
   ## enable repositories
   - import_tasks: tasks/system_setup/repositories.yml
 
+  # Software installation
   - import_tasks: tasks/software/codecs.yml
-  - import_tasks: tasks/software/python.yml
   - import_tasks: tasks/software/package_utilities.yml
 
   ## add flatpak support and flathub remote
