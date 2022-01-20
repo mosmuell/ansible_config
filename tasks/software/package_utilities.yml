@@ -28,6 +28,7 @@
         - pavucontrol # sound control
         - htop
         - neovim
+        - cronie # for crontabs
         - wl-clipboard # needed for copy/paste to the system clipboard with wayland
         - libnsl # needed for some legacy programms?
         #- libusb # needed for USB devices
