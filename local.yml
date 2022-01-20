@@ -27,6 +27,11 @@
 
   tasks:
 
+  ## Including the variables which might be distribution specific
+  - name: Including distribution specific variables
+    include_vars: "{{ ansible_distribution }}.yml"
+    tags: always
+
   ## User configs
   - import_tasks: tasks/users/mose.yml
 
@@ -42,6 +47,7 @@
   ## enable repositories
   - import_tasks: tasks/system_setup/repositories.yml
 
+  - import_tasks: tasks/software/codecs.yml
   - import_tasks: tasks/software/python.yml
   - import_tasks: tasks/software/package_utilities.yml
 

@@ -1,0 +1,2 @@
+gstreamer_libav_package: gstreamer1-libav
+gstreamer_plugins_bad_package: gstreamer1-plugins-bad-free-extras
