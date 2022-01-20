@@ -5,6 +5,7 @@
         - lapack-devel
         - gsl-devel
         - make
+        - cmake
         - automake
         - gcc
         - gcc-c++
