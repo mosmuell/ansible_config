@@ -3,5 +3,5 @@
   become_user: mose
   flatpak:
     name: org.gnome.PowerStats
-    method: user
+    method: system
     state: present

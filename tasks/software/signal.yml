@@ -3,7 +3,7 @@
   become_user: mose
   flatpak:
     name: org.signal.Signal
-    method: user
+    method: system
     state: present
 
 - name: software | signal | enable autostart

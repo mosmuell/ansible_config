@@ -3,5 +3,5 @@
   become_user: mose
   flatpak:
     name: org.mozilla.thunderbird
-    method: user
+    method: system
     state: present

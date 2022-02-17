@@ -3,5 +3,5 @@
   become_user: mose
   flatpak:
     name: com.bitwarden.desktop
-    method: user
+    method: system
     state: present
