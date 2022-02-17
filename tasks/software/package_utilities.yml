@@ -40,3 +40,11 @@
         - langpacks-de # german language pack for libreoffice
         - langpacks-en_GB # british "
       state: latest
+
+  - name: installing TLP for managing laptop battery power
+    package:
+      name:
+        - tlp
+        - tlp-rdw
+        - akmod-acpi_call
+      state: latest

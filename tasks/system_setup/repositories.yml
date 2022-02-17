@@ -1,4 +1,9 @@
-    - name: Importing (free) key
+#---
+#- hosts: localhost
+#  tags: always
+#  become: true
+#  tasks:
+    - name: system setup | repositories | Importing rpm-fusion (free/non-free) key
       rpm_key:
         key: "{{ item }}"
         state: present
@@ -14,4 +19,19 @@
       loop:
         - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm
         - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm
+      when: ansible_distribution == 'Fedora'
+
+    - name: system setup | repositories | Importing TLP GPG key
+      rpm_key:
+        key: https://repo.linrunner.de/fedora/tlp/repos/RPM-GPG-KEY-tlp-fedora-{{ansible_distribution_major_version}}-primary
+        state: present
+      when: ansible_distribution == 'Fedora'
+
+    - name: system setup | repositories | enable ThinkPad Extras repository on Fedora
+      dnf:
+        name: "{{ item }}"
+        state: present
+        disable_gpg_check: true
+      loop:
+        - https://repo.linrunner.de/fedora/tlp/repos/releases/tlp-release.fc{{ansible_distribution_major_version}}.noarch.rpm
       when: ansible_distribution == 'Fedora'
