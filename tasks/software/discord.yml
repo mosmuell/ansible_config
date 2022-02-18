@@ -5,3 +5,4 @@
     name: com.discordapp.Discord
     method: system
     state: present
+  when: discord is defined and discord == true

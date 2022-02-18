@@ -5,3 +5,4 @@
     name: org.pulseaudio.pavucontrol
     method: system
     state: present
+  when: pavucontrol is defined and pavucontrol == true

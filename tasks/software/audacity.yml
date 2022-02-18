@@ -5,3 +5,4 @@
     name: org.audacityteam.Audacity
     method: system
     state: present
+  when: audacity is defined and audacity == true

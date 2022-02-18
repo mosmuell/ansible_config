@@ -5,3 +5,4 @@
     name: com.spotify.Client
     method: system
     state: present
+  when: spotify is defined and spotify == true

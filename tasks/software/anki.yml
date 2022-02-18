@@ -5,3 +5,4 @@
     name: net.ankiweb.Anki
     method: system
     state: present
+  when: anki is defined and anki == true

@@ -31,6 +31,11 @@
     include_vars: "{{ ansible_distribution }}.yml"
     tags: always
 
+  ## Including the workstation variables
+  - name: Including distribution specific variables
+    include_vars: "workstation.yml"
+    tags: workstation
+
   ## User configs
   - import_tasks: tasks/users/mose.yml
 
@@ -38,13 +43,13 @@
   - import_tasks: tasks/software/python.yml
 
   ## desktop environments
-  - include_tasks: tasks/desktop_environments/gnome/appearance.yml
-  - include_tasks: tasks/desktop_environments/gnome/keybindings.yml
-  - include_tasks: tasks/desktop_environments/gnome/nautilus.yml
-  - include_tasks: tasks/desktop_environments/gnome/peripherals.yml
-  - include_tasks: tasks/desktop_environments/gnome/power.yml
-  - include_tasks: tasks/desktop_environments/gnome/shell-settings.yml
-  - include_tasks: tasks/desktop_environments/gnome/terminal.yml
+  - import_tasks: tasks/desktop_environments/gnome/appearance.yml
+  - import_tasks: tasks/desktop_environments/gnome/keybindings.yml
+  - import_tasks: tasks/desktop_environments/gnome/nautilus.yml
+  - import_tasks: tasks/desktop_environments/gnome/peripherals.yml
+  - import_tasks: tasks/desktop_environments/gnome/power.yml
+  - import_tasks: tasks/desktop_environments/gnome/shell-settings.yml
+  - import_tasks: tasks/desktop_environments/gnome/terminal.yml
 
   ## enable repositories
   - import_tasks: tasks/system_setup/repositories.yml

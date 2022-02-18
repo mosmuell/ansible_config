@@ -4,3 +4,4 @@
       name:
         - "{{ gstreamer_libav_package }}"
         - "{{ gstreamer_plugins_bad_package }}"
+    when: codecs is defined and codecs == true

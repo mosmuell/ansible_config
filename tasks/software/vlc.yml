@@ -5,3 +5,4 @@
     name: org.videolan.VLC
     method: system
     state: present
+  when: vlc is defined and vlc == true

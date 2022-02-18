@@ -13,6 +13,8 @@
         #- libstdc++ # already installed
         #- glibc # already installed
       state: latest
+    when: cpp_tools is defined and cpp_tools == true
+
 
   - name: installing visualisation programms
     package:
@@ -60,3 +62,4 @@
         - tlp-rdw
         - akmod-acpi_call
       state: latest
+    when: tlp is defined and tlp == true

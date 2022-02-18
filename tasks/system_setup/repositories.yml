@@ -23,19 +23,22 @@
         - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm
       when: ansible_distribution == 'Fedora'
 
-    - name: system setup | repositories | Importing TLP GPG key
-      tags: repository, gpg-key, tlp
-      rpm_key:
-        key: https://repo.linrunner.de/fedora/tlp/repos/RPM-GPG-KEY-tlp-fedora-{{ansible_distribution_major_version}}-primary
-        state: present
-      when: ansible_distribution == 'Fedora'
+    - name: TLP repo
+      block:
+        - name: system setup | repositories | Importing TLP GPG key
+          tags: repository, gpg-key, tlp
+          rpm_key:
+            key: https://repo.linrunner.de/fedora/tlp/repos/RPM-GPG-KEY-tlp-fedora-{{ansible_distribution_major_version}}-primary
+            state: present
+          when: ansible_distribution == 'Fedora'
 
-    - name: system setup | repositories | enable ThinkPad Extras repository on Fedora
-      tags: repository, tlp
-      dnf:
-        name: "{{ item }}"
-        state: present
-        disable_gpg_check: true
-      loop:
-        - https://repo.linrunner.de/fedora/tlp/repos/releases/tlp-release.fc{{ansible_distribution_major_version}}.noarch.rpm
-      when: ansible_distribution == 'Fedora'
+        - name: system setup | repositories | enable ThinkPad Extras repository on Fedora
+          tags: repository, tlp
+          dnf:
+            name: "{{ item }}"
+            state: present
+            disable_gpg_check: true
+          loop:
+            - https://repo.linrunner.de/fedora/tlp/repos/releases/tlp-release.fc{{ansible_distribution_major_version}}.noarch.rpm
+          when: ansible_distribution == 'Fedora'
+      when: tlp is defined and tlp == true

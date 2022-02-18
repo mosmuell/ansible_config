@@ -5,3 +5,4 @@
     name: org.mozilla.thunderbird
     method: system
     state: present
+  when: thunderbird is defined and thunderbird == true

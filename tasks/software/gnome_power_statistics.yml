@@ -5,3 +5,4 @@
     name: org.gnome.PowerStats
     method: system
     state: present
+  when: gnome_power_statistics is defined and gnome_power_statistics == true

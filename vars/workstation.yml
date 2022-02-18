@@ -1,12 +1,20 @@
-# application selection
+personal_config: true
+codecs: true
+
+
+# flatpak application selection
 anki: true
 audacity: true
 bitwarden: true
 discord: true
 gnome_power_statistics: true
-moneydance: true
+pavucontrol: true
 signal: true
 spotify: true
 thunderbird: true
 vlc: true
 zoom: true
+
+cpp_tools: true
+moneydance: true
+tlp: true

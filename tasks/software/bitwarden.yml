@@ -5,3 +5,4 @@
     name: com.bitwarden.desktop
     method: system
     state: present
+  when: bitwarden is defined and bitwarden == true
