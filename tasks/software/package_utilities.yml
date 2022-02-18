@@ -37,9 +37,22 @@
         - rsync
         - screen
         - wget
-        - langpacks-de # german language pack for libreoffice
-        - langpacks-en_GB # british "
       state: latest
+
+  - name: language packs
+    block:
+      - name: install language packs
+        package:
+          name:
+            - langpacks-de # german language pack for libreoffice
+            - langpacks-en_GB # british "
+          state: latest
+
+      - name: remove language packs
+        package:
+          name:
+            - langpacks-en # american english
+          state: absent
 
   - name: installing TLP for managing laptop battery power
     package:
