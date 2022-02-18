@@ -1,0 +1,7 @@
+- name: software | pavucontrol | install package
+  tags: packages,flatpak,pavucontrol,workstation-packages
+  become_user: mose
+  flatpak:
+    name: org.pulseaudio.pavucontrol
+    method: system
+    state: present

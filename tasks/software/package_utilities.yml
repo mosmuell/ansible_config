@@ -25,7 +25,6 @@
   - name: installing tools
     package:
       name:
-        - pavucontrol # sound control
         - htop
         - neovim
         - cronie # for crontabs
