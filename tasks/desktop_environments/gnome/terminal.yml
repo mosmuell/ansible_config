@@ -14,5 +14,5 @@
       - { key: "use-theme-colors", value: "false"}
       - { key: "use-transparent-background", value: "false"}
       #- { key: use-system-font, value: "false" }
-      - { key: default-size-columns, value: "120" }
+      - { key: default-size-columns, value: "118" }
       - { key: scrollback-unlimited, value: "true" }
