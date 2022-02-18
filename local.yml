@@ -24,7 +24,6 @@
 - hosts: localhost # running the playbook against the host machine
   connection: local #use local connection -> no ssh
   become: true # using sudo
-
   tasks:
 
   ## Including the variables which might be distribution specific

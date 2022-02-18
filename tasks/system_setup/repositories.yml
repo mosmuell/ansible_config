@@ -4,6 +4,7 @@
 #  become: true
 #  tasks:
     - name: system setup | repositories | Importing rpm-fusion (free/non-free) key
+      tags: repository, gpg-key, rpm-fusion
       rpm_key:
         key: "{{ item }}"
         state: present
@@ -13,6 +14,7 @@
       when: ansible_distribution == 'Fedora'
 
     - name: system setup | repositories | enable RPM Fusion repository on Fedora
+      tags: repository, rpm-fusion
       dnf:
         name: "{{ item }}"
         state: present
@@ -22,12 +24,14 @@
       when: ansible_distribution == 'Fedora'
 
     - name: system setup | repositories | Importing TLP GPG key
+      tags: repository, gpg-key, tlp
       rpm_key:
         key: https://repo.linrunner.de/fedora/tlp/repos/RPM-GPG-KEY-tlp-fedora-{{ansible_distribution_major_version}}-primary
         state: present
       when: ansible_distribution == 'Fedora'
 
     - name: system setup | repositories | enable ThinkPad Extras repository on Fedora
+      tags: repository, tlp
       dnf:
         name: "{{ item }}"
         state: present

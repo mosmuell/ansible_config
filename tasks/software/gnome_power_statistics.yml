@@ -1,5 +1,5 @@
 - name: software | gnome power statistics | install package
-  tags: packages,flatpak,anki,workstation-packages
+  tags: packages,flatpak,gnome-power-statistics,workstation-packages
   become_user: mose
   flatpak:
     name: org.gnome.PowerStats

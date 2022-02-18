@@ -1,12 +1,12 @@
   - name: software | flatpak | configure flatpak
+    tags: packages,flatpak,workstation-packages
     block:
-      - name: system setup | tweaks | add flatpak support
+      - name: software | flatpak | add flatpak support
         package:
           name: flatpak
           state: present
 
-      - name: system setup | tweaks | flatpak | add flathub remote
-        tags: packages,flatpak,workstation-packages
+      - name: software | flatpak | add flathub remote
         flatpak_remote:
           name: flathub
           flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
