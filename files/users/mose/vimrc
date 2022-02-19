@@ -36,3 +36,22 @@ else " Standard vim specific commands
 	nnoremap "+p :let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>p
 	nnoremap "*p :let @"=substitute(system("wl-paste --no-newline --primary"), '<C-v><C-m>', '', 'g')<cr>p
 endif
+
+" installing vim-plug (plugin manager for nvim/vim) if not installed
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  call mkdp#util#install()
+endif
+
+" installing plugins
+call plug#begin()
+" The default plugin directory will be as follows:
+"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
+
+" see: https://github.com/iamcco/markdown-preview.nvim/issues/50
+Plug 'iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()', 'for': ['markdown', 'vim-plug']}
+
+" Initialize plugin system
+call plug#end()
