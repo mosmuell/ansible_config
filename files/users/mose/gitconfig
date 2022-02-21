@@ -1,0 +1,11 @@
+[user]
+	email = mosmuell@ethz.ch
+	name = Mose Mueller
+	#email = mosemueller@gmail.com
+	#name = MoseMueller
+[color]
+	ui = auto
+[init]
+	defaultBranch = main
+[core]
+	editor = nvim

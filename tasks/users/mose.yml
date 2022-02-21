@@ -27,6 +27,7 @@
         - { src: 'git-prompt.sh', dest: '.git-prompt.sh'}
         - { src: 'bashrc', dest: '.bashrc'}
         - { src: 'vimrc', dest: '.vimrc' }
+        - { src: 'gitconfig', dest: '.gitconfig' }
 
     - name: users | mose | create symbolic links
       file:
