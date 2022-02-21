@@ -28,6 +28,7 @@
         - { src: 'bashrc', dest: '.bashrc'}
         - { src: 'vimrc', dest: '.vimrc' }
         - { src: 'gitconfig', dest: '.gitconfig' }
+        - { src: 'tlp.conf', dest: '../../etc/tlp.conf' }
 
     - name: users | mose | create symbolic links
       file:
