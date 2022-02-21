@@ -12,6 +12,8 @@
       with_items:
         - { dir: .config }
         - { dir: .config/nvim }
+        - { dir: ../../root/.config }
+        - { dir: ../../root/.config/nvim }
         - { dir: .local }
         - { dir: .local/share }
         - { dir: .local/share/applications }
@@ -37,4 +39,5 @@
         state: link
       with_items:
         - { src: '.vimrc', dest: '.config/nvim/init.vim'}
+        - { src: '.vimrc', dest: '../../root/.config/nvim/init.vim'}
   when: personal_config is defined and personal_config == true
