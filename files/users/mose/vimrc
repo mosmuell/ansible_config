@@ -1,30 +1,18 @@
+" enabling copy and paste
+set clipboard=unnamedplus
+
 "show line numbers
 set number
 
-filetype plugin indent on
-" show existing tab with 4 spaces width
-set tabstop=4
-" when indenting with '>', use 4 spaces width
-set shiftwidth=4
-" On pressing tab, insert 4 spaces (expandtab) or use tab (noexpandtab)
-set noexpandtab
-
-set list
-syntax on
-set listchars=tab:!·,trail:⎵,nbsp:⎵ " eol:⏎,
-set hlsearch
-
-" show current filename
-set showtabline=2
-
-" enabling copy and paste
-set clipboard=unnamedplus
+" colorscheme with light background
+set background=light
 
 if has('nvim') " Neovim specific commands
 	" echo "Loading nvim settings"
 
 	" Changing listchars color
 	hi Whitespace ctermfg=LightGrey
+
 else " Standard vim specific commands
 	" echo "Loading vim settings"
 
@@ -37,6 +25,27 @@ else " Standard vim specific commands
 	nnoremap "*p :let @"=substitute(system("wl-paste --no-newline --primary"), '<C-v><C-m>', '', 'g')<cr>p
 endif
 
+" show tabs and white spaces
+set list
+syntax on
+set listchars=tab:!·,trail:⎵,nbsp:⎵ " eol:⏎,
+set hlsearch
+
+filetype plugin indent on
+" show existing tab with 4 spaces width
+set tabstop=4
+" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+" On pressing tab, insert 4 spaces (expandtab) or use tab (noexpandtab)
+set noexpandtab
+
+" show current filename
+set showtabline=2
+
+"""""""""""""""""""
+""" VIM PLUGINS """
+"""""""""""""""""""
+
 " installing vim-plug (plugin manager for nvim/vim) if not installed
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -48,7 +57,6 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
 
-" installing plugins
 call plug#begin()
 " The default plugin directory will be as follows:
 "   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
@@ -56,5 +64,4 @@ call plug#begin()
 " see: https://github.com/iamcco/markdown-preview.nvim/issues/50
 " Plug 'iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()', 'for': ['markdown', 'vim-plug']}
 Plug 'iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()', 'for': 'markdown', 'on': 'MarkdownPreview' }
-" Initialize plugin system
 call plug#end()
