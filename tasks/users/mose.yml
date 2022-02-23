@@ -27,6 +27,7 @@
         mode: 0600
       with_items:
         - { src: 'git-prompt.sh', dest: '.git-prompt.sh'}
+        - { src: 'tmux.conf', dest: '.tmux.conf'}
         - { src: 'bashrc', dest: '.bashrc'}
         - { src: 'vimrc', dest: '.vimrc' }
         - { src: 'gitconfig', dest: '.gitconfig' }
