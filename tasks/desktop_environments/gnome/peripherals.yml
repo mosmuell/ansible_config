@@ -31,7 +31,7 @@
     become_user: mose
     dconf:
       key: "/org/gnome/desktop/peripherals/touchpad/speed"
-      value: "1.0"
+      value: "0.5"
 
   - name: gnome | peripherals | allow volume above 100 percent
     tags: gnome,sound,peripherals
