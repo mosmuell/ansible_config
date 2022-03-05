@@ -1,0 +1,25 @@
+- name: software | syncthing | install package
+  tags: packages,workstation-packages,syncthing
+  package:
+    name:
+      - syncthing
+    state: latest
+  when: syncthing is defined and syncthing == true
+
+- name: software | syncthing | enable autostart
+  tags: packages,workstation-packages,syncthing
+  file:
+    src: /usr/share/applications/syncthing-start.desktop
+    dest: /home/mose/.config/autostart/syncthing-start.desktop
+    owner: mose
+    group: mose
+    state: link
+  when: syncthing is defined and syncthing == true
+
+- name: software | syncthing | remove Sync folder
+  tags: packages,workstation-packages,syncthing
+  file:
+    path: /home/mose/{{ item.dir }}
+    state: absent
+  with_items:
+    - { dir: Sync }

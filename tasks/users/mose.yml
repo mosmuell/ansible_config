@@ -11,6 +11,7 @@
         mode: 0700
       with_items:
         - { dir: .config }
+        - { dir: .config/autostart }
         - { dir: .config/nvim }
         - { dir: ../../root/.config }
         - { dir: ../../root/.config/nvim }

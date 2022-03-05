@@ -17,4 +17,5 @@ zoom: true
 
 cpp_tools: true
 moneydance: true
+syncthing: true
 tlp: true
