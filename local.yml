@@ -43,13 +43,37 @@
   - import_tasks: tasks/software/python.yml
 
   ## desktop environments
-  - import_tasks: tasks/desktop_environments/gnome/appearance.yml
-  - import_tasks: tasks/desktop_environments/gnome/keybindings.yml
-  - import_tasks: tasks/desktop_environments/gnome/nautilus.yml
-  - import_tasks: tasks/desktop_environments/gnome/peripherals.yml
-  - import_tasks: tasks/desktop_environments/gnome/power.yml
-  - import_tasks: tasks/desktop_environments/gnome/shell-settings.yml
-  - import_tasks: tasks/desktop_environments/gnome/terminal.yml
+  ### Gnome
+  - include_tasks: tasks/desktop_environments/gnome/appearance.yml
+    when: gnome is defined and gnome == true
+
+  - include_tasks: tasks/desktop_environments/gnome/keybindings.yml
+    when: gnome is defined and gnome == true
+
+  - include_tasks: tasks/desktop_environments/gnome/nautilus.yml
+    when: gnome is defined and gnome == true
+
+  - include_tasks: tasks/desktop_environments/gnome/peripherals.yml
+    when: gnome is defined and gnome == true
+
+  - include_tasks: tasks/desktop_environments/gnome/power.yml
+    when: gnome is defined and gnome == true
+
+  - include_tasks: tasks/desktop_environments/gnome/shell-settings.yml
+    when: gnome is defined and gnome == true
+
+  - include_tasks: tasks/desktop_environments/gnome/terminal.yml
+    when: gnome is defined and gnome == true
+
+  - include_tasks: tasks/desktop_environments/gnome/appearance.yml
+    when: gnome is defined and gnome == true
+
+  ### i3
+  - include_tasks: tasks/desktop_environments/i3/config.yml
+    when: i3 is defined and i3 == true
+
+  - include_tasks: tasks/desktop_environments/i3/software.yml
+    when: i3 is defined and i3 == true
 
   ## enable repositories
   - import_tasks: tasks/system_setup/repositories.yml

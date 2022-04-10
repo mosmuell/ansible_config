@@ -1,0 +1,23 @@
+- name: i3 config files
+  block:
+    - name: users | mose | create personal config directories
+      tags: dotfiles,dotfiles-mose
+      file:
+        path: /home/mose/{{ item.dir }}
+        state: directory
+        owner: mose
+        group: mose
+        mode: 0700
+      with_items:
+        - { dir: .config }
+        - { dir: .config/i3}
+
+    - name: users | mose | copy personal config files
+      copy:
+        src: users/mose/{{ item.src }}
+        dest: /home/mose/{{ item.dest }}
+        owner: mose
+        group: mose
+        mode: 0600
+      with_items:
+        - { src: 'i3.config', dest: '.config/i3/config'}
