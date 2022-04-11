@@ -9,5 +9,6 @@
         - blueman # bluetooth
         - arandr # monitor settings
         - autorandr
+        - feh # for background wallpaper
       state: latest
 

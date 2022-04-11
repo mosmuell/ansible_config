@@ -25,3 +25,12 @@
         - { src: 'i3.config', dest: '.config/i3/config'}
         - { src: 'rofi/config.rasi', dest: '.config/rofi/config.rasi'}
         - { src: 'autorandr/', dest: '.config/autorandr/'}
+
+- name: i3 wallpaper
+  block:
+    - name: copy wallpaper file
+      copy:
+        src: files/wallpaper/wallpaper.jpg
+        dest: /usr/share/backgrounds/wallpaper.jpg
+        owner: root
+        group: root
