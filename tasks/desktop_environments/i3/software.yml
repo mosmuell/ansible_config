@@ -10,5 +10,6 @@
         - arandr # monitor settings
         - autorandr
         - feh # for background wallpaper
+        - ranger # terminal file manager
       state: latest
 
