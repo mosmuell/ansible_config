@@ -10,7 +10,9 @@
         mode: 0700
       with_items:
         - { dir: .config }
+        - { dir: .config/autorandr}
         - { dir: .config/i3}
+        - { dir: .config/rofi}
 
     - name: users | mose | copy personal config files
       copy:
@@ -21,3 +23,5 @@
         mode: 0600
       with_items:
         - { src: 'i3.config', dest: '.config/i3/config'}
+        - { src: 'rofi/config.rasi', dest: '.config/rofi/config.rasi'}
+        - { src: 'autorandr/', dest: '.config/autorandr/'}
