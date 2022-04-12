@@ -1,6 +1,6 @@
 - name: i3 config files
   block:
-    - name: users | mose | create personal config directories
+    - name: desktop environment | i3 | create i3 config directories
       tags: dotfiles,dotfiles-mose
       file:
         path: /home/mose/{{ item.dir }}
@@ -15,7 +15,8 @@
         - { dir: .config/rofi}
         - { dir: .local/share/fonts}
 
-    - name: users | mose | copy personal config files
+    - name: desktop environment | i3 | copy i3 config files
+      tags: dotfiles,dotfiles-mose
       copy:
         src: users/mose/{{ item.src }}
         dest: /home/mose/{{ item.dest }}
@@ -27,8 +28,11 @@
         - { src: 'rofi/config.rasi', dest: '.config/rofi/config.rasi'}
         - { src: 'autorandr/', dest: '.config/autorandr/'}
         - { src: 'fonts/', dest: '.local/share/fonts/'}
+        - { src: 'thinkpad/Xresources', dest: '.Xresources'}
+        - { src: 'thinkpad/profile', dest: '.profile'}
 
 - name: i3 wallpaper
+  tags: wallpaper,i3
   block:
     - name: copy wallpaper file
       copy:
@@ -36,3 +40,27 @@
         dest: /usr/share/backgrounds/wallpaper.jpg
         owner: root
         group: root
+
+- name: urxvt extensions
+  tags: urxvt,urxvt-extensions,i3
+  block:
+    - name: desktop environment | i3 | creating urxvt extensions folders
+      file:
+        path: /home/mose/{{ item.dir }}
+        state: directory
+        owner: mose
+        group: mose
+        mode: 0700
+      with_items:
+        - { dir: .urxvt}
+        - { dir: .urxvt/ext}
+
+    - name: desktop environment | i3 | copy urxvt extensions
+      copy:
+        src: users/mose/{{ item.src }}
+        dest: /home/mose/{{ item.dest }}
+        owner: mose
+        group: mose
+        mode: 0600
+      with_items:
+        - { src: 'urxvt/ext/', dest: '.urxvt/ext/'}
