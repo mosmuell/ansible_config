@@ -13,6 +13,7 @@
         - { dir: .config/autorandr}
         - { dir: .config/i3}
         - { dir: .config/rofi}
+        - { dir: .local/share/fonts}
 
     - name: users | mose | copy personal config files
       copy:
@@ -25,6 +26,7 @@
         - { src: 'i3.config', dest: '.config/i3/config'}
         - { src: 'rofi/config.rasi', dest: '.config/rofi/config.rasi'}
         - { src: 'autorandr/', dest: '.config/autorandr/'}
+        - { src: 'fonts/', dest: '.local/share/fonts/'}
 
 - name: i3 wallpaper
   block:
