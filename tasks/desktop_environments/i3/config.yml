@@ -27,7 +27,8 @@
         mode: 0600
       with_items:
         - { src: 'i3.config', dest: '.config/i3/config'}
-        - { src: 'i3bocks/', dest: '.config/i3blocks/'}
+        - { src: 'i3blocks/config', dest: '.config/i3blocks/config'}
+        - { src: 'i3blocks/scripts/', dest: '.config/i3blocks/scripts/'}
         - { src: 'rofi/config.rasi', dest: '.config/rofi/config.rasi'}
         - { src: 'autorandr/', dest: '.config/autorandr/'}
         - { src: 'fonts/', dest: '.local/share/fonts/'}
