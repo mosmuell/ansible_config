@@ -12,15 +12,6 @@ color=#f8f8f2
 separator_block_width=15
 markup=pango
 
-[battery]
-interval=2
-color=#ff5555
-border=#ff5555
-border_top=1
-border_right=0
-border_bottom=0
-border_left=0
-
 [wifi]
 command=iwgetid -r | tr '\n' ' ' && grep $(iwgetid -m | awk '{ printf "%s", $1 }') /proc/net/wireless | awk '{ printf "%i%\n", int($3 * 100 / 70) }'
 instance=wlp11s0f3u1
@@ -92,18 +83,19 @@ border_right=0
 border_bottom=0
 border_left=0
 
-#if you prefer automatic updating
-[volume-pipewire]
-command=~/.config/i3blocks/scripts/volume-pipewire
-interval=persist
-SUBSCRIBE=0
-USE_ALSA_NAME=1
-signal=10
-border=#bd93f9
-border_top=1
-border_right=0
-border_bottom=0
-border_left=0
+
+# #if you prefer automatic updating
+# [volume-pipewire]
+# command=~/.config/i3blocks/scripts/volume-pipewire
+# interval=persist
+# SUBSCRIBE=0
+# USE_ALSA_NAME=1
+# signal=10
+# border=#bd93f9
+# border_top=1
+# border_right=0
+# border_bottom=0
+# border_left=0
 # [time_pst]
 # command=TZ=":US/Pacific" date '+%I : %M %Z' | awk '{ printf "%s<span color=\"#8be9fd\">%s</span>%s<span color=\"#8be9fd\"> %s</span>\n", $1, $2, $3, $4 }'
 # interval=1
@@ -140,6 +132,18 @@ command=LC_ALL="en_GB.UTF-8" date "+%A %d %B %Y" | awk '{ printf "<span color=\"
 interval=60
 label=<span color="#ff5555"> </span>
 border=#ff5555
+border_top=1
+border_right=0
+border_bottom=0
+border_left=0
+
+[volume]
+# command= pactl list sinks | grep "Name: $(pactl get-default-sink)" -A7 | awk 'NR==8{ print; }' | cut -f2 -d "/"
+command= pactl list sinks | grep "Name: $(pactl get-default-sink)" -A7 | awk 'NR==8{ print $5; }'
+label= 
+interval=1
+signal=10
+border=#bd93f9
 border_top=1
 border_right=0
 border_bottom=0
