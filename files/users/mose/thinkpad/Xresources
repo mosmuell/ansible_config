@@ -10,13 +10,17 @@ Xft.rgba: rgb
 !! urxvt config !!
 !!!!!!!!!!!!!!!!!!
 
+URxvt*termName:         rxvt-256color
+
 !! URxvt Appearance
-URxvt*font: xft:Bitstream Vera Sans Mono:size=10:antialias=true,xft:Inconsolata Nerd Font Mono:style=Regular:size=10
+URxvt*font: xft:Bitstream Vera Sans Mono:size=10:antialias=true,\
+			xft:Inconsolata Nerd Font Mono:style=Regular:size=10
+!URxvt*font: xft:Bitstream Vera Sans Mono:size=10:antialias=true,xft: Font Awesome 6 Free:style=Regular
 !URxvt*font: xft:Monospace:size=10
 URxvt*boldFont: xft:Monospace:bold:size=10
 !URxvt*font: xft:Monospace:size=10
 !URxvt*boldFont: xft:Monospace:bold:size=10
-URxvt.letterSpace: 0
+!URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.cursorBlink: true
 URxvt.cursorUnderline: false
