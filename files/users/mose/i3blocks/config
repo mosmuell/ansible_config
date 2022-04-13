@@ -43,7 +43,7 @@ border_bottom=0
 border_left=0
 
 [home]
-command=df -h /home | awk 'FNR==2 { gsub(/[A-Za-z]/, ""); printf "%i<span color=\"#50fa7b\">GiB</span>\n", $4 }'
+command=df -h /home | awk 'FNR==2 { gsub(/[A-Za-z]/, ""); printf "%i<span color=\"#50fa7b\"> GiB</span>\n", $4 }'
 interval=3
 label=<span color="#50fa7b"> </span>
 border=#50fa7b
@@ -83,9 +83,9 @@ border_bottom=0
 border_left=0
 
 [memory]
-command=free --giga | awk 'FNR==2{ printf "%i<span color=\"#ff79c6\">GiB</span>\n", $7 }'
+command=free --giga | awk 'FNR==2{ printf "%i<span color=\"#ff79c6\"> GiB</span>\n", $7 }'
 interval=2
-label=<span color="#ff79c6"> </span>
+label=<span color="#ff79c6"> </span>
 border=#ff79c6
 border_top=1
 border_right=0
@@ -104,7 +104,6 @@ border_top=1
 border_right=0
 border_bottom=0
 border_left=0
-
 # [time_pst]
 # command=TZ=":US/Pacific" date '+%I : %M %Z' | awk '{ printf "%s<span color=\"#8be9fd\">%s</span>%s<span color=\"#8be9fd\"> %s</span>\n", $1, $2, $3, $4 }'
 # interval=1
@@ -125,6 +124,7 @@ border_left=0
 # border_bottom=0
 # border_left=0
 
+
 [time_est]
 command=TZ=":Europe/Zurich" date '+%I : %M ' | awk '{ printf "%s<span color=\"#f1fa8c\">%s</span>%s<span color=\"#f1fa8c\"> %s</span>\n", $1, $2, $3, $4 }'
 interval=1
@@ -140,6 +140,17 @@ command=LC_ALL="en_GB.UTF-8" date "+%A %d %B %Y" | awk '{ printf "<span color=\"
 interval=60
 label=<span color="#ff5555"> </span>
 border=#ff5555
+border_top=1
+border_right=0
+border_bottom=0
+border_left=0
+
+[battery2]
+command=~/.config/i3blocks/scripts/battery2
+markup=pango
+interval=30
+color=#50fa7b
+border=#50fa7b
 border_top=1
 border_right=0
 border_bottom=0
