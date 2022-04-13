@@ -12,6 +12,8 @@
         - { dir: .config }
         - { dir: .config/autorandr}
         - { dir: .config/i3}
+        - { dir: .config/i3blocks}
+        - { dir: .config/i3blocks/scripts}
         - { dir: .config/rofi}
         - { dir: .local/share/fonts}
 
@@ -25,6 +27,7 @@
         mode: 0600
       with_items:
         - { src: 'i3.config', dest: '.config/i3/config'}
+        - { src: 'i3bocks/', dest: '.config/i3blocks/'}
         - { src: 'rofi/config.rasi', dest: '.config/rofi/config.rasi'}
         - { src: 'autorandr/', dest: '.config/autorandr/'}
         - { src: 'fonts/', dest: '.local/share/fonts/'}

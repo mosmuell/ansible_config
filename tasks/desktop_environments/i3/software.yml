@@ -3,6 +3,7 @@
     package:
       name:
         - i3
+        - i3blocks
         - rofi # program lancher
         - xprop # used to identify class of programs
         - playerctl # keybinding for multimedia
