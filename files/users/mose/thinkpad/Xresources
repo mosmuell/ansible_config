@@ -27,9 +27,12 @@ URxvt.urgentOnBell: true
 ! no bright colour when bold
 URxvt.intensityStyles: false
 
-URxvt.transparent:   true
-!URxvt.tintColor:     white
-URxvt.shading:       40
+!URxvt.transparent:   true
+!!URxvt.tintColor:     white
+!URxvt.shading:       30
+
+urxvt*depth: 32
+urxvt*background: rgba:0000/0000/0200/c800
 
 !!!! Tango scheme
 !! foreground/background
@@ -112,6 +115,7 @@ URxvt.keysym.Shift-Control-C:   eval:selection_to_clipboard
 !! Extensions !!
 !!!!!!!!!!!!!!!!
 
+URxvt*perl-lib: ~/.config/urxvt/ext/
 URxvt.perl-ext-common: default,matcher,resize-font
 URxvt.url-launcher: /usr/bin/xdg-open
 URxvt.matcher.button: 1

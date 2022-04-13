@@ -11,5 +11,6 @@
         - autorandr
         - feh # for background wallpaper
         - ranger # terminal file manager
+        - xcompmgr # compositor for transparency
       state: latest
 
