@@ -7,6 +7,9 @@ set number
 " colorscheme with light background
 set background=light
 
+" enable using mouse
+set mouse=a
+
 if has('nvim') " Neovim specific commands
 	" echo "Loading nvim settings"
 
