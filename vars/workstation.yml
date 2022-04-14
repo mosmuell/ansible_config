@@ -19,6 +19,7 @@ cpp_tools: true
 moneydance: true
 syncthing: true
 tlp: true
+thunar: false
 
 gnome: false
 i3: true

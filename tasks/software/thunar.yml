@@ -1,0 +1,32 @@
+  - name: software | Thunar | Installing Thunar
+    block:
+      - name: Install packages
+        package:
+          name:
+            - thunar # lightweight file manager
+            - thunar-volman
+          state: latest
+
+      - name: software | Thunar | Copying Thunar config
+        block:
+          - name: software | Thunar | create config directory
+            tags: dotfiles,dotfiles-mose
+            file:
+              path: /home/mose/{{ item.dir }}
+              state: directory
+              owner: mose
+              group: mose
+              mode: 0700
+            with_items:
+              - { dir: .config/Thunar}
+
+          - name: software | Thunar | copy config files
+            copy:
+              src: users/mose/{{ item.src }}
+              dest: /home/mose/{{ item.dest }}
+              owner: mose
+              group: mose
+              mode: 0600
+            with_items:
+              - { src: 'Thunar', dest: '.config/Thunar/'}
+    when: thunar is defined and thunar == true
