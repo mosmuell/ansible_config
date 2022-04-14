@@ -23,7 +23,7 @@ border_bottom=0
 border_left=0
 
 [home]
-command=df -h /home | awk 'FNR==2 { gsub(/[A-Za-z]/, ""); printf "%i<span color=\"#50fa7b\"> GiB</span>\n", $4 }'
+command=df -BG /home | awk 'FNR==2 { gsub(/[A-Za-z]/, ""); printf "%i<span color=\"#50fa7b\"> GiB</span>\n", $4 }'
 interval=3
 label=<span color="#50fa7b"> </span>
 border=#50fa7b
@@ -42,15 +42,15 @@ border_left=0
 # border_bottom=0
 # border_left=0
 
-[gpu_stats]
-command=nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | awk '{ printf "%02i<span color=\"#ffb86c\">%</span>", $0}' && nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits | awk '{ printf " %i<span color=\"#ffb86c\">°C</span>\n", $0}'
-label=<span color="#ffb86c"><b>GPU: </b></span>
-interval=2
-border=#ffb86c
-border_top=1
-border_right=0
-border_bottom=0
-border_left=0
+# [gpu_stats]
+# command=nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | awk '{ printf "%02i<span color=\"#ffb86c\">%</span>", $0}' && nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits | awk '{ printf " %i<span color=\"#ffb86c\">°C</span>\n", $0}'
+# label=<span color="#ffb86c"><b>GPU: </b></span>
+# interval=2
+# border=#ffb86c
+# border_top=1
+# border_right=0
+# border_bottom=0
+# border_left=0
 
 [cpu_usage]
 command=/home/mose/.config/i3blocks/scripts/cpu_usage
@@ -80,7 +80,7 @@ border_left=0
 # border_left=0
 
 [memory]
-command=free --giga | awk 'FNR==2{ printf "%i<span color=\"#ff79c6\"> GiB</span>\n", $7 }'
+command=free -h | awk 'FNR==2{ printf substr($4, 1, length($4)-2)"<span color=\"#ff79c6\"> GiB</span>\n"}'
 interval=2
 label=<span color="#ff79c6"> </span>
 border=#ff79c6
@@ -123,26 +123,6 @@ border_left=0
 # border_left=0
 
 
-[time_est]
-command=TZ=":Europe/Zurich" date '+%I : %M ' | awk '{ printf "%s<span color=\"#f1fa8c\">%s</span>%s<span color=\"#f1fa8c\"> %s</span>\n", $1, $2, $3, $4 }'
-interval=1
-label=<span color="#f1fa8c"> </span>
-border=#f1fa8c
-border_top=1
-border_right=0
-border_bottom=0
-border_left=0
-
-[date]
-command=LC_ALL="en_GB.UTF-8" date "+%A %d %B %Y" | awk '{ printf "<span color=\"#ff5555\">%s</span> %s %s %s<span color=\"#ff5555\">%s %s</span>\n", $1, $2, $3, $4, $5, $6 }'
-interval=60
-label=<span color="#ff5555"> </span>
-border=#ff5555
-border_top=1
-border_right=0
-border_bottom=0
-border_left=0
-
 [volume]
 # command= pactl list sinks | grep "Name: $(pactl get-default-sink)" -A7 | awk 'NR==8{ print; }' | cut -f2 -d "/"
 command= pactl list sinks | grep "Name: $(pactl get-default-sink)" -A7 | awk 'NR==8{ print $5; }'
@@ -150,17 +130,6 @@ label=
 interval=1
 signal=10
 border=#bd93f9
-border_top=1
-border_right=0
-border_bottom=0
-border_left=0
-
-[battery2]
-command=~/.config/i3blocks/scripts/battery2
-markup=pango
-interval=30
-color=#50fa7b
-border=#50fa7b
 border_top=1
 border_right=0
 border_bottom=0
@@ -190,6 +159,37 @@ UNIT=MB
 #<span font='FontAwesome'>  </span>
 label=<span font='FontAwesome' color="#ff79c6">  </span>
 border=#ff79c6
+border_top=1
+border_right=0
+border_bottom=0
+border_left=0
+
+[date]
+command=LC_ALL="en_GB.UTF-8" date "+%A %d %B %Y" | awk '{ printf "<span color=\"#ff5555\">%s</span> %s %s %s<span color=\"#ff5555\">%s %s</span>\n", $1, $2, $3, $4, $5, $6 }'
+interval=60
+label=<span color="#ff5555"> </span>
+border=#ff5555
+border_top=1
+border_right=0
+border_bottom=0
+border_left=0
+
+[time_est]
+command=TZ=":Europe/Zurich" date '+%I : %M ' | awk '{ printf "%s<span color=\"#f1fa8c\">%s</span>%s<span color=\"#f1fa8c\"> %s</span>\n", $1, $2, $3, $4 }'
+interval=1
+label=<span color="#f1fa8c"> </span>
+border=#f1fa8c
+border_top=1
+border_right=0
+border_bottom=0
+border_left=0
+
+[battery2]
+command=~/.config/i3blocks/scripts/battery2
+markup=pango
+interval=30
+color=#50fa7b
+border=#50fa7b
 border_top=1
 border_right=0
 border_bottom=0
