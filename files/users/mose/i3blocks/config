@@ -12,17 +12,6 @@ color=#f8f8f2
 separator_block_width=15
 markup=pango
 
-[wifi]
-command=iwgetid -r | tr '\n' ' ' && grep $(iwgetid -m | awk '{ printf "%s", $1 }') /proc/net/wireless | awk '{ printf "%i%\n", int($3 * 100 / 70) }'
-instance=wlp11s0f3u1
-interval=5
-label=<span color="#ff79c6"> </span>
-border=#ff79c6
-border_top=1
-border_right=0
-border_bottom=0
-border_left=0
-
 [mediaplayer]
 command=playerctl metadata --format "{{ artist }} <span color=\"#bd93f9\">-</span> {{ title }}"
 interval=2
@@ -155,6 +144,35 @@ markup=pango
 interval=30
 color=#50fa7b
 border=#50fa7b
+border_top=1
+border_right=0
+border_bottom=0
+border_left=0
+
+#[wifi]
+#command=/home/mose/.config/i3blocks/scripts/wifi
+##INTERFACE=wlo1
+#interval=60
+#label=<span font='FontAwesome' color="#ff79c6">  </span>
+#border=#ff79c6
+#border_top=1
+#border_right=0
+#border_bottom=0
+#border_left=0
+
+[bandwidth]
+command=/home/mose/.config/i3blocks/scripts/bandwidth
+interval=persist
+markup=pango
+#LABEL=<span font='FontAwesome'>  </span>
+#IFACE=[automatically determined]
+#DT=3
+UNIT=MB
+# Exposed variables: rx, wx, tx, unit, iface
+#PRINTF_COMMAND=printf "${LABEL}%-5.1f/%5.1f %s/s\n", rx, wx, unit;
+#<span font='FontAwesome'>  </span>
+label=<span font='FontAwesome' color="#ff79c6">  </span>
+border=#ff79c6
 border_top=1
 border_right=0
 border_bottom=0
