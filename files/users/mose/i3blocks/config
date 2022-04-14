@@ -80,7 +80,7 @@ border_left=0
 # border_left=0
 
 [memory]
-command=free -h | awk 'FNR==2{ printf substr($4, 1, length($4)-2)"<span color=\"#ff79c6\"> GiB</span>\n"}'
+command=free -h | awk 'FNR==2{ printf substr($3, 1, length($3)-2)"<span color=\"#ff79c6\"> GiB</span>\n"}'
 interval=2
 label=<span color="#ff79c6"> </span>
 border=#ff79c6
