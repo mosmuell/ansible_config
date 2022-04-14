@@ -165,7 +165,7 @@ border_bottom=0
 border_left=0
 
 [date]
-command=LC_ALL="en_GB.UTF-8" date "+%A %d %B %Y" | awk '{ printf "<span color=\"#ff5555\">%s</span> %s %s %s<span color=\"#ff5555\">%s %s</span>\n", $1, $2, $3, $4, $5, $6 }'
+command=LC_ALL="en_GB.UTF-8" date "+%A %d %B %Y %I:%M" | awk '{ printf "<span color=\"#ff5555\">%s</span> %s %s %s   %s %s\n", $1, $2, $3, $4, $5, $6 ,$7 }'
 interval=60
 label=<span color="#ff5555"> </span>
 border=#ff5555
@@ -174,15 +174,15 @@ border_right=0
 border_bottom=0
 border_left=0
 
-[time_est]
-command=TZ=":Europe/Zurich" date '+%I : %M ' | awk '{ printf "%s<span color=\"#f1fa8c\">%s</span>%s<span color=\"#f1fa8c\"> %s</span>\n", $1, $2, $3, $4 }'
-interval=1
-label=<span color="#f1fa8c"> </span>
-border=#f1fa8c
-border_top=1
-border_right=0
-border_bottom=0
-border_left=0
+# [time_est]
+# command=TZ=":Europe/Zurich" date '+%I : %M ' | awk '{ printf "%s<span color=\"#f1fa8c\">%s</span>%s<span color=\"#f1fa8c\"> %s</span>\n", $1, $2, $3, $4 }'
+# interval=1
+# label=<span color="#f1fa8c"> </span>
+# border=#f1fa8c
+# border_top=1
+# border_right=0
+# border_bottom=0
+# border_left=0
 
 [battery2]
 command=~/.config/i3blocks/scripts/battery2
