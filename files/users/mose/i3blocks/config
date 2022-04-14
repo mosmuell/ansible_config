@@ -167,7 +167,7 @@ border_bottom=0
 border_left=0
 
 [date]
-command=LC_ALL="en_GB.UTF-8" date "+%A %d %B %Y %I:%M" | awk '{ printf "<span color=\"#bd93f9\">%s</span> %s %s %s   %s %s\n", $1, $2, $3, $4, $5, $6 ,$7 }'
+command=LC_ALL="en_GB.UTF-8" date "+%A %d %B %Y %I:%M:%S" | awk '{ printf "<span color=\"#bd93f9\">%s</span> %s %s %s   %s %s\n", $1, $2, $3, $4, $5, $6 ,$7 }'
 interval=1
 label=<span color="#bd93f9"> </span>
 border=#bd93f9
