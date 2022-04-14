@@ -81,14 +81,15 @@ border_left=0
 # border_left=0
 
 [memory]
-command=free -h | awk 'FNR==2{ printf substr($3, 1, length($3)-2)" <span color=\"#ff79c6\">" substr($3, length($3)-1,1) "B</span>\n"}'
+command=free -h | awk 'FNR==2{ printf substr($3, 1, length($3)-2)" <span color=\"#f1fa8c\">" substr($3, length($3)-1,1) "B</span>\n"}'
 interval=2
-label=<span color="#ff79c6"> </span>
-border=#ff79c6
+label=<span color="#f1fa8c"> </span>
+border=#f1fa8c
 border_top=1
 border_right=0
 border_bottom=0
 border_left=0
+
 
 
 # #if you prefer automatic updating
@@ -130,7 +131,7 @@ command= pactl list sinks | grep "Name: $(pactl get-default-sink)" -A7 | awk 'NR
 label= 
 interval=1
 signal=10
-border=#bd93f9
+border=#8be9fd
 border_top=1
 border_right=0
 border_bottom=0
@@ -166,10 +167,10 @@ border_bottom=0
 border_left=0
 
 [date]
-command=LC_ALL="en_GB.UTF-8" date "+%A %d %B %Y %I:%M" | awk '{ printf "<span color=\"#ff5555\">%s</span> %s %s %s   %s %s\n", $1, $2, $3, $4, $5, $6 ,$7 }'
-interval=60
-label=<span color="#ff5555"> </span>
-border=#ff5555
+command=LC_ALL="en_GB.UTF-8" date "+%A %d %B %Y %I:%M" | awk '{ printf "<span color=\"#bd93f9\">%s</span> %s %s %s   %s %s\n", $1, $2, $3, $4, $5, $6 ,$7 }'
+interval=1
+label=<span color="#bd93f9"> </span>
+border=#bd93f9
 border_top=1
 border_right=0
 border_bottom=0
