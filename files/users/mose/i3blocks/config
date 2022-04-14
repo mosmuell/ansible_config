@@ -23,7 +23,8 @@ border_bottom=0
 border_left=0
 
 [home]
-command=df -BG /home | awk 'FNR==2 { gsub(/[A-Za-z]/, ""); printf "%i<span color=\"#50fa7b\"> GiB</span>\n", $4 }'
+#command=df -BG /home | awk 'FNR==2 { gsub(/[A-Za-z]/, ""); printf "%i<span color=\"#50fa7b\"> GiB</span>\n", $4 }'
+command=df -h /home | awk 'FNR==2 { printf substr($4, 1, length($4)-1)" <span color=\"#50fa7b\">" substr($4, length($4), 1) "B</span>\n"}'
 interval=3
 label=<span color="#50fa7b"> </span>
 border=#50fa7b
@@ -80,7 +81,7 @@ border_left=0
 # border_left=0
 
 [memory]
-command=free -h | awk 'FNR==2{ printf substr($3, 1, length($3)-2)"<span color=\"#ff79c6\"> GiB</span>\n"}'
+command=free -h | awk 'FNR==2{ printf substr($3, 1, length($3)-2)" <span color=\"#ff79c6\">" substr($3, length($3)-1,1) "B</span>\n"}'
 interval=2
 label=<span color="#ff79c6"> </span>
 border=#ff79c6
