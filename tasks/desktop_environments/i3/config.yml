@@ -35,6 +35,17 @@
         - { src: 'thinkpad/Xresources', dest: '.Xresources'}
         - { src: 'thinkpad/profile', dest: '.profile'}
 
+    - name: desktop environment | i3 | copy i3blocks executable files
+      tags: dotfiles,dotfiles-mose
+      copy:
+        src: users/mose/{{ item.src }}
+        dest: /home/mose/{{ item.dest }}
+        owner: mose
+        group: mose
+        mode: a+x
+      with_items:
+        - { src: 'i3blocks/scripts/', dest: '.config/i3blocks/scripts/'}
+
 - name: i3 wallpaper
   tags: wallpaper,i3
   block:
