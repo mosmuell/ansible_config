@@ -3,33 +3,28 @@
 
 set -a
 
-AUDIO_HIGH_SYMBOL=${AUDIO_HIGH_SYMBOL:-'🔊  '}
+AUDIO_HIGH_SYMBOL=${AUDIO_HIGH_SYMBOL:-'  '}
 
 AUDIO_MED_THRESH=${AUDIO_MED_THRESH:-50}
-AUDIO_MED_SYMBOL=${AUDIO_MED_SYMBOL:-'🔉  '}
+AUDIO_MED_SYMBOL=${AUDIO_MED_SYMBOL:-'  '}
 
 AUDIO_LOW_THRESH=${AUDIO_LOW_THRESH:-10}
-AUDIO_LOW_SYMBOL=${AUDIO_LOW_SYMBOL:-'🔈  '}
+AUDIO_LOW_SYMBOL=${AUDIO_LOW_SYMBOL:-'  '}
 
-AUDIO_MUTED_SYMBOL=${AUDIO_MUTED_SYMBOL:-'🔇  '}
+AUDIO_MUTED_SYMBOL=${AUDIO_MUTED_SYMBOL:-'  '}
 
 AUDIO_DELTA=${AUDIO_DELTA:-5}
 # <span color="#bd93f9"> </span>
-DEFAULT_COLOR=${DEFAULT_COLOR:-'<span color="#bd93f9">'}
-MUTED_COLOR=${MUTED_COLOR:-'<span color="#FF0000">'}
-NC=${NC:-'</span>'}
+DEFAULT_COLOR=${DEFAULT_COLOR:-"#ffffff"}
+MUTED_COLOR=${MUTED_COLOR:-"#ff4040"}
 
-# LONG_FORMAT=${LONG_FORMAT:-'${COLOR}${SYMB}${NC} ${VOL}% [${INDEX}:${NAME}]'}
-# SHORT_FORMAT=${SHORT_FORMAT:-'${COLOR}${SYMB}${NC} ${VOL}% [${INDEX}]'}
 LONG_FORMAT=${LONG_FORMAT:-'${SYMB} ${VOL}% [${INDEX}:${NAME}]'}
-SHORT_FORMAT=${SHORT_FORMAT:-'${SYMB} ${VOL}% [${INDEX}]'}
+SHORT_FORMAT=${SHORT_FORMAT:-'${SYMB}${VOL}%'}
+# SHORT_FORMAT=${SHORT_FORMAT:-'${SYMB} ${VOL}% [${INDEX}]'}
 USE_ALSA_NAME=${USE_ALSA_NAME:-0}
 USE_DESCRIPTION=${USE_DESCRIPTION:-0}
 
-SUBSCRIBE=${SUBSCRIBE:-0}
-
-MIXER=${MIXER:-""}
-SCONTROL=${SCONTROL:-""}
+SUBSCRIBE=${SUBSCRIBE:-1}
 
 while getopts F:Sf:adH:M:L:X:T:t:C:c:i:m:s:h opt; do
     case "$opt" in
@@ -47,8 +42,6 @@ while getopts F:Sf:adH:M:L:X:T:t:C:c:i:m:s:h opt; do
         C) DEFAULT_COLOR="$OPTARG" ;;
         c) MUTED_COLOR="$OPTARG" ;;
         i) AUDIO_INTERVAL="$OPTARG" ;;
-        m) MIXER="$OPTARG" ;;
-        s) SCONTROL="$OPTARG" ;;
         h) printf \
 "Usage: volume-pulseaudio [-S] [-F format] [-f format] [-p] [-a|-d] [-H symb] [-M symb]
         [-L symb] [-X symb] [-T thresh] [-t thresh] [-C color] [-c color] [-i inter] 
@@ -75,75 +68,23 @@ Options:
     esac
 done
 
-if [[ -z "$MIXER" ]] ; then
-    MIXER="default"
-    if amixer -D pulse info >/dev/null 2>&1 ; then
-        MIXER="pulse"
-    fi
-fi
-
-if [[ -z "$SCONTROL" ]] ; then
-    SCONTROL=$(amixer -D "$MIXER" scontrols | sed -n "s/Simple mixer control '\([^']*\)',0/\1/p" | head -n1)
-fi
-
-
-CAPABILITY=$(amixer -D $MIXER get $SCONTROL | sed -n "s/  Capabilities:.*cvolume.*/Capture/p")
-
-
-function move_sinks_to_new_default {
-    DEFAULT_SINK=$1
-    pactl list sink-inputs | grep 'Sink Input #' | grep -o '[0-9]\+' | while read SINK
-    do
-        pactl move-sink-input $SINK $DEFAULT_SINK
-    done
-}
-
-function set_default_playback_device_next {
-    inc=${1:-1}
-    num_devices=$(pactl list sinks | grep -c Name:)
-    sink_arr=($(pactl list sinks | grep Name: | sed -r 's/\s+Name: (.+)/\1/'))
-    default_sink=$(pactl get-default-sink)
-    default_sink_index=$(for i in "${!sink_arr[@]}"; do if [[ "$default_sink" = "${sink_arr[$i]}" ]]; then echo "$i"; fi done)
-    default_sink_index=$(( ($default_sink_index + $num_devices + $inc) % $num_devices ))
-    default_sink=${sink_arr[$default_sink_index]}
-    pactl set-default-sink $default_sink
-    move_sinks_to_new_default $default_sink
-}
-
-case "$BLOCK_BUTTON" in
-    1) set_default_playback_device_next ;;
-    2) amixer -q -D $MIXER sset $SCONTROL $CAPABILITY toggle ;;
-    3) set_default_playback_device_next -1 ;;
-    4) amixer -q -D $MIXER sset $SCONTROL $CAPABILITY $AUDIO_DELTA%+ ;;
-    5) amixer -q -D $MIXER sset $SCONTROL $CAPABILITY $AUDIO_DELTA%- ;;
-esac
-
 function print_format {
-    echo "$1" | envsubst '${SYMB}${VOL}${INDEX}${NAME}'
-    #echo "$1" | envsubst '${COLOR}${SYMB}${NC}${VOL}${INDEX}${NAME}'
+    output="<span color=\"$2\">$1</span>"
+
+    echo "$output" | envsubst '${SYMB}${VOL}${INDEX}${NAME}'
 }
 
 function print_block {
-    ACTIVE=$(pactl list sinks  | grep "State\: RUNNING" -B4 -A55 | grep "Name:\|Volume: \(front-left\|mono\)\|Mute:\|api.alsa.pcm.card = \|node.nick = ")
-    for Name in NAME MUTED VOL INDEX NICK; do
+	ACTIVE=$(pactl list sinks | grep "Name: $(pactl get-default-sink)" -B4 -A7 | grep "Name:\|Volume: \(front-left\|mono\)\|Mute:\|api.alsa.pcm.card = \|node.nick = ")
+    for Name in NAME MUTED VOL; do
         read $Name
     done < <(echo "$ACTIVE")
-    INDEX=$(echo "$INDEX"  | grep -o '".*"' | sed 's/"//g')
     VOL=$(echo "$VOL" | grep -o "[0-9]*%" | head -1 )
     VOL="${VOL%?}"
     NAME=$(echo "$NICK" | grep -o '".*"' | sed 's/"//g')
 
-    if [[ $USE_ALSA_NAME == 1 ]] ; then
-        ALSA_NAME=$(pactl list sinks |\
-awk '/^\s*\*/{f=1}/^\s*index:/{f=0}f' |\
-grep "alsa.name\|alsa.mixer_name" |\
-head -n1 |\
-sed 's/.*= "\(.*\)".*/\1/')
-        NAME=${ALSA_NAME:-$NAME}
-    elif [[ $USE_DESCRIPTION == 1 ]] ; then
-        DESCRIPTION=$(pactl list sinks  | grep "State\: RUNNING" -B4 -A55 | grep 'Description: ' | sed 's/^.*: //')
-        NAME=${DESCRIPTION:-$NAME}
-    fi
+	DESCRIPTION=$(pactl list sinks  |  grep "Name: $(pactl get-default-sink)" -A7 | grep 'Description: ' | sed 's/^.*: //')
+	NAME=${DESCRIPTION:-$NAME}
 
     if [[ $MUTED =~ "no" ]] ; then
         SYMB=$AUDIO_HIGH_SYMBOL
@@ -155,17 +96,10 @@ sed 's/.*= "\(.*\)".*/\1/')
         COLOR=$MUTED_COLOR
     fi
 
-    if [[ $ACTIVE = "" ]] ; then
-        echo "Sound inactive"
-        COLOR='#222225'
-    fi
-
-    if [[ $SUBSCRIBE == 1 ]] ; then
-        print_format "$LONG_FORMAT"
+	if [[ $SUBSCRIBE == 1 ]] ; then
+        print_format "$LONG_FORMAT" $COLOR
     else
-        #print_format "$LONG_FORMAT"
-        print_format "$SHORT_FORMAT"
-        #echo "$COLOR"
+        print_format "$SHORT_FORMAT" $COLOR
     fi
 }
 
