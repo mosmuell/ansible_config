@@ -12,7 +12,6 @@
         - arandr # monitor settings
         - autorandr
         - feh # for background wallpaper
-        - ranger # terminal file manager
         - xcompmgr # compositor for transparency
         - acpi # power management tool needed for i3blocks
         - sysstat # for cpu usage in i3blocks

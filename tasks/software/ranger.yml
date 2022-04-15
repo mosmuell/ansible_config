@@ -1,0 +1,32 @@
+  - name: software | ranger | Installing ranger
+    block:
+      - name: Install packages
+        package:
+          name:
+            - ranger # terminal file manager
+            - w3m-img # for image preview
+          state: latest
+
+      - name: software | ranger | Copying ranger config
+        block:
+          - name: software | ranger | Creating config directory
+            tags: dotfiles,dotfiles-mose
+            file:
+              path: /home/mose/{{ item.dir }}
+              state: directory
+              owner: mose
+              group: mose
+              mode: 0700
+            with_items:
+              - { dir: .config/ranger}
+
+          - name: software | ranger | Copying config files
+            copy:
+              src: users/mose/{{ item.src }}
+              dest: /home/mose/{{ item.dest }}
+              owner: mose
+              group: mose
+              mode: 0600
+            with_items:
+              - { src: 'ranger', dest: '.config/ranger/'}
+    when: ranger is defined and ranger == true
