@@ -94,7 +94,7 @@ border_left=0
 # #if you prefer automatic updating
 [volume-pipewire]
 command=~/.config/i3blocks/scripts/volume-pipewire
-interval=persist
+interval=once
 SUBSCRIBE=0
 USE_ALSA_NAME=1
 signal=10
