@@ -96,4 +96,5 @@
   - import_tasks: tasks/software/zoom.yml
 
   - import_tasks: tasks/software/moneydance.yml
+  - import_tasks: tasks/software/ranger.yml
   - import_tasks: tasks/software/syncthing.yml

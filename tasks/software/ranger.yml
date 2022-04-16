@@ -28,5 +28,15 @@
               group: mose
               mode: 0600
             with_items:
-              - { src: 'ranger', dest: '.config/ranger/'}
+              - { src: 'ranger', dest: '.config/'}
+
+          - name: software | ranger | Making files executable
+            copy:
+              src: users/mose/{{ item.src }}
+              dest: /home/mose/{{ item.dest }}
+              owner: mose
+              group: mose
+              mode: a+x
+            with_items:
+              - { src: 'ranger/scope.sh', dest: '.config/ranger/scope.sh'}
     when: ranger is defined and ranger == true
