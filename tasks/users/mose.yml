@@ -30,7 +30,6 @@
       with_items:
         - { src: 'git-prompt.sh', dest: '.git-prompt.sh'}
         - { src: 'tmux/tmux.conf', dest: '.tmux.conf'}
-        - { src: 'tmux/tmux-first-unattached-session', dest: '.tmux/'}
         - { src: 'bashrc', dest: '.bashrc'}
         - { src: 'vimrc', dest: '.vimrc' }
         - { src: 'gitconfig', dest: '.gitconfig' }
@@ -59,6 +58,8 @@
       git:
         repo: https://github.com/tmux-plugins/tpm.git
         dest: /home/mose/.tmux/plugins/tpm
+      become: yes
+      become_user: mose
   when: personal_config is defined and personal_config == true
 
 
