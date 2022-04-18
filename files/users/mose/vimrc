@@ -5,7 +5,7 @@ set clipboard=unnamedplus
 set number
 
 " colorscheme with light background
-set background=light
+set background=dark
 
 " enable using mouse
 set mouse=a
