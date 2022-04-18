@@ -18,6 +18,7 @@
         - { dir: .local }
         - { dir: .local/share }
         - { dir: .local/share/applications }
+        - { dir: .tmux }
 
     - name: users | mose | copy personal config files
       copy:
@@ -28,11 +29,22 @@
         mode: 0600
       with_items:
         - { src: 'git-prompt.sh', dest: '.git-prompt.sh'}
-        - { src: 'tmux.conf', dest: '.tmux.conf'}
+        - { src: 'tmux/tmux.conf', dest: '.tmux.conf'}
+        - { src: 'tmux/tmux-first-unattached-session', dest: '.tmux/'}
         - { src: 'bashrc', dest: '.bashrc'}
         - { src: 'vimrc', dest: '.vimrc' }
         - { src: 'gitconfig', dest: '.gitconfig' }
         - { src: 'tlp.conf', dest: '../../etc/tlp.conf' }
+
+    - name: users | mose | copy executable files
+      copy:
+        src: users/mose/{{ item.src }}
+        dest: /home/mose/{{ item.dest }}
+        owner: mose
+        group: mose
+        mode: a+x
+      with_items:
+        - { src: 'tmux/tmux-first-unattached-session', dest: '.tmux/'}
 
     - name: users | mose | create symbolic links
       file:
@@ -42,4 +54,11 @@
       with_items:
         - { src: '.vimrc', dest: '.config/nvim/init.vim'}
         - { src: '.vimrc', dest: '../../root/.config/nvim/init.vim'}
+
+    - name: users | mose | clone tmux plugin manager repository
+      git:
+        repo: https://github.com/tmux-plugins/tpm.git
+        dest: /home/mose/.tmux/plugins/tpm
   when: personal_config is defined and personal_config == true
+
+
