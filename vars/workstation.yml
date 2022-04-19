@@ -21,6 +21,7 @@ ranger: true
 syncthing: true
 tlp: true
 thunar: false
+zsh: true
 
 gnome: false
 i3: true

@@ -1,0 +1,39 @@
+# installing zsh
+  - name: Installing and configuring zsh
+    block:
+      - name: Installing base packages
+        package:
+          name:
+            - zsh
+          state: latest
+      - name: Cloning plugins from github
+        git:
+          repo: "{{ item.repo }}"
+          dest: /home/mose/.zsh/{{ item.dest }}
+        with_items:
+          - { repo: 'https://github.com/zsh-users/zsh-autosuggestions.git', dest: 'zsh-autosuggestions'}
+          - { repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git', dest: 'zsh-syntax-highlighting'}
+        become: yes
+        become_user: mose
+
+          #  - name: software | zsh | create config directory
+          #    tags: dotfiles,dotfiles-mose,zsh
+          #    file:
+          #      path: /home/mose/{{ item.dir }}
+          #      state: directory
+          #      owner: mose
+          #      group: mose
+          #      mode: 0700
+          #    with_items:
+          #      - { dir: .zsh}
+
+      - name: software | zsh | copy config file
+        copy:
+          src: users/mose/zsh/{{ item.src }}
+          dest: /home/mose/{{ item.dest }}
+          owner: mose
+          group: mose
+          mode: 0600
+        with_items:
+          - { src: 'zshrc', dest: '.zshrc'}
+    when: zsh is defined and zsh == true

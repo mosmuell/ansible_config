@@ -1,0 +1,40 @@
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+setopt autocd
+unsetopt beep
+bindkey -v
+# The following lines were added by compinstall
+
+# case insensitive path-completion 
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
+zstyle ':completion:*' menu select
+
+autoload -Uz compinit && compinit
+# End of lines added by compinstall
+
+zstyle ':vcs_info:*' actionformats  '(%b|%a) '
+zstyle ':vcs_info:*' formats          '(%b) '
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+precmd () { vcs_info }
+setopt prompt_subst
+autoload -Uz vcs_info
+
+PROMPT=$'%B%F{green}%n@%m%f:%b%F{blue}%~%f %F{#FFB52E}${vcs_info_msg_0_}%f\n$ '
+
+# aliases
+alias vim="nvim"
+alias ans_config="sudo ansible-pull -U https://github.com/mosmuell/ansible_config.git"
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
