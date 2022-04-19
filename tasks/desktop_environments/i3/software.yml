@@ -4,17 +4,18 @@
       name:
         - i3
         - i3blocks
-        - lxpolkit # authentification manager
-        - rofi # program lancher
-        - xprop # used to identify class of programs
-        - playerctl # keybinding for multimedia
-        - blueman # bluetooth
+        - acpi # power management tool needed for i3blocks
         - arandr # monitor settings
         - autorandr
-        - feh # for background wallpaper
-        - xcompmgr # compositor for transparency
-        - acpi # power management tool needed for i3blocks
-        - sysstat # for cpu usage in i3blocks
+        - blueman # bluetooth
         - brightnessctl # for adjusting brightness with multimedia keys
+        - feh # for background wallpaper
+        - lxpolkit # authentification manager
+        - playerctl # keybinding for multimedia
+        - rofi # program lancher
+        - sysstat # for cpu usage in i3blocks
+        - xclip # enabling copy on X-server
+        - xcompmgr # compositor for transparency
+        - xprop # used to identify class of programs
       state: latest
 
