@@ -1,5 +1,9 @@
 # .bashrc
-export EDITOR=nvim
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -16,8 +20,7 @@ export PATH
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
-# User specific aliases and functions
-
+### User specific aliases and functions ###
 
 # This script allows you to see repository status in your prompt.
 
