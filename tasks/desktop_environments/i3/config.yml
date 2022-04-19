@@ -28,7 +28,6 @@
       with_items:
         - { src: 'i3.config', dest: '.config/i3/config'}
         - { src: 'i3blocks/config', dest: '.config/i3blocks/config'}
-        - { src: 'i3blocks/scripts/', dest: '.config/i3blocks/scripts/'}
         - { src: 'rofi/config.rasi', dest: '.config/rofi/config.rasi'}
         - { src: 'autorandr/', dest: '.config/autorandr/'}
         - { src: 'fonts/', dest: '.local/share/fonts/'}
@@ -45,6 +44,17 @@
         mode: a+x
       with_items:
         - { src: 'i3blocks/scripts/', dest: '.config/i3blocks/scripts/'}
+
+    - name: desktop environment | i3 | Enabling touchpad tapping on X11
+      copy:
+        dest: "/etc/X11/xorg.conf.d/90-touchpad.conf"
+        content: |
+          Section "InputClass"
+                 Identifier "touchpad"
+                 MatchIsTouchpad "on"
+                 Driver "libinput"
+                 Option "Tapping" "on"
+          EndSection
 
 - name: i3 wallpaper
   tags: wallpaper,i3
