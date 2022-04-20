@@ -10,14 +10,20 @@ Xft.rgba: rgb
 !! urxvt config !!
 !!!!!!!!!!!!!!!!!!
 
+! URxvt clipboard
+! Disable ISO 14755 unicode input so we can use Ctrl-Shift bindings
+URxvt.iso14755:        false
+URxvt.iso14755_52:     false
+
 URxvt*termName: rxvt-256color
 
 !! URxvt Appearance
 URxvt*font: xft: DejaVu Sans Mono for Powerline:antialias=true:size=10,\
-			xft:Inconsolata Nerd Font Mono:style=Regular:size=10
-!xft:Bitstream Vera Sans Mono:size=10:antialias=true,\
+			xft:Inconsolata Nerd Font Mono:style=Regular:size=10,\
+			xft:Bitstream Vera Sans Mono:size=10:antialias=true
+!URxvt*font: xft:Bitstream Vera Sans Mono:size=10:antialias=true,xft: Font Awesome 6 Free:style=Regular
+!URxvt*font: xft:Monospace:size=10
 URxvt*boldFont: xft: DejaVu Sans Mono for Powerline:style=Bold:antialias=true:size=10
-
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.cursorBlink: true
