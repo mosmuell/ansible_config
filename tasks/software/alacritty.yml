@@ -1,0 +1,30 @@
+# installing alacritty
+  - name: Installing and configuring alacritty
+    block:
+      - name: Installing base package
+        package:
+          name:
+            - alacritty
+          state: latest
+
+      - name: software | alacritty | create config directory
+        tags: dotfiles,dotfiles-mose,alacritty
+        file:
+          path: /home/mose/.config/{{ item.dir }}
+          state: directory
+          owner: mose
+          group: mose
+          mode: 0700
+        with_items:
+          - { dir: alacritty}
+
+      - name: software | alacritty | copy config file
+        copy:
+          src: users/mose/alacritty/{{ item.src }}
+          dest: /home/mose/.config/alacritty/{{ item.dest }}
+          owner: mose
+          group: mose
+          mode: 0600
+        with_items:
+          - { src: 'alacritty.yml', dest: 'alacritty.yml'}
+    when: alacritty is defined and alacritty == true

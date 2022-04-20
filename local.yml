@@ -96,8 +96,8 @@
   - import_tasks: tasks/software/vlc.yml
   - import_tasks: tasks/software/zoom.yml
 
+  - import_tasks: tasks/software/alacritty.yml
   - import_tasks: tasks/software/moneydance.yml
   - import_tasks: tasks/software/ranger.yml
   - import_tasks: tasks/software/syncthing.yml
   - import_tasks: tasks/software/zsh.yml
-

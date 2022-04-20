@@ -16,6 +16,7 @@ thunderbird: true
 vlc: true
 zoom: true
 
+alacritty: true
 cpp_tools: true
 moneydance: true
 ranger: true
