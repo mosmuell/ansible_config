@@ -4,6 +4,8 @@ else
   export EDITOR='nvim'
 fi
 
+export TERM="alacritty"
+
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
@@ -21,17 +23,6 @@ setopt autocd
 unsetopt beep
 bindkey -e
 
-### Prompt ###
-
-# using vcs_info (for git)
-zstyle ':vcs_info:*' actionformats  '(%b|%a) '
-zstyle ':vcs_info:*' formats          '(%b) '
-zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
-precmd () { vcs_info }
-setopt prompt_subst
-autoload -Uz vcs_info
-
-PROMPT=$'%B%F{green}%n@%m%f:%b%F{blue}%~%f %F{#FFB52E}${vcs_info_msg_0_}%f\n$ '
 
 # aliases
 alias vim="nvim"
@@ -71,6 +62,8 @@ key[Control-Right]="${terminfo[kRIT5]}"
 [[ -n "${key[Shift-Tab]}" ]] && bindkey -- "${key[Shift-Tab]}"  reverse-menu-complete
 [[ -n "${key[Control-Left]}"  ]] && bindkey -- "${key[Control-Left]}"  backward-word
 [[ -n "${key[Control-Right]}" ]] && bindkey -- "${key[Control-Right]}" forward-word
+[[ -n "^[[1;5D"  ]] && bindkey -- "^[[1;5D"  backward-word
+[[ -n "^[[1;5C"  ]] && bindkey -- "^[[1;5C"  forward-word
 # bindkey "^[[1~" beginning-of-line
 # bindkey "^[[4~" end-of-line
 
@@ -101,3 +94,20 @@ zle -N history-beginning-search-forward-end history-search-end
 #bindkey "^[[A" history-beginning-search-backward
 #bindkey "^[[B" history-beginning-search-forward
 autoload -U history-search-end
+
+
+##############
+### Prompt ###
+##############
+
+# # using vcs_info (for git)
+# zstyle ':vcs_info:*' actionformats  '(%b|%a) '
+# zstyle ':vcs_info:*' formats          '(%b) '
+# zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+# precmd () { vcs_info }
+# setopt prompt_subst
+# autoload -Uz vcs_info
+# 
+# PROMPT=$'%B%F{green}%n@%m%f:%b%F{blue}%~%f %F{#FFB52E}${vcs_info_msg_0_}%f\n$ '
+
+eval "$(starship init zsh)"

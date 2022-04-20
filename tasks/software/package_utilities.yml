@@ -40,6 +40,14 @@
         - wget
       state: latest
 
+  - name: installing starship
+    package:
+      name:
+        - starship
+      state: latest
+    when: starship is defined and starship == true
+
+
   - name: language packs
     block:
       - name: install language packs

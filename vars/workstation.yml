@@ -19,6 +19,7 @@ zoom: true
 cpp_tools: true
 moneydance: true
 ranger: true
+starship: true
 syncthing: true
 tlp: true
 thunar: false
