@@ -87,6 +87,7 @@
   - import_tasks: tasks/software/audacity.yml
   - import_tasks: tasks/software/bitwarden.yml
   - import_tasks: tasks/software/discord.yml
+  - import_tasks: tasks/software/ferdi.yml
   - import_tasks: tasks/software/gnome_power_statistics.yml
   - import_tasks: tasks/software/pavucontrol.yml
   - import_tasks: tasks/software/signal.yml

@@ -7,6 +7,7 @@ anki: true
 audacity: true
 bitwarden: true
 discord: true
+ferdi: true
 gnome_power_statistics: true
 pavucontrol: true
 signal: true
