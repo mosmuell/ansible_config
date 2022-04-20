@@ -89,3 +89,4 @@
         mode: 0600
       with_items:
         - { src: 'urxvt/ext/', dest: '.urxvt/ext/'}
+  when: urxvt is defined and urxvt == true

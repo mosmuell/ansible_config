@@ -23,6 +23,7 @@ starship: true
 syncthing: true
 tlp: true
 thunar: false
+urxvt: false
 zsh: true
 
 gnome: false
