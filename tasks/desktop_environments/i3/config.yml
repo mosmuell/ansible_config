@@ -11,6 +11,7 @@
       with_items:
         - { dir: .config }
         - { dir: .config/autorandr}
+        - { dir: .config/dunst}
         - { dir: .config/i3}
         - { dir: .config/i3blocks}
         - { dir: .config/i3blocks/scripts}
@@ -28,6 +29,7 @@
       with_items:
         - { src: 'i3.config', dest: '.config/i3/config'}
         - { src: 'i3blocks/config', dest: '.config/i3blocks/config'}
+        - { src: 'dunst/dunstrc', dest: '.config/dunst/dunstrc'}
         - { src: 'rofi/config.rasi', dest: '.config/rofi/config.rasi'}
         - { src: 'autorandr/', dest: '.config/autorandr/'}
         - { src: 'fonts/', dest: '.local/share/fonts/'}

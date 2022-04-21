@@ -4,6 +4,7 @@
       name:
         - i3
         - i3blocks
+        - dunst # notification deamon
         - acpi # power management tool needed for i3blocks
         - arandr # monitor settings
         - autorandr
