@@ -82,7 +82,7 @@ border_left=0
 #command=free -h | awk 'FNR==2{ printf substr($3, 1, length($3)-2)" <span color=\"#f1fa8c\">" substr($3, length($3)-1,1) "B</span>\n"}'
 command=/home/mose/.config/i3blocks/scripts/memory
 interval=20
-label=<span color="#f1fa8c"> </span>
+label=<span color="#f1fa8c">  </span>
 border=#f1fa8c
 border_top=1
 border_right=0
