@@ -1,7 +1,8 @@
 # installing alacritty
   - name: Installing and configuring alacritty
+    tags: alacritty
     block:
-      - name: Installing base package
+      - name: software | alacritty | Installing base package
         package:
           name:
             - alacritty
