@@ -100,4 +100,5 @@
   - import_tasks: tasks/software/moneydance.yml
   - import_tasks: tasks/software/ranger.yml
   - import_tasks: tasks/software/syncthing.yml
+  - import_tasks: tasks/software/urxvt.yml
   - import_tasks: tasks/software/zsh.yml

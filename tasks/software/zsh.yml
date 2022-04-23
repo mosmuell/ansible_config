@@ -6,6 +6,7 @@
           name:
             - zsh
           state: latest
+
       - name: Cloning plugins from github
         git:
           repo: "{{ item.repo }}"
@@ -15,17 +16,6 @@
           - { repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git', dest: 'zsh-syntax-highlighting'}
         become: yes
         become_user: mose
-
-          #  - name: software | zsh | create config directory
-          #    tags: dotfiles,dotfiles-mose,zsh
-          #    file:
-          #      path: /home/mose/{{ item.dir }}
-          #      state: directory
-          #      owner: mose
-          #      group: mose
-          #      mode: 0700
-          #    with_items:
-          #      - { dir: .zsh}
 
       - name: software | zsh | copy config file
         copy:

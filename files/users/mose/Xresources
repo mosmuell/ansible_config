@@ -1,0 +1,9 @@
+Xft.dpi: 180
+Xft.hinting: true
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.antialias: 1
+Xft.rgba: rgb
+
+#include ".config/urxvt/config"

@@ -1,0 +1,31 @@
+  - name: software | urxvt
+    tags: urxvt,urxvt-extensions
+    block:
+      - name: software | urxvt | installing urxvt
+        package:
+          name:
+            - rxvt-unicode
+          state: latest
+
+      - name: software | urxvt | creating urxvt config folders
+        file:
+          path: /home/mose/.config/{{ item.dir }}
+          state: directory
+          owner: mose
+          group: mose
+          mode: 0700
+        with_items:
+          - { dir: urxvt}
+          - { dir: urxvt/ext}
+
+      - name: software | urxvt | copy config files
+        copy:
+          src: users/mose/{{ item.src }}
+          dest: /home/mose/.config/{{ item.dest }}
+          owner: mose
+          group: mose
+          mode: 0600
+        with_items:
+          - { src: 'urxvt/config', dest: 'urxvt/config'}
+          - { src: 'urxvt/ext/', dest: 'urxvt/ext/'}
+    when: urxvt is defined and urxvt == true

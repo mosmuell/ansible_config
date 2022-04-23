@@ -33,7 +33,7 @@
         - { src: 'rofi/config.rasi', dest: '.config/rofi/config.rasi'}
         - { src: 'autorandr/', dest: '.config/autorandr/'}
         - { src: 'fonts/', dest: '.local/share/fonts/'}
-        - { src: 'thinkpad/Xresources', dest: '.Xresources'}
+        - { src: 'Xresources', dest: '.Xresources'}
         - { src: 'thinkpad/profile', dest: '.profile'}
 
     - name: desktop environment | i3 | copy i3blocks executable files
@@ -68,27 +68,3 @@
         owner: root
         group: root
 
-- name: urxvt extensions
-  tags: urxvt,urxvt-extensions,i3
-  block:
-    - name: desktop environment | i3 | creating urxvt extensions folders
-      file:
-        path: /home/mose/{{ item.dir }}
-        state: directory
-        owner: mose
-        group: mose
-        mode: 0700
-      with_items:
-        - { dir: .urxvt}
-        - { dir: .urxvt/ext}
-
-    - name: desktop environment | i3 | copy urxvt extensions
-      copy:
-        src: users/mose/{{ item.src }}
-        dest: /home/mose/{{ item.dest }}
-        owner: mose
-        group: mose
-        mode: 0600
-      with_items:
-        - { src: 'urxvt/ext/', dest: '.urxvt/ext/'}
-  when: urxvt is defined and urxvt == true
