@@ -4,7 +4,7 @@ else
   export EDITOR='nvim'
 fi
 
-export TERM="alacritty"
+export TERM="xterm-256color"
 
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
