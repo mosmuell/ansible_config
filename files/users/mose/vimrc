@@ -66,15 +66,75 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 \| endif
 
 call plug#begin()
-" The default plugin directory will be as follows:
-"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
-
-" see: https://github.com/iamcco/markdown-preview.nvim/issues/50
-" Plug 'iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()', 'for': ['markdown', 'vim-plug']}
 Plug 'iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()', 'for': 'markdown', 'on': 'MarkdownPreview' }
+
+"Brings you the IDE-like tabs into Vim, for easy navigation, and a nice, customizable look
+Plug 'bagrat/vim-buffet'
+
+Plug 'christoomey/vim-tmux-navigator'
 
 " Conquer of Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" NERDtree
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
+
 call plug#end()
 
 source ~/.config/nvim/coc.vim
+
+""""""""""""""""""""""""""""""""""
+""" Vim-Tmux Navigator Binding """
+""""""""""""""""""""""""""""""""""
+
+" Custom navigator bindings (as set in tmux)
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
+
+"""""""""""""""""""""""
+""" NERDtree config """
+"""""""""""""""""""""""
+
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" Start NERDTree and leave the cursor in it.
+autocmd VimEnter * NERDTree | wincmd p
+
+let g:NERDTreeChDirMode = 2
+"""""""""""""""""""""""""
+""" vim-buffet config """
+"""""""""""""""""""""""""
+let g:buffet_show_index = 1
+
+nmap <M-1> <Plug>BuffetSwitch(1)
+nmap <M-2> <Plug>BuffetSwitch(2)
+nmap <M-3> <Plug>BuffetSwitch(3)
+nmap <M-4> <Plug>BuffetSwitch(4)
+nmap <M-5> <Plug>BuffetSwitch(5)
+nmap <M-6> <Plug>BuffetSwitch(6)
+nmap <M-7> <Plug>BuffetSwitch(7)
+nmap <M-8> <Plug>BuffetSwitch(8)
+nmap <M-9> <Plug>BuffetSwitch(9)
+nmap <M-0> <Plug>BuffetSwitch(10)
+
+" Key-mappings to navigate the buffers
+noremap <Tab> :bn<CR> " tab
+noremap <S-Tab> :bp<CR> " Shift + tab
+noremap <M-q> :Bw<CR> " Alt + q
+noremap <M-S-q> :Bw!<CR> " Alt + Shift + q
+
+function! g:BuffetSetCustomColors()
+	hi! BuffetCurrentBuffer cterm=NONE ctermbg=106 ctermfg=8 guibg=#b8bb26 guifg=#000000
+	hi! BuffetTrunc cterm=bold ctermbg=66 ctermfg=8 guibg=#458588 guifg=#000000
+	hi! BuffetBuffer cterm=NONE ctermbg=239 ctermfg=15 guibg=#504945 guifg=#000000
+	hi! BuffetTab cterm=NONE ctermbg=66 ctermfg=8 guibg=#458588 guifg=#000000
+	hi! BuffetActiveBuffer cterm=NONE ctermbg=10 ctermfg=239 guibg=#999999 guifg=#504945
+endfunction
