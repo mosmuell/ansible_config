@@ -106,9 +106,16 @@ nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 " Start NERDTree and leave the cursor in it.
-autocmd VimEnter * NERDTree | wincmd p
+" autocmd VimEnter * NERDTree | wincmd p
 
 let g:NERDTreeChDirMode = 2
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+" Make sure vim does not open files and other buffers on NerdTree window
+autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
+let g:plug_window = 'noautocmd vertical topleft new'
+
 """""""""""""""""""""""""
 """ vim-buffet config """
 """""""""""""""""""""""""
