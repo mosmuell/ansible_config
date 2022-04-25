@@ -19,6 +19,7 @@ zoom: true
 alacritty: true
 cpp_tools: true
 moneydance: true
+nvim: true
 ranger: true
 starship: true
 syncthing: true

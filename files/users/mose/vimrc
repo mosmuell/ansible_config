@@ -67,4 +67,9 @@ call plug#begin()
 " see: https://github.com/iamcco/markdown-preview.nvim/issues/50
 " Plug 'iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()', 'for': ['markdown', 'vim-plug']}
 Plug 'iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()', 'for': 'markdown', 'on': 'MarkdownPreview' }
+
+" Conquer of Completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
+
+source ~/.config/nvim/coc.vim

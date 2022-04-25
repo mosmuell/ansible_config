@@ -28,7 +28,6 @@
     package:
       name:
         - htop
-        - neovim
         - cronie # for crontabs
         - wl-clipboard # needed for copy/paste to the system clipboard with wayland
         - libnsl # needed for some legacy programms?
@@ -39,6 +38,40 @@
         - screen
         - wget
       state: latest
+
+  - name: installing neovim and dependencies
+    tags: nvim
+    block:
+      - name: Installing programms
+        package:
+          name:
+            - neovim
+            - nodejs # for plugins (includes npm)
+            - clang-tools-extra # for c++ autocompletion
+          state: latest
+
+      - name: Create personal config directories
+        tags: dotfiles,dotfiles-mose
+        file:
+          path: /home/mose/.config/{{ item.dir }}
+          state: directory
+          owner: mose
+          group: mose
+          mode: 0700
+        with_items:
+          - { dir: nvim/coc }
+
+      - name: Copy config files
+        copy:
+          src: users/mose/nvim/{{ item.src }}
+          dest: /home/mose/.config/nvim/{{ item.dest }}
+          owner: mose
+          group: mose
+          mode: 0600
+        with_items:
+          - { src: 'coc/coc.vim', dest: 'coc/coc.vim' }
+          - { src: 'coc/coc-settings.json', dest: 'coc/coc-settings.json' }
+    when: nvim is defined and nvim == true
 
   - name: installing starship
     package:
