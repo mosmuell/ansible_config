@@ -10,6 +10,11 @@ set background=dark
 " enable using mouse
 set mouse=a
 
+hi Pmenu ctermbg=black ctermfg=white 
+hi Pmenu guibg=#d7e5dc gui=NONE
+hi PmenuSel guibg=#b7c7b7 gui=NONE
+hi PmenuSbar guibg=#bcbcbc
+hi PmenuThumb guibg=#585858
 if has('nvim') " Neovim specific commands
 	" echo "Loading nvim settings"
 
