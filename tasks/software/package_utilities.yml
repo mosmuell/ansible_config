@@ -50,16 +50,16 @@
             - clang-tools-extra # for c++ autocompletion
           state: latest
 
-      - name: Create personal config directories
-        tags: dotfiles,dotfiles-mose
-        file:
-          path: /home/mose/.config/{{ item.dir }}
-          state: directory
-          owner: mose
-          group: mose
-          mode: 0700
-        with_items:
-          - { dir: nvim/coc }
+			  #      - name: Create personal config directories
+			  #        tags: dotfiles,dotfiles-mose
+			  #        file:
+			  #          path: /home/mose/.config/{{ item.dir }}
+			  #          state: directory
+			  #          owner: mose
+			  #          group: mose
+			  #          mode: 0700
+			  #        with_items:
+			  #          - { dir: nvim/coc }
 
       - name: Copy config files
         copy:
@@ -69,8 +69,8 @@
           group: mose
           mode: 0600
         with_items:
-          - { src: 'coc/coc.vim', dest: 'coc/coc.vim' }
-          - { src: 'coc/coc-settings.json', dest: 'coc/coc-settings.json' }
+          - { src: 'coc.vim', dest: 'coc.vim' }
+          - { src: 'coc-settings.json', dest: 'coc-settings.json' }
     when: nvim is defined and nvim == true
 
   - name: installing starship
