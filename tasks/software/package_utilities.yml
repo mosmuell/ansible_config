@@ -10,6 +10,7 @@
         - gcc
         - gcc-c++
         - kernel-devel
+        - ninja-build
         #- libstdc++ # already installed
         #- glibc # already installed
       state: latest
@@ -37,6 +38,7 @@
         - rsync
         - screen
         - wget
+        - fzf # fuzzy search
       state: latest
 
   - name: installing neovim and dependencies
@@ -64,13 +66,14 @@
       - name: Copy config files
         copy:
           src: users/mose/nvim/{{ item.src }}
-          dest: /home/mose/.config/nvim/{{ item.dest }}
+          dest: /home/mose/.config/{{ item.dest }}
           owner: mose
           group: mose
           mode: 0600
         with_items:
-          - { src: 'coc.vim', dest: 'coc.vim' }
-          - { src: 'coc-settings.json', dest: 'coc-settings.json' }
+          - { src: 'clangd/config.yaml', dest: 'clangd/config.yaml' }
+          - { src: 'coc.vim', dest: 'nvim/coc.vim' }
+          - { src: 'coc-settings.json', dest: 'nvim/coc-settings.json' }
     when: nvim is defined and nvim == true
 
   - name: installing starship

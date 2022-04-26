@@ -19,7 +19,7 @@ if has('nvim') " Neovim specific commands
 	" echo "Loading nvim settings"
 
 	" Changing listchars color
-	hi Whitespace ctermfg=LightGrey
+	hi Whitespace ctermfg=DarkGrey
 
 else " Standard vim specific commands
 	" echo "Loading vim settings"
@@ -82,9 +82,30 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 
+Plug 'preservim/nerdcommenter'
 call plug#end()
 
 source ~/.config/nvim/coc.vim
+
+""""""""""""""""""""""
+""" Nerd Commenter """
+""""""""""""""""""""""
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Mapping Ctrl-/ to toggle comments
+vmap <C-_> <plug>NERDCommenterToggle
+nmap <C-_> <plug>NERDCommenterToggle
+
+"""""""""""""""""""""
+""" Fuzzy Finding """
+"""""""""""""""""""""
+
+nmap <C-P> :FZF<CR>
 
 """"""""""""""""""""""""""""""""""
 """ Vim-Tmux Navigator Binding """
@@ -108,35 +129,66 @@ autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTa
 " Start NERDTree and leave the cursor in it.
 " autocmd VimEnter * NERDTree | wincmd p
 
-let g:NERDTreeChDirMode = 2
+let g:NERDTreeChDirMode = 1 "CWD is changed when NERDTree is first loaded to the dir it is initialised in
+let g:NERDTreeMouseMode = 3 "open any node with single mouse click
 nnoremap <C-n> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+" nnoremap <C-f> :NERDTreeFind<CR>
 
 " Make sure vim does not open files and other buffers on NerdTree window
 autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
 let g:plug_window = 'noautocmd vertical topleft new'
+
+" Check if NERDTree is open or active
+function! IsNERDTreeOpen()
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+" file, we're not in vimdiff and the current file is in the current working
+" dir
+function! SyncTree()
+  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff && stridx(expand('%:p:h'),getcwd()) >= 0
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+
+" This looks whether the current file is in the current working directory or
+" one of its subfolders.
+" " if stridx(expand('%:p:h'),getcwd()) >= 0 
+" " 	echo "Yes"
+" " 	echo expand('%:p:h')
+" " 	echo getcwd()
+" " else
+" " 	echo "nope"
+" " 	echo expand('%:p:h')
+" " 	echo getcwd()
+" " endif
+
+" Highlight currently open buffer in NERDTree
+autocmd BufRead * call SyncTree()
 
 """""""""""""""""""""""""
 """ vim-buffet config """
 """""""""""""""""""""""""
 let g:buffet_show_index = 1
 
-nmap <M-1> <Plug>BuffetSwitch(1)
-nmap <M-2> <Plug>BuffetSwitch(2)
-nmap <M-3> <Plug>BuffetSwitch(3)
-nmap <M-4> <Plug>BuffetSwitch(4)
-nmap <M-5> <Plug>BuffetSwitch(5)
-nmap <M-6> <Plug>BuffetSwitch(6)
-nmap <M-7> <Plug>BuffetSwitch(7)
-nmap <M-8> <Plug>BuffetSwitch(8)
-nmap <M-9> <Plug>BuffetSwitch(9)
-nmap <M-0> <Plug>BuffetSwitch(10)
+nmap <silent> <M-1> <Plug>BuffetSwitch(1)<CR>:call SyncTree()<CR>
+nmap <silent> <M-2> <Plug>BuffetSwitch(2)<CR>:call SyncTree()<CR>
+nmap <silent> <M-3> <Plug>BuffetSwitch(3)<CR>:call SyncTree()<CR>
+nmap <silent> <M-4> <Plug>BuffetSwitch(4)<CR>:call SyncTree()<CR>
+nmap <silent> <M-5> <Plug>BuffetSwitch(5)<CR>:call SyncTree()<CR>
+nmap <silent> <M-6> <Plug>BuffetSwitch(6)<CR>:call SyncTree()<CR>
+nmap <silent> <M-7> <Plug>BuffetSwitch(7)<CR>:call SyncTree()<CR>
+nmap <silent> <M-8> <Plug>BuffetSwitch(8)<CR>:call SyncTree()<CR>
+nmap <silent> <M-9> <Plug>BuffetSwitch(9)<CR>:call SyncTree()<CR>
+nmap <silent> <M-0> <Plug>BuffetSwitch(10)<CR>:call SyncTree()<CR>
 
 " Key-mappings to navigate the buffers
-noremap <Tab> :bn<CR> " tab
-noremap <S-Tab> :bp<CR> " Shift + tab
-noremap <M-q> :Bw<CR> " Alt + q
-noremap <M-S-q> :Bw!<CR> " Alt + Shift + q
+noremap <silent> <Tab> :bn<CR>:call SyncTree()<CR> " tab
+noremap <silent> <S-Tab> :bp<CR>:call SyncTree()<CR> " Shift + tab
+noremap <silent> <M-q> :Bw<CR>:call SyncTree()<CR> " Alt + q
+noremap <silent> <M-S-q> :Bw!<CR>:call SyncTree()<CR> " Alt + Shift + q
 
 function! g:BuffetSetCustomColors()
 	hi! BuffetCurrentBuffer cterm=NONE ctermbg=106 ctermfg=8 guibg=#b8bb26 guifg=#000000
