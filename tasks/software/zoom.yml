@@ -1,5 +1,5 @@
 - name: software | discord | install package
-  tags: packages,flatpak,anki,workstation-packages
+  tags: packages,flatpak,zoom,workstation-packages
   become_user: mose
   flatpak:
     name: us.zoom.Zoom
