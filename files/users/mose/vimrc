@@ -90,6 +90,7 @@ call plug#end()
 colorscheme codedark
 
 source ~/.config/nvim/coc.vim
+source ~/.config/nvim/bclose.vim
 
 """""""""""""""""""
 """ Vim Airline """
@@ -98,7 +99,6 @@ source ~/.config/nvim/coc.vim
 let g:airline_theme = 'codedark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#buffer_min_count = 2
 let g:airline_powerline_fonts = 1
 
 " Keybindings to change buffers
@@ -116,8 +116,8 @@ nmap <silent> <M-0> :b 0<CR>:call SyncTree()<CR>
 " Key-mappings to navigate the buffers
 noremap <silent> <Tab> :bn<CR>:call SyncTree()<CR> " tab
 noremap <silent> <S-Tab> :bp<CR>:call SyncTree()<CR> " Shift + tab
-noremap <silent> <M-q> :bw<CR>:call SyncTree()<CR> " Alt + q
-noremap <silent> <M-S-q> :bw!<CR>:call SyncTree()<CR> " Alt + Shift + q
+noremap <silent> <M-q> :Bclose<CR>:call SyncTree()<CR> " Alt + q
+noremap <silent> <M-S-q> :Bclose!<CR>:call SyncTree()<CR> " Alt + Shift + q
 
 function! s:update_git_status()
 	let g:airline_section_b = "%{get(g:,'coc_git_status')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}"

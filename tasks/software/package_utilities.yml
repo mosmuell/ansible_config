@@ -72,6 +72,7 @@
           mode: 0600
         with_items:
           - { src: 'clangd/config.yaml', dest: 'clangd/config.yaml' }
+          - { src: 'bdelete.vim', dest: 'nvim/bdelete.vim' }
           - { src: 'coc.vim', dest: 'nvim/coc.vim' }
           - { src: 'coc-settings.json', dest: 'nvim/coc-settings.json' }
     when: nvim is defined and nvim == true
