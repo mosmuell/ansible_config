@@ -66,6 +66,10 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 			\| endif
 
 call plug#begin()
+" Plug 'octol/vim-cpp-enhanced-highlight'
+" Plug 'bfrg/vim-cpp-modern'
+Plug 'sheerun/vim-polyglot'
+
 Plug 'iamcco/markdown-preview.nvim', { 'do': ':call mkdp#util#install()', 'for': 'markdown', 'on': 'MarkdownPreview' }
 Plug 'christoomey/vim-tmux-navigator'
 " Conquer of Completion
@@ -80,17 +84,49 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/nerdcommenter'
 
 " Colorschemes
-" Plug 'joshdick/onedark.vim'
+Plug 'joshdick/onedark.vim'
 Plug 'tomasiser/vim-code-dark'
+Plug 'morhetz/gruvbox'
+Plug 'sainnhe/everforest'
+Plug 'rigellute/rigel'
+Plug 'sainnhe/edge'
+Plug 'sainnhe/sonokai'
 
 " Vim airline
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
+"""""""""""""""""""
+""" Colorscheme """
+"""""""""""""""""""
+
+if has('termguicolors')
+	set termguicolors
+endif
+
+" The configuration options should be placed before `colorscheme sonokai`.
+" let g:sonokai_style = 'andromeda'
+" let g:sonokai_better_performance = 1
 colorscheme codedark
 
 source ~/.config/nvim/coc.vim
 source ~/.config/nvim/bclose.vim
+
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_experimental_template_highlight = 1
+let g:cpp_concepts_highlight = 1
+"
+" Disable function highlighting (affects both C and C++ files)
+let g:cpp_function_highlight = 1
+
+" Enable highlighting of C++11 attributes
+let g:cpp_attributes_highlight = 1
+
+" Highlight struct/class member variables (affects both C and C++ files)
+let g:cpp_member_highlight = 1
 
 """""""""""""""""""
 """ Vim Airline """
@@ -101,7 +137,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 
-" Keybindings to change buffers
+" Keybindings to change to specific buffers
 nmap <silent> <M-1> :b 1<CR>:call SyncTree()<CR>
 nmap <silent> <M-2> :b 2<CR>:call SyncTree()<CR>
 nmap <silent> <M-3> :b 3<CR>:call SyncTree()<CR>
@@ -119,6 +155,7 @@ noremap <silent> <S-Tab> :bp<CR>:call SyncTree()<CR> " Shift + tab
 noremap <silent> <M-q> :Bclose<CR>:call SyncTree()<CR> " Alt + q
 noremap <silent> <M-S-q> :Bclose!<CR>:call SyncTree()<CR> " Alt + Shift + q
 
+" Git status showing on the statusbar
 function! s:update_git_status()
 	let g:airline_section_b = "%{get(g:,'coc_git_status')}%{get(b:,'coc_git_status','')}%{get(b:,'coc_git_blame','')}"
 endfunction
