@@ -49,32 +49,17 @@
           name:
             - neovim
             - nodejs # for plugins (includes npm)
-            - clang-tools-extra # for c++ autocompletion
+              #- clang-tools-extra # for c++ autocompletion -> not really needed with lua
+            - ripgrep
           state: latest
-
-			  #      - name: Create personal config directories
-			  #        tags: dotfiles,dotfiles-mose
-			  #        file:
-			  #          path: /home/mose/.config/{{ item.dir }}
-			  #          state: directory
-			  #          owner: mose
-			  #          group: mose
-			  #          mode: 0700
-			  #        with_items:
-			  #          - { dir: nvim/coc }
 
       - name: Copy config files
         copy:
-          src: users/mose/nvim/{{ item.src }}
-          dest: /home/mose/.config/{{ item.dest }}
+          src: users/mose/nvim/
+          dest: /home/mose/.config/
           owner: mose
           group: mose
           mode: 0600
-        with_items:
-          - { src: 'clangd/config.yaml', dest: 'clangd/config.yaml' }
-          - { src: 'bdelete.vim', dest: 'nvim/bdelete.vim' }
-          - { src: 'coc.vim', dest: 'nvim/coc.vim' }
-          - { src: 'coc-settings.json', dest: 'nvim/coc-settings.json' }
     when: nvim is defined and nvim == true
 
   - name: installing starship
