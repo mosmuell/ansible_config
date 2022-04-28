@@ -45,6 +45,7 @@
     tags: nvim
     block:
       - name: Installing programms
+        tags: nvim
         package:
           name:
             - neovim
@@ -54,8 +55,9 @@
           state: latest
 
       - name: Copy config files
+        tags: nvim
         copy:
-          src: users/mose/nvim/
+          src: users/mose/nvim
           dest: /home/mose/.config/
           owner: mose
           group: mose
