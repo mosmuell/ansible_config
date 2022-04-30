@@ -58,6 +58,9 @@ keymap("n", "<M-S-q>", ":Bdelete! <CR>", opts)
 -- Toggling nvim-tree
 keymap("n", "<C-n>", ":NvimTreeToggle<CR>", opts)
 
+-- Commenting out current line
+keymap("n", "<C-_>", ":CommentToggle<CR>", opts)
+
 -- Insert --
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
@@ -71,6 +74,9 @@ keymap("v", ">", ">gv", opts)
 keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
+
+-- Commenting out current block
+keymap("v", "<C-_>", ":CommentToggle<CR>", opts)
 
 -- Visual Block --
 -- Move text up and down

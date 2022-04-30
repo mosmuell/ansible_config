@@ -33,6 +33,14 @@ vim.cmd [[
     autocmd!
     autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
   augroup end
+
+  augroup _nvim_comment
+    autocmd!
+    " when you enter a (new) buffer
+    autocmd BufEnter *.cpp,*.h :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
+    " when you've changed the name of a file opened in a buffer, the file type may have changed
+    autocmd BufFilePost *.cpp,*.h :lua vim.api.nvim_buf_set_option(0, "commentstring", "// %s")
+  augroup END
 ]]
 
 -- Autoformat
