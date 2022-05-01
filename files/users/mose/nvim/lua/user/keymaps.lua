@@ -26,16 +26,16 @@ keymap("n", "<M-k>", "<C-w>k", opts)
 keymap("n", "<M-l>", "<C-w>l", opts)
 
 -- Custom navigator bindings (as set in tmux)
-keymap("n", "<M-h>", ":TmuxNavigateLeft<cr> ", opts)
-keymap("n", "<M-j>", ":TmuxNavigateDown<cr> ", opts)
-keymap("n", "<M-k>", ":TmuxNavigateUp<cr>   ", opts)
-keymap("n", "<M-l>", ":TmuxNavigateRight<cr>", opts)
+keymap("n", "<M-h>", '<cmd>lua require("tmux").move_left()<cr>', opts)
+keymap("n", "<M-j>", '<cmd>lua require("tmux").move_bottom()<cr>', opts)
+keymap("n", "<M-k>", '<cmd>lua require("tmux").move_top()<cr>', opts)
+keymap("n", "<M-l>", '<cmd>lua require("tmux").move_right()<cr>', opts)
 
 -- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+keymap("n", "<M-Up>", '<cmd>lua require("tmux").resize_top()<cr>', opts)
+keymap("n", "<M-Down>", '<cmd>lua require("tmux").resize_bottom()<cr>', opts)
+keymap("n", "<M-Left>", '<cmd>lua require("tmux").resize_left()<cr>', opts)
+keymap("n", "<M-Right>", '<cmd>lua require("tmux").resize_right()<cr>', opts)
 
 -- Navigate buffers
 keymap("n", "<Tab>", ":bnext<CR>", opts)

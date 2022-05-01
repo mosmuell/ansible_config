@@ -27,6 +27,7 @@ export PATH
 
 alias vim="nvim"
 alias ans_config="sudo ansible-pull -U https://github.com/mosmuell/ansible_config.git"
+alias ls="ls --color=auto"
 
 ##############
 ### Prompt ###
@@ -41,4 +42,3 @@ alias ans_config="sudo ansible-pull -U https://github.com/mosmuell/ansible_confi
 
 export TERM="xterm-256color"
 eval "$(starship init bash)"
-

@@ -4,8 +4,6 @@ else
   export EDITOR='nvim'
 fi
 
-export TERM="xterm-256color"
-
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
@@ -27,6 +25,8 @@ bindkey -e
 # aliases
 alias vim="nvim"
 alias ans_config="sudo ansible-pull -U https://github.com/mosmuell/ansible_config.git"
+alias gl="git log --graph --all --oneline --decorate"
+
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -110,4 +110,5 @@ autoload -U history-search-end
 # 
 # PROMPT=$'%B%F{green}%n@%m%f:%b%F{blue}%~%f %F{#FFB52E}${vcs_info_msg_0_}%f\n$ '
 
+export TERM="xterm-256color"
 eval "$(starship init zsh)"

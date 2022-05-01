@@ -1,5 +1,4 @@
 local fn = vim.fn
-
 -- Automatically install packer
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -46,8 +45,6 @@ return packer.startup(function(use)
     use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
     use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
     use {"numToStr/Comment.nvim", tag="v0.6"}
-    -- use "numToStr/Comment.nvim" -- Easily comment stuff
-    -- use "terrortylor/nvim-comment"
     use "kyazdani42/nvim-web-devicons"
     use "kyazdani42/nvim-tree.lua"
     use "akinsho/bufferline.nvim"
@@ -64,8 +61,9 @@ return packer.startup(function(use)
     -- Colorschemes
     -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
     use "lunarvim/darkplus.nvim"
-    use "tomasiser/vim-code-dark"
-    use "Mofiqul/vscode.nvim"
+    use "lunarvim/onedarker.nvim"
+    -- use "tomasiser/vim-code-dark"
+    -- use "Mofiqul/vscode.nvim"
 
     -- cmp plugins
     use "hrsh7th/nvim-cmp" -- The completion plugin
@@ -99,13 +97,14 @@ return packer.startup(function(use)
     -- Git
     use "lewis6991/gitsigns.nvim"
 
+    -- Tmux-vim integration
+    use "aserowy/tmux.nvim"
+
     ------------------------
-    --- NON  LUA PLUGINS ---
+    --- NON-LUA PLUGINS ---
     ------------------------
 
-    -- Tmux integration
-    use 'christoomey/vim-tmux-navigator'
-
+    -- Markdown preview in the browser
     use {
         'iamcco/markdown-preview.nvim',
         run = function() vim.fn['mkdp#util#install']() end,
