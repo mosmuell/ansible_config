@@ -45,8 +45,9 @@ return packer.startup(function(use)
     use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
     use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
     use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
+    use {"numToStr/Comment.nvim", tag="v0.6"}
     -- use "numToStr/Comment.nvim" -- Easily comment stuff
-    use "terrortylor/nvim-comment"
+    -- use "terrortylor/nvim-comment"
     use "kyazdani42/nvim-web-devicons"
     use "kyazdani42/nvim-tree.lua"
     use "akinsho/bufferline.nvim"
@@ -91,6 +92,7 @@ return packer.startup(function(use)
     use {
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
+        commit = "bc25a6a5c4fd659bbf78ba0a2442ecf14eb00398"
     }
     use "JoosepAlviste/nvim-ts-context-commentstring"
 
@@ -109,6 +111,7 @@ return packer.startup(function(use)
         run = function() vim.fn['mkdp#util#install']() end,
         ft = {'markdown'}
     }
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if PACKER_BOOTSTRAP then
