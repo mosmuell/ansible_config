@@ -44,7 +44,8 @@ return packer.startup(function(use)
     use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
     use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
     use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
-    use {"numToStr/Comment.nvim", tag="v0.6"}
+    use "numToStr/Comment.nvim"
+    -- use {"numToStr/Comment.nvim", tag="v0.6"}
     use "kyazdani42/nvim-web-devicons"
     use "kyazdani42/nvim-tree.lua"
     use "akinsho/bufferline.nvim"
@@ -84,13 +85,14 @@ return packer.startup(function(use)
     use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
 
     -- Telescope
-    use {"nvim-telescope/telescope.nvim", tag="nvim-0.6"}
+    use "nvim-telescope/telescope.nvim"
+    -- use {"nvim-telescope/telescope.nvim", tag="nvim-0.6"}
 
     -- Treesitter
     use {
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
-        commit = "bc25a6a5c4fd659bbf78ba0a2442ecf14eb00398"
+        -- commit = "bc25a6a5c4fd659bbf78ba0a2442ecf14eb00398"
     }
     use "JoosepAlviste/nvim-ts-context-commentstring"
 
