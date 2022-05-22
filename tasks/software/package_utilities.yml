@@ -59,7 +59,7 @@
       - name: Copy config files
         tags: nvim
         copy:
-          src: users/mose/nvim
+          src: users/mose/nvim_config
           dest: /home/mose/.config/
           owner: mose
           group: mose

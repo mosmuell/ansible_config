@@ -1,0 +1,4 @@
+[submodule "files/users/mose/nvim_config"]
+    path = files/users/mose/nvim_config
+    url = https://github.com/mosmuell/nvim_config
+    branch = main
