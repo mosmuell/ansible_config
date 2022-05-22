@@ -1,4 +1,6 @@
 # .bashrc
+# use zsh as default shell
+exec zsh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
