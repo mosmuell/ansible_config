@@ -26,79 +26,79 @@
   become: true # using sudo
   tasks:
 
-  ## Including the variables which might be distribution specific
-  - name: Including distribution specific variables
-    include_vars: "{{ ansible_distribution }}.yml"
-    tags: always
+    ## Including the variables which might be distribution specific
+    - name: Including distribution specific variables
+      include_vars: "{{ ansible_distribution }}.yml"
+      tags: always
 
-  ## Including the workstation variables
-  - name: Including distribution specific variables
-    include_vars: "workstation.yml"
-    tags: workstation
+        ## Including the workstation variables
+    - name: Including distribution specific variables
+      include_vars: "workstation.yml"
+      tags: workstation
 
-  ## User configs
-  - import_tasks: tasks/users/mose.yml
+        ## User configs
+    - import_tasks: tasks/users/mose.yml
 
-  ## Installing python (needed for setup)
-  - import_tasks: tasks/software/python.yml
+      ## Installing python (needed for setup)
+    - import_tasks: tasks/software/python.yml
 
-  ## desktop environments
-  ### Gnome
-  - include_tasks: tasks/desktop_environments/gnome/appearance.yml
-    when: gnome is defined and gnome == true
+      ## desktop environments
+      ### Gnome
+    - include_tasks: tasks/desktop_environments/gnome/appearance.yml
+      when: gnome is defined and gnome == true
 
-  - include_tasks: tasks/desktop_environments/gnome/keybindings.yml
-    when: gnome is defined and gnome == true
+    - include_tasks: tasks/desktop_environments/gnome/keybindings.yml
+      when: gnome is defined and gnome == true
 
-  - include_tasks: tasks/desktop_environments/gnome/nautilus.yml
-    when: gnome is defined and gnome == true
+    - include_tasks: tasks/desktop_environments/gnome/nautilus.yml
+      when: gnome is defined and gnome == true
 
-  - include_tasks: tasks/desktop_environments/gnome/peripherals.yml
-    when: gnome is defined and gnome == true
+    - include_tasks: tasks/desktop_environments/gnome/peripherals.yml
+      when: gnome is defined and gnome == true
 
-  - include_tasks: tasks/desktop_environments/gnome/power.yml
-    when: gnome is defined and gnome == true
+    - include_tasks: tasks/desktop_environments/gnome/power.yml
+      when: gnome is defined and gnome == true
 
-  - include_tasks: tasks/desktop_environments/gnome/shell-settings.yml
-    when: gnome is defined and gnome == true
+    - include_tasks: tasks/desktop_environments/gnome/shell-settings.yml
+      when: gnome is defined and gnome == true
 
-  - include_tasks: tasks/desktop_environments/gnome/terminal.yml
-    when: gnome is defined and gnome == true
+    - include_tasks: tasks/desktop_environments/gnome/terminal.yml
+      when: gnome is defined and gnome == true
 
-  ### i3
-  - include_tasks: tasks/desktop_environments/i3/config.yml
-    when: i3 is defined and i3 == true
+        ### i3
+    - include_tasks: tasks/desktop_environments/i3/config.yml
+      when: i3 is defined and i3 == true
 
-  - include_tasks: tasks/desktop_environments/i3/software.yml
-    when: i3 is defined and i3 == true
+    - include_tasks: tasks/desktop_environments/i3/software.yml
+      when: i3 is defined and i3 == true
 
-  ## enable repositories
-  - import_tasks: tasks/system_setup/repositories.yml
+        ## enable repositories
+    - import_tasks: tasks/system_setup/repositories.yml
 
-  # Software installation
-  - import_tasks: tasks/software/codecs.yml
-  - import_tasks: tasks/software/package_utilities.yml
+      # Software installation
+    - import_tasks: tasks/software/codecs.yml
+    - import_tasks: tasks/software/package_utilities.yml
 
-  ## add flatpak support and flathub remote
-  - import_tasks: tasks/software/flatpak.yml
+      ## add flatpak support and flathub remote
+    - import_tasks: tasks/software/flatpak.yml
 
-  ### installing flatpak software
-  - import_tasks: tasks/software/anki.yml
-  - import_tasks: tasks/software/audacity.yml
-  - import_tasks: tasks/software/bitwarden.yml
-  - import_tasks: tasks/software/discord.yml
-  - import_tasks: tasks/software/ferdi.yml
-  - import_tasks: tasks/software/gnome_power_statistics.yml
-  - import_tasks: tasks/software/pavucontrol.yml
-  - import_tasks: tasks/software/signal.yml
-  - import_tasks: tasks/software/spotify.yml
-  - import_tasks: tasks/software/thunderbird.yml
-  - import_tasks: tasks/software/vlc.yml
-  - import_tasks: tasks/software/zoom.yml
+      ### installing flatpak software
+    - import_tasks: tasks/software/anki.yml
+    - import_tasks: tasks/software/audacity.yml
+    - import_tasks: tasks/software/bitwarden.yml
+    - import_tasks: tasks/software/discord.yml
+    - import_tasks: tasks/software/ferdi.yml
+    - import_tasks: tasks/software/gnome_power_statistics.yml
+    - import_tasks: tasks/software/pavucontrol.yml
+    - import_tasks: tasks/software/signal.yml
+    - import_tasks: tasks/software/spotify.yml
+    - import_tasks: tasks/software/thunderbird.yml
+    - import_tasks: tasks/software/vlc.yml
+    - import_tasks: tasks/software/zoom.yml
 
-  - import_tasks: tasks/software/alacritty.yml
-  - import_tasks: tasks/software/moneydance.yml
-  - import_tasks: tasks/software/ranger.yml
-  - import_tasks: tasks/software/syncthing.yml
-  - import_tasks: tasks/software/urxvt.yml
-  - import_tasks: tasks/software/zsh.yml
+    - import_tasks: tasks/software/alacritty.yml
+    - import_tasks: tasks/software/moneydance.yml
+    - import_tasks: tasks/software/ranger.yml
+    - import_tasks: tasks/software/syncthing.yml
+    - import_tasks: tasks/software/urxvt.yml
+    - import_tasks: tasks/software/zsh.yml
