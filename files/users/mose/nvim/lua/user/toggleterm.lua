@@ -45,9 +45,11 @@ function _G.set_terminal_keymaps()
     vim.api.nvim_buf_set_keymap(0, 't', '<M-j>', [[<C-\><C-n><C-W>j]], opts)
     vim.api.nvim_buf_set_keymap(0, 't', '<M-k>', [[<C-\><C-n><C-W>k]], opts)
     vim.api.nvim_buf_set_keymap(0, 't', '<M-l>', [[<C-\><C-n><C-W>l]], opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<tab>', [[<C-w><C-p>:bnext<CR>]], opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<S-tab>', [[<C-w><C-p>:bprevious<CR>]], opts)
 end
 
-vim.cmd('autocmd! TermOpen term://toggleterm* lua set_terminal_keymaps()')
+vim.cmd('autocmd! TermOpen term://*zsh;#toggleterm#* lua set_terminal_keymaps()')
 
 local Terminal = require("toggleterm.terminal").Terminal
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
