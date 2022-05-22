@@ -1,5 +1,6 @@
 # installing zsh
   - name: Installing and configuring zsh
+    tags: zsh
     block:
       - name: Installing base packages
         package:
