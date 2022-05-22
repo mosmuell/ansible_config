@@ -60,3 +60,5 @@ tmux.setup {
         resize_step_y = 1,
     }
 }
+
+
