@@ -1,10 +1,7 @@
 local fn = vim.fn
 -- Automatically install packer
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-    PACKER_BOOTSTRAP = fn.system {
-        "git",
-        "clone",
+if fn.empty(fn.glob(install_path)) > 0 then PACKER_BOOTSTRAP = fn.system { "git", "clone",
         "--depth",
         "1",
         "https://github.com/wbthomason/packer.nvim",
@@ -87,6 +84,7 @@ return packer.startup(function(use)
     -- Telescope
     use "nvim-telescope/telescope.nvim"
     -- use {"nvim-telescope/telescope.nvim", tag="nvim-0.6"}
+    use "nvim-telescope/telescope-dap.nvim"
 
     -- Treesitter
     use {
@@ -101,6 +99,12 @@ return packer.startup(function(use)
 
     -- Tmux-vim integration
     use "aserowy/tmux.nvim"
+
+    -- Debug Adapter Protocol
+    use 'mfussenegger/nvim-dap'
+    use 'mfussenegger/nvim-dap-python'
+    use 'rcarriga/nvim-dap-ui'
+    use 'theHamsta/nvim-dap-virtual-text'
 
     ------------------------
     --- NON-LUA PLUGINS ---

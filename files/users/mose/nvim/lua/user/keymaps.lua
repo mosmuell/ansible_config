@@ -91,3 +91,14 @@ keymap("t", "<M-h>", "<C-\\><C-N><C-w>h", term_opts)
 keymap("t", "<M-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<M-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<M-l>", "<C-\\><C-N><C-w>l", term_opts)
+
+
+-- nvim dap --
+keymap("n", "<F5>", "<CMD>lua require'dap'.continue()<CR>", opts)
+keymap("n", "<F10>", "<CMD>lua require'dap'.step_over()<CR>", opts)
+keymap("n", "<F11>", "<CMD>lua require'dap'.step_into()<CR>", opts)
+keymap("n", "<F12>", "<CMD>lua require'dap'.step_out()<CR>", opts)
+-- keymap("n", "<leader>db", "lua require'dap'.toggle_breakpoint()<CR>", opts)
+-- keymap("n", "<leader>dB", "lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", opts)
+-- keymap("n", "<leader>dr", "lua require'dap'.repl.open()<CR>", opts)
+-- keymap("n", "<leader>dl", "lua require'dap'.run_last()<CR>", opts)
