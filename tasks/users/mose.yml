@@ -21,6 +21,7 @@
         - { dir: .tmux }
 
     - name: users | mose | copy personal config files
+      tags: dotfiles,dotfiles-mose
       copy:
         src: users/mose/{{ item.src }}
         dest: /home/mose/{{ item.dest }}
@@ -36,6 +37,7 @@
         - { src: 'tlp.conf', dest: '../../etc/tlp.conf' }
 
     - name: users | mose | copy executable files
+      tags: dotfiles,dotfiles-mose
       copy:
         src: users/mose/{{ item.src }}
         dest: /home/mose/{{ item.dest }}
@@ -55,6 +57,7 @@
           #         - { src: '.vimrc', dest: '../../root/.config/nvim/init.vim'}
 
     - name: users | mose | clone tmux plugin manager repository
+      tags: dotfiles,dotfiles-mose
       git:
         repo: https://github.com/tmux-plugins/tpm.git
         dest: /home/mose/.tmux/plugins/tpm
