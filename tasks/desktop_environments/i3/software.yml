@@ -2,16 +2,16 @@
   - name: i3-specific software
     package:
       name:
-        - i3
+        # - i3
         - i3blocks
-        - dunst # notification deamon
+        # - dunst # notification deamon
         - acpi # power management tool needed for i3blocks
         - arandr # monitor settings
         - autorandr
         - blueman # bluetooth
-        - brightnessctl # for adjusting brightness with multimedia keys
+        # - brightnessctl # for adjusting brightness with multimedia keys
         - feh # for background wallpaper
-        - lxpolkit # authentification manager
+        # - lxpolkit # authentification manager
         - playerctl # keybinding for multimedia
         - rofi # program lancher
         - sysstat # for cpu usage in i3blocks
