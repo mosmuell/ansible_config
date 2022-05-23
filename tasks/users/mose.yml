@@ -47,14 +47,15 @@
       with_items:
         - { src: 'tmux/tmux-first-unattached-session', dest: '.tmux/'}
 
-          #     - name: users | mose | create symbolic links
-          #       file:
-          #         src: /home/mose/{{ item.src }}
-          #         dest: /home/mose/{{ item.dest }}
-          #         state: link
-          #       with_items:
-          #         - { src: '.vimrc', dest: '.config/nvim/init.vim'}
-          #         - { src: '.vimrc', dest: '../../root/.config/nvim/init.vim'}
+    - name: users | mose | create symbolic links
+      file:
+        src: /home/mose/{{ item.src }}
+        dest: /home/mose/{{ item.dest }}
+        state: link
+        force: yes
+      with_items:
+        # - { src: '.vimrc', dest: '.config/nvim/init.vim'}
+        - { src: '.config/nvim', dest: '../../root/.config/nvim'}
 
     - name: users | mose | clone tmux plugin manager repository
       tags: dotfiles,dotfiles-mose
