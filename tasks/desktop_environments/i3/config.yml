@@ -1,4 +1,5 @@
 - name: i3 config files
+  tags: i3
   block:
     - name: desktop environment | i3 | create i3 config directories
       tags: dotfiles,dotfiles-mose

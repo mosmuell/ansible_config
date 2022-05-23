@@ -1,5 +1,6 @@
 # Installing required software packages specific to i3wm
   - name: i3-specific software
+    tags: i3
     package:
       name:
         # - i3

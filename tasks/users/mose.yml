@@ -48,6 +48,7 @@
         - { src: 'tmux/tmux-first-unattached-session', dest: '.tmux/'}
 
     - name: users | mose | create symbolic links
+      tags: dotfiles,dotfiles-mose,nvim-root
       file:
         src: /home/mose/{{ item.src }}
         dest: /home/mose/{{ item.dest }}
