@@ -30,15 +30,16 @@
       name:
         - htop
         - cronie # for crontabs
-        - wl-clipboard # needed for copy/paste to the system clipboard with wayland
+        # - wl-clipboard # needed for copy/paste to the system clipboard with wayland
         - libnsl # needed for some legacy programms?
         #- libusb # needed for USB devices
-        - gnome-tweaks
+        # - gnome-tweaks
         - curl
         - rsync
         - screen
         - wget
         - fzf # fuzzy search
+        - git
       state: latest
 
   - name: installing neovim and dependencies
@@ -50,7 +51,7 @@
           name:
             - neovim
             - nodejs # for plugins (includes npm)
-              #- clang-tools-extra # for c++ autocompletion -> not really needed with lua
+            #- clang-tools-extra # for c++ autocompletion -> not really needed with lua
             - ripgrep
             - python3-flake8
             - python3-black
