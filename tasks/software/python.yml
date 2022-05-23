@@ -14,8 +14,8 @@
         - python3-notebook
       state: latest
 
-  - name: installing qutip with pip (not working at the moment)
-    pip:
-      name:
-        - qutip
-      state: absent
+  # - name: installing qutip with pip (not working at the moment)
+  #   pip:
+  #     name:
+  #       - qutip
+  #     state: absent
