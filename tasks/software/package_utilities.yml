@@ -56,14 +56,22 @@
             - python3-black
           state: latest
 
-      - name: Copy config files
-        tags: nvim
-        copy:
-          src: users/mose/nvim_config
-          dest: /home/mose/.config/
-          owner: mose
-          group: mose
-          mode: 0600
+      - name: tasks | software | nvim | cloning nvim repo
+        tags: dotfiles,dotfiles-mose,nvim
+        git:
+          repo: https://github.com/mosmuell/nvim_config.git
+          dest: /home/mose/.config/nvim
+        become: yes
+        become_user: mose
+
+      # - name: Copy config files
+      #   tags: nvim
+      #   copy:
+      #     src: users/mose/nvim_config
+      #     dest: /home/mose/.config/
+      #     owner: mose
+      #     group: mose
+      #     mode: 0600
     when: nvim is defined and nvim == true
 
   - name: installing starship
