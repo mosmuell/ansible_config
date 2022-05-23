@@ -65,7 +65,7 @@
     - include_tasks: tasks/desktop_environments/gnome/terminal.yml
       when: gnome is defined and gnome == true
 
-        ### i3
+      ### i3
     - include_tasks: tasks/desktop_environments/i3/config.yml
       when: i3 is defined and i3 == true
 

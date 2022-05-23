@@ -7,9 +7,9 @@ anki: true
 audacity: true
 bitwarden: true
 discord: true
-ferdi: true
-gnome_power_statistics: true
-pavucontrol: true
+ferdi: false
+gnome_power_statistics: false
+pavucontrol: false
 signal: true
 spotify: true
 thunderbird: true
@@ -18,12 +18,12 @@ zoom: true
 
 alacritty: true
 cpp_tools: true
-moneydance: true
+moneydance: false
 nvim: true
 ranger: true
 starship: true
 syncthing: true
-tlp: true
+tlp: false
 thunar: false
 urxvt: false
 zsh: true
