@@ -1,6 +1,47 @@
 # Config files
 - name: config files
   block:
+    - name: users | mose | tmux
+      tags: dotfiles,dotfiles-mose,tmux
+      block:
+        - name: users | mose | tmux | tmux folder
+          file:
+            path: /home/mose/{{ item.dir }}
+            state: directory
+            owner: mose
+            group: mose
+            mode: 0700
+          with_items:
+            - { dir: .tmux }
+
+        - name: users | mose | tmux | tmux config
+          copy:
+            src: users/mose/{{ item.src }}
+            dest: /home/mose/{{ item.dest }}
+            owner: mose
+            group: mose
+            mode: 0600
+          with_items:
+            - { src: 'tmux/tmux.conf', dest: '.tmux.conf'}
+
+        - name: users | mose | tmux | copy executable files
+          copy:
+            src: users/mose/{{ item.src }}
+            dest: /home/mose/{{ item.dest }}
+            owner: mose
+            group: mose
+            mode: a+x
+          with_items:
+            - { src: 'tmux/tmux-first-unattached-session', dest: '.tmux/'}
+
+        - name: users | mose | tmux | clone tmux plugin manager repository
+          git:
+            repo: https://github.com/tmux-plugins/tpm.git
+            dest: /home/mose/.tmux/plugins/tpm
+          become: yes
+          become_user: mose
+      when: tmux is defined and tmux == true
+
     - name: users | mose | create personal config directories
       tags: dotfiles,dotfiles-mose
       file:
@@ -18,7 +59,6 @@
         - { dir: .local }
         - { dir: .local/share }
         - { dir: .local/share/applications }
-        - { dir: .tmux }
 
     - name: users | mose | copy personal config files
       tags: dotfiles,dotfiles-mose
@@ -30,22 +70,10 @@
         mode: 0600
       with_items:
         - { src: 'git-prompt.sh', dest: '.git-prompt.sh'}
-        - { src: 'tmux/tmux.conf', dest: '.tmux.conf'}
         - { src: 'bashrc', dest: '.bashrc'}
         - { src: 'vimrc', dest: '.vimrc' }
         - { src: 'gitconfig', dest: '.gitconfig' }
         - { src: 'tlp.conf', dest: '../../etc/tlp.conf' }
-
-    - name: users | mose | copy executable files
-      tags: dotfiles,dotfiles-mose
-      copy:
-        src: users/mose/{{ item.src }}
-        dest: /home/mose/{{ item.dest }}
-        owner: mose
-        group: mose
-        mode: a+x
-      with_items:
-        - { src: 'tmux/tmux-first-unattached-session', dest: '.tmux/'}
 
     - name: users | mose | create symbolic links
       tags: dotfiles,dotfiles-mose,nvim-root
@@ -57,12 +85,4 @@
       with_items:
         # - { src: '.vimrc', dest: '.config/nvim/init.vim'}
         - { src: '.config/nvim', dest: '../../root/.config/nvim'}
-
-    - name: users | mose | clone tmux plugin manager repository
-      tags: dotfiles,dotfiles-mose
-      git:
-        repo: https://github.com/tmux-plugins/tpm.git
-        dest: /home/mose/.tmux/plugins/tpm
-      become: yes
-      become_user: mose
   when: personal_config is defined and personal_config == true

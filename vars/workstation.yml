@@ -1,5 +1,6 @@
-personal_config: true
 codecs: true
+personal_config: true
+tmux: true
 
 
 # flatpak application selection
