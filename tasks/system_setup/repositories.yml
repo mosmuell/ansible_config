@@ -41,4 +41,13 @@
           loop:
             - https://repo.linrunner.de/fedora/tlp/repos/releases/tlp-release.fc{{ansible_distribution_major_version}}.noarch.rpm
           when: ansible_distribution == 'Fedora'
+
+        - name: system setup | repositories | copy tlp config
+          tags: dotfiles,dotfiles-mose,tlp
+          copy:
+            src: users/mose/tlp.conf
+            dest: /etc/tlp.conf
+            owner: mose
+            group: mose
+            mode: 0600
       when: tlp is defined and tlp == true
