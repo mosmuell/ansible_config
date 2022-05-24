@@ -54,8 +54,6 @@
         - { dir: .config }
         - { dir: .config/autostart }
         - { dir: .config/nvim }
-        - { dir: ../../root/.config }
-        - { dir: ../../root/.config/nvim }
         - { dir: .local }
         - { dir: .local/share }
         - { dir: .local/share/applications }
@@ -74,14 +72,29 @@
         - { src: 'vimrc', dest: '.vimrc' }
         - { src: 'gitconfig', dest: '.gitconfig' }
 
-    - name: users | mose | create symbolic links
-      tags: dotfiles,dotfiles-mose,nvim-root
-      file:
-        src: /home/mose/{{ item.src }}
-        dest: /home/mose/{{ item.dest }}
-        state: link
-        force: yes
-      with_items:
-        # - { src: '.vimrc', dest: '.config/nvim/init.vim'}
-        - { src: '.config/nvim', dest: '../../root/.config/nvim'}
+    - name: users | root | link nvim config directory
+      tags: dotfiles,dotfiles-root,nvim
+      block:
+
+      - name: users | root | create config folder
+        file:
+          path: /root/{{ item.dir }}
+          state: directory
+          owner: root
+          group: root
+          mode: 0700
+        with_items:
+          - { dir: .config }
+          - { dir: .config/nvim }
+
+      - name: users | root | create symbolic links
+        file:
+          src: /home/mose/{{ item.src }}
+          dest: /root/{{ item.dest }}
+          state: link
+          force: yes
+        with_items:
+          # - { src: '.vimrc', dest: '.config/nvim/init.vim'}
+          - { src: '.config/nvim', dest: '.config/nvim'}
+
   when: personal_config is defined and personal_config == true
