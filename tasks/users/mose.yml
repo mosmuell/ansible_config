@@ -53,7 +53,6 @@
       with_items:
         - { dir: .config }
         - { dir: .config/autostart }
-        - { dir: .config/nvim }
         - { dir: .local }
         - { dir: .local/share }
         - { dir: .local/share/applications }
@@ -80,11 +79,10 @@
         file:
           path: /root/{{ item.dir }}
           state: directory
-          owner: root
-          group: root
+          owner: mose
+          group: mose
           mode: 0700
         with_items:
-          - { dir: .config }
           - { dir: .config/nvim }
 
       - name: users | root | create symbolic links
