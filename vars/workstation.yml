@@ -21,6 +21,7 @@ alacritty: true
 cpp_tools: true
 moneydance: false
 nvim: true
+rambox: true
 ranger: true
 starship: true
 syncthing: true

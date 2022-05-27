@@ -98,6 +98,7 @@
 
     - import_tasks: tasks/software/alacritty.yml
     - import_tasks: tasks/software/moneydance.yml
+    - import_tasks: tasks/software/rambox.yml
     - import_tasks: tasks/software/ranger.yml
     - import_tasks: tasks/software/syncthing.yml
     - import_tasks: tasks/software/urxvt.yml

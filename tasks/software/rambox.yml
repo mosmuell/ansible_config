@@ -1,0 +1,21 @@
+  - name: tasks | software | rambox
+    tags: software,rambox
+    block:
+      - name: Download rambox
+        become_user: mose
+        get_url:
+          url: "{{ rambox_url }}"
+          dest: ~/Downloads/Rambox.rpm
+
+      - name: Fedora
+        yum:
+          name: /home/mose/Downloads/Rambox.rpm
+          state: present
+          disable_gpg_check: True
+        when: ansible_distribution == "Fedora"
+
+      - name: Debian
+        apt:
+          deb: "{{ rambox_url }}"
+        when: ansible_distribution in ["Debian", "Ubuntu"]
+    when: rambox is defined and rambox == true
