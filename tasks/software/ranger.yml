@@ -31,8 +31,7 @@
               - { src: 'ranger', dest: '.config/'}
 
           - name: software | ranger | Making files executable
-            copy:
-              src: users/mose/{{ item.src }}
+            file:
               dest: /home/mose/{{ item.dest }}
               owner: mose
               group: mose
