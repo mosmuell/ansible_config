@@ -1,0 +1,26 @@
+# installing polybar
+  - name: Installing and configuring polybar
+    tags: polybar
+    block:
+      - name: software | polybar | Installing base package
+        package:
+          name:
+            - polybar
+          state: latest
+
+      - name: software | polybar | copy config file
+        copy:
+          src: users/mose/polybar/
+          dest: /home/mose/.config/polybar/
+          owner: mose
+          group: mose
+          mode: 0600
+
+      - name: software | polybar | make launch.sh executable
+        tags: dotfiles,dotfiles-mose,polybar
+        file:
+          dest: /home/mose/.config/polybar/launch.sh
+          owner: mose
+          group: mose
+          mode: a+x
+    when: polybar is defined and polybar == true
