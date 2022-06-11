@@ -72,6 +72,13 @@
     - include_tasks: tasks/desktop_environments/i3/software.yml
       when: i3 is defined and i3 == true
 
+      ### sway
+    - include_tasks: tasks/desktop_environments/sway/config.yml
+      when: sway is defined and sway == true
+
+    - include_tasks: tasks/desktop_environments/sway/software.yml
+      when: sway is defined and sway == true
+
         ## enable repositories
     - import_tasks: tasks/system_setup/repositories.yml
 

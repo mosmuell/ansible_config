@@ -27,10 +27,11 @@ rambox: true
 ranger: true
 starship: true
 syncthing: true
-tlp: false
-thunar: false
+tlp: true
+thunar: true
 urxvt: false
 zsh: true
 
 gnome: false
-i3: true
+i3: false
+sway: true

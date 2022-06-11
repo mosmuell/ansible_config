@@ -1,0 +1,17 @@
+# Installing required software packages specific to i3wm
+  - name: sway-specific software
+    tags: sway
+    package:
+      name:
+        - acpi # power management tool needed for i3blocks
+        - blueman # bluetooth
+        - brightnessctl # for adjusting brightness with multimedia keys
+        - dunst # notification deamon
+        - i3blocks # alternative to waybar
+        - lxpolkit # authentification manager
+        - playerctl # keybinding for multimedia
+        - sysstat # for cpu usage in i3blocks
+        - waybar
+        - wofi # program lancher
+        - wl-clipboard # needed for copy/paste to the system clipboard with wayland
+      state: latest

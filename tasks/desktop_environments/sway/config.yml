@@ -1,0 +1,54 @@
+- name: sway config files
+  tags: sway
+  block:
+    - name: desktop environment | sway | create sway config directories
+      tags: dotfiles,dotfiles-mose
+      file:
+        path: /home/mose/{{ item.dir }}
+        state: directory
+        owner: mose
+        group: mose
+        mode: 0700
+      with_items:
+        - { dir: .config/dunst}
+        - { dir: .config/sway}
+        - { dir: .config/i3blocks}
+        - { dir: .config/i3blocks/scripts}
+        - { dir: .config/wofi}
+        - { dir: .local/share/fonts}
+
+    - name: desktop environment | sway | copy sway config files
+      tags: dotfiles,dotfiles-mose
+      copy:
+        src: users/mose/{{ item.src }}
+        dest: /home/mose/{{ item.dest }}
+        owner: mose
+        group: mose
+        mode: 0600
+      with_items:
+        - { src: 'sway/config', dest: '.config/sway/config'}
+        - { src: 'sway/wofi/', dest: '.config/wofi'}
+        - { src: 'i3blocks/config', dest: '.config/i3blocks/config'}
+        - { src: 'dunst/dunstrc', dest: '.config/dunst/dunstrc'}
+        - { src: 'fonts/', dest: '.local/share/fonts/'}
+
+    - name: desktop environment | sway | copy i3blocks executable files
+      tags: dotfiles,dotfiles-mose
+      copy:
+        src: users/mose/{{ item.src }}
+        dest: /home/mose/{{ item.dest }}
+        owner: mose
+        group: mose
+        mode: a+x
+      with_items:
+        - { src: 'i3blocks/scripts/', dest: '.config/i3blocks/scripts/'}
+
+- name: sway wallpaper
+  tags: wallpaper,sway
+  block:
+    - name: copy wallpaper file
+      copy:
+        src: files/wallpaper/wallpaper.jpg
+        dest: /usr/share/backgrounds/wallpaper.jpg
+        owner: root
+        group: root
