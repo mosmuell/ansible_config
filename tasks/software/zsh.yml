@@ -12,6 +12,7 @@
         git:
           repo: "{{ item.repo }}"
           dest: /home/mose/.zsh/{{ item.dest }}
+          force: true
         with_items:
           - { repo: 'https://github.com/zsh-users/zsh-autosuggestions.git', dest: 'zsh-autosuggestions'}
           - { repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git', dest: 'zsh-syntax-highlighting'}

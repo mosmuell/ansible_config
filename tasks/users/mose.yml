@@ -38,6 +38,7 @@
           git:
             repo: https://github.com/tmux-plugins/tpm.git
             dest: /home/mose/.tmux/plugins/tpm
+            force: yes
           become: yes
           become_user: mose
       when: tmux is defined and tmux == true
