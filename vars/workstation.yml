@@ -13,6 +13,7 @@ gnome_power_statistics: false
 pavucontrol: false
 signal: true
 spotify: true
+synology: true
 thunderbird: true
 vlc: true
 zoom: true

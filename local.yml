@@ -92,6 +92,7 @@
     - import_tasks: tasks/software/pavucontrol.yml
     - import_tasks: tasks/software/signal.yml
     - import_tasks: tasks/software/spotify.yml
+    - import_tasks: tasks/software/synology.yml
     - import_tasks: tasks/software/thunderbird.yml
     - import_tasks: tasks/software/vlc.yml
     - import_tasks: tasks/software/zoom.yml
