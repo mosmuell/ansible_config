@@ -5,6 +5,8 @@
           name:
             - thunar # lightweight file manager
             - thunar-volman
+            - samba
+            - gvfs-smb
           state: latest
 
       - name: software | Thunar | Copying Thunar config
