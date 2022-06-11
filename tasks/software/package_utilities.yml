@@ -103,6 +103,6 @@
       name:
         - tlp
         - tlp-rdw
-        - akmod-acpi_call
+        # - akmod-acpi_call
       state: latest
     when: tlp is defined and tlp == true
