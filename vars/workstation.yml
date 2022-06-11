@@ -22,11 +22,11 @@ alacritty: true
 cpp_tools: true
 moneydance: true
 nvim: true
-polybar: true
+polybar: false
 rambox: true
 ranger: true
 starship: true
-syncthing: true
+syncthing: false
 tlp: true
 thunar: true
 urxvt: false
