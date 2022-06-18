@@ -32,9 +32,9 @@
       tags: always
 
         ## Including the workstation variables
-    - name: Including distribution specific variables
+    - name: Including workstation specific variables
       include_vars: "workstation.yml"
-      tags: workstation
+      tags: always,workstation
 
         ## User configs
     - import_tasks: tasks/users/mose.yml
@@ -45,38 +45,49 @@
       ## desktop environments
       ### Gnome
     - include_tasks: tasks/desktop_environments/gnome/appearance.yml
+      tags: always
       when: gnome is defined and gnome == true
 
     - include_tasks: tasks/desktop_environments/gnome/keybindings.yml
+      tags: always
       when: gnome is defined and gnome == true
 
     - include_tasks: tasks/desktop_environments/gnome/nautilus.yml
+      tags: always
       when: gnome is defined and gnome == true
 
     - include_tasks: tasks/desktop_environments/gnome/peripherals.yml
+      tags: always
       when: gnome is defined and gnome == true
 
     - include_tasks: tasks/desktop_environments/gnome/power.yml
+      tags: always
       when: gnome is defined and gnome == true
 
     - include_tasks: tasks/desktop_environments/gnome/shell-settings.yml
+      tags: always
       when: gnome is defined and gnome == true
 
     - include_tasks: tasks/desktop_environments/gnome/terminal.yml
+      tags: always
       when: gnome is defined and gnome == true
 
       ### i3
     - include_tasks: tasks/desktop_environments/i3/config.yml
+      tags: always
       when: i3 is defined and i3 == true
 
     - include_tasks: tasks/desktop_environments/i3/software.yml
+      tags: always
       when: i3 is defined and i3 == true
 
       ### sway
     - include_tasks: tasks/desktop_environments/sway/config.yml
+      tags: always
       when: sway is defined and sway == true
 
     - include_tasks: tasks/desktop_environments/sway/software.yml
+      tags: always
       when: sway is defined and sway == true
 
         ## enable repositories
