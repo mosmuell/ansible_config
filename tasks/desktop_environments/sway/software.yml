@@ -8,6 +8,7 @@
         - brightnessctl # for adjusting brightness with multimedia keys
         - dunst # notification deamon
         - i3blocks # alternative to waybar
+        - imv # image viewer
         - lxpolkit # authentification manager
         - playerctl # keybinding for multimedia
         - sysstat # for cpu usage in i3blocks
