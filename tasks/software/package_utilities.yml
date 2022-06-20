@@ -99,6 +99,7 @@
           state: absent
 
   - name: installing TLP for managing laptop battery power
+    tags: tlp
     package:
       name:
         - tlp
