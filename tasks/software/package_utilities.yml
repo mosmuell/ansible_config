@@ -55,6 +55,8 @@
             - ripgrep
             - python3-flake8
             - python3-black
+            - python3-mypy
+            - python3-virtualenv
           state: latest
 
       - name: tasks | software | nvim | cloning nvim repo
@@ -65,14 +67,26 @@
         become: yes
         become_user: mose
 
-      # - name: Copy config files
-      #   tags: nvim
-      #   copy:
-      #     src: users/mose/nvim_config
-      #     dest: /home/mose/.config/
-      #     owner: mose
-      #     group: mose
-      #     mode: 0600
+      - name: tasks | software | nvim | virtualenv
+        tags: nvim,virtualenv,pynvim
+        block:
+        - name: creating virtualenv folder
+          tags: nvim,virtualenv
+          file:
+            path: /home/mose/{{ item.dir }}
+            state: directory
+            owner: mose
+            group: mose
+            mode: 0700
+          with_items:
+            - { dir: .virtualenvs }
+
+        - name: creating virtual env pynvim
+          tags: nvim,pynvim,virtualenv
+          pip:
+            virtualenv: /home/mose/.virtualenvs/pynvim
+            requirements: /home/mose/.config/nvim/pynvim_requirements.txt
+
     when: nvim is defined and nvim == true
 
   - name: installing starship
