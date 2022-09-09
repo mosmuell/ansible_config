@@ -19,3 +19,15 @@
       - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name", value: "'Tmux'" }
       - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding", value: "'<Primary><Alt>m'" }
       - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command", value: "'gnome-terminal -e \"tmux new -A -s main\"'" }
+
+  - name: gnome | keybindings | Setting workspace keybindings
+    tags: gnome,keybindings,workspaces
+    become: true
+    tasks:
+      - name: copy config file containing workspace keybindings
+        copy:
+          src: users/mose/dconf/workspace-settings
+          path: /etc/dconf/db
+
+      - name: update dconf
+        shell: dconf update
