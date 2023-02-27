@@ -72,6 +72,15 @@
       tags: always
       when: gnome is defined and gnome == true
 
+      ### awesome
+    - include_tasks: tasks/desktop_environments/awesome/config.yml
+      tags: always
+      when: awesome is defined and awesome == true
+
+    - include_tasks: tasks/desktop_environments/awesome/software.yml
+      tags: always
+      when: awesome is defined and awesome == true
+
       ### i3
     - include_tasks: tasks/desktop_environments/i3/config.yml
       tags: always

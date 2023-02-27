@@ -35,3 +35,4 @@ zsh: true
 gnome: false
 i3: false
 sway: true
+awesome: true

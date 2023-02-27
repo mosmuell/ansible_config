@@ -1,0 +1,50 @@
+- name: desktop-environment | awesome | awesome config files
+  tags: awesome
+  block:
+    - name: desktop environment | awesome | create awesome config directories
+      tags: dotfiles,dotfiles-mose
+      file:
+        path: /home/mose/{{ item.dir }}
+        state: directory
+        owner: mose
+        group: mose
+        mode: 0700
+      with_items:
+        - { dir: .config }
+        - { dir: .config/autorandr}
+        - { dir: .config/awesome}
+        - { dir: .local/share/fonts}
+
+    - name: desktop environment | awesome | copy awesome config files
+      tags: dotfiles,dotfiles-mose
+      copy:
+        src: users/mose/{{ item.src }}
+        dest: /home/mose/{{ item.dest }}
+        owner: mose
+        group: mose
+        mode: 0600
+      with_items:
+        - { src: 'awesome_config/', dest: '.config/awesome'}
+        - { src: 'autorandr/', dest: '.config/autorandr/'}
+        - { src: 'fonts/', dest: '.local/share/fonts/'}
+
+    - name: desktop environment | awesome | Enabling touchpad tapping on X11
+      copy:
+        dest: "/etc/X11/xorg.conf.d/90-touchpad.conf"
+        content: |
+          Section "InputClass"
+                 Identifier "touchpad"
+                 MatchIsTouchpad "on"
+                 Driver "libinput"
+                 Option "Tapping" "on"
+          EndSection
+
+- name: awesome wallpaper
+  tags: wallpaper,awesome
+  block:
+    - name: copy wallpaper file
+      copy:
+        src: files/wallpaper/wallpaper.jpg
+        dest: /usr/share/backgrounds/wallpaper.jpg
+        owner: root
+        group: root

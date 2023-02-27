@@ -1,0 +1,19 @@
+# Installing required software packages specific to awesomewm
+  - name: desktop environment | awesome | awesome-specific software
+    tags: awesome
+    package:
+      name:
+        - awesome
+        - acpi # power management tool
+        - arandr # monitor settings
+        - autorandr
+        - blueman # bluetooth
+        - brightnessctl # for adjusting brightness with multimedia keys
+        - feh # for background wallpaper
+        - lxpolkit # authentification manager
+        - playerctl # keybinding for multimedia
+        - xclip # enabling copy on X-server
+        - xcompmgr # compositor for transparency
+        - xprop # used to identify class of programs
+      state: latest
+
