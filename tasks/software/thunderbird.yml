@@ -2,7 +2,7 @@
   tags: packages,flatpak,thunderbird,workstation-packages
   become_user: mose
   flatpak:
-    name: org.mozilla.thunderbird
+    name: org.mozilla.Thunderbird
     method: system
     state: present
   when: thunderbird is defined and thunderbird == true
