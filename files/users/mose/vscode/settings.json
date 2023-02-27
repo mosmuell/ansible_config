@@ -1,0 +1,50 @@
+{
+    "workbench.colorTheme": "Default Dark+",
+    "vim.digraphs": {},
+    "editor.minimap.enabled": false,
+    "editor.lineNumbers": "relative",
+    "git.autofetch": true,
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [
+                "u"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "undo",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [
+                "<C-r>"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "redo",
+                    "args": []
+                }
+            ]
+        }
+    ],
+    "[vue]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "editor.formatOnSave": true,
+    "html.format.wrapAttributes": "force-expand-multiline",
+    "[typescript]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    },
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "jupyter.debugJustMyCode": false,
+    "git.confirmSync": false,
+    "git.suggestSmartCommit": false
+}
