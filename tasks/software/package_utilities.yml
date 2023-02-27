@@ -90,10 +90,19 @@
     when: nvim is defined and nvim == true
 
   - name: installing starship
-    package:
-      name:
-        - starship
-      state: latest
+    tags: starship, bash, zsh
+    block:
+    - name: Download starship installer script
+      get_url:
+        url: https://starship.rs/install.sh
+        dest: /home/mose/starship_installer.sh
+    - name: Execute starship installer script
+      script: /home/mose/starship_installer.sh -y
+    - name: Removing starship installer script
+      file:
+        path: /home/mose/starship_installer.sh
+        state: absent
+
     when: starship is defined and starship == true
 
 
