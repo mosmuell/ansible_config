@@ -10,6 +10,7 @@
         - i3blocks # alternative to waybar
         - imv # image viewer
         - lxpolkit # authentification manager
+        - network-manager-applet  # for nm-applet
         - playerctl # keybinding for multimedia
         - sysstat # for cpu usage in i3blocks
         - waybar

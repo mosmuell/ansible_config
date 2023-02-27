@@ -19,5 +19,6 @@
         - xclip # enabling copy on X-server
         - xcompmgr # compositor for transparency
         - xprop # used to identify class of programs
+        - network-manager-applet  # for nm-applet
       state: latest
 
