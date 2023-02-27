@@ -1,5 +1,5 @@
 # installing zsh
-  - name: Installing and configuring zsh
+  - name: software | zsh | Installing and configuring zsh
     tags: zsh
     block:
       - name: Installing base packages
@@ -8,7 +8,7 @@
             - zsh
           state: latest
 
-      - name: Cloning plugins from github
+      - name: software | zsh | Cloning plugins from github
         git:
           repo: "{{ item.repo }}"
           dest: /home/mose/.zsh/{{ item.dest }}
