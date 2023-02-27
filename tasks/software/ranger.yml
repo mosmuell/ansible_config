@@ -30,6 +30,7 @@
             with_items:
               - { src: 'ranger/rc.conf', dest: '.config/ranger/rc.conf'}
               - { src: 'ranger/rifle.conf', dest: '.config/ranger/rifle.conf'}
+              - { src: 'ranger/scope.sh', dest: '.config/ranger/scope.sh'}
 
           - name: software | ranger | Making files executable
             file:
