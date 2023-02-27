@@ -25,8 +25,12 @@
 
     - name: system setup | repositories | enable VSCode repository on Fedora
       tags: repository,vscode
-      rpm_key:
-        key: "https://packages.microsoft.com/keys/microsoft.asc"
+      block:
+        - name: system setup | repositories | vscode | adding key
+          rpm_key:
+            key: "https://packages.microsoft.com/keys/microsoft.asc"
+        - name: system setup | repositories | vscode | adding repository
+          shell: sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
       when: ansible_distribution == 'Fedora' and vscode is defined and vscode == true
 
     - name: TLP repo
