@@ -2,3 +2,6 @@
     path = files/users/mose/nvim_config
     url = https://github.com/mosmuell/nvim_config
     branch = main
+[submodule "files/users/mose/awesome_config"]
+	path = files/users/mose/awesome_config
+	url = https://github.com/mosmuell/awesome_config
