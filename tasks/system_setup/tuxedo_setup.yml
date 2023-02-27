@@ -1,0 +1,21 @@
+# code: language=ansible
+- name: system setup | tuxedo setup
+  tags: tuxedo
+  block:
+    - name: system setup | tuxedo setup | enabling copr repositories
+      block:
+      - name: system setup | tuxedo setup | enabling tuxedo keyboard copr repository
+        command:
+          cmd: dnf copr enable kallepm/tuxedo-keyboard -y
+          creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:kallepm:tuxedo-keyboard.repo
+      - name: system setup | tuxedo setup | enabling tuxedo control center copr repository
+        command:
+          cmd: dnf copr enable kallepm/tuxedo-control-center -y
+          creates: /etc/yum.repos.d/_copr:copr.fedorainfracloud.org:kallepm:tuxedo-control-center.repo
+    - name: system setup | tuxedo setup | installation
+      package:
+        name:
+          - tuxedo-control-center
+          - tuxedo-keyboard
+        state: latest
+  when: tuxedo is defined and tuxedo == true

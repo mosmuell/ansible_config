@@ -102,6 +102,9 @@
       ## enable repositories
     - import_tasks: tasks/system_setup/repositories.yml
 
+      ## tuxedo setup
+    - import_tasks: tasks/system_setup/tuxedo_setup.yml
+
       # Software installation
     - import_tasks: tasks/software/codecs.yml
     - import_tasks: tasks/software/package_utilities.yml
