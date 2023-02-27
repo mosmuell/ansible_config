@@ -43,6 +43,28 @@
           become_user: mose
       when: tmux is defined and tmux == true
 
+    - name: users | mose | create fonts directory
+      tags: fonts
+      file:
+        path: /home/mose/{{ item.dir }}
+        state: directory
+        owner: mose
+        group: mose
+        mode: 0700
+      with_items:
+        - { dir: .local/share/fonts}
+
+    - name: users | mose | copy fonts
+      tags: fonts
+      copy:
+        src: users/mose/{{ item.src }}
+        dest: /home/mose/{{ item.dest }}
+        owner: mose
+        group: mose
+        mode: 0600
+      with_items:
+        - { src: 'fonts/', dest: '.local/share/fonts/'}
+
     - name: users | mose | create personal config directories
       tags: dotfiles,dotfiles-mose
       file:
