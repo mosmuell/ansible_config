@@ -15,7 +15,7 @@
         - { dir: .config/awesome}
         - { dir: .local/share/fonts}
 
-    - name: desktop environment | awesome | copy awesome config files
+    - name: desktop environment | awesome | copy autorandr config files
       tags: dotfiles,dotfiles-mose
       copy:
         src: users/mose/{{ item.src }}
@@ -24,9 +24,15 @@
         group: mose
         mode: 0600
       with_items:
-        - { src: 'awesome_config/', dest: '.config/awesome/'}
         - { src: 'autorandr/', dest: '.config/autorandr/'}
-        - { src: 'fonts/', dest: '.local/share/fonts/'}
+
+    - name: desktop environment | awesome | copy awesome config files
+      tags: dotfiles,dotfiles-mose,awesome
+      git:
+        repo: https://github.com/mosmuell/awesome_config.git
+        dest: /home/mose/.config/awesome
+      become: yes
+      become_user: mose
 
     - name: desktop environment | awesome | Enabling touchpad tapping on X11
       copy:
