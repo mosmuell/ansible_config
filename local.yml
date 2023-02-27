@@ -99,12 +99,13 @@
       tags: always
       when: sway is defined and sway == true
 
-        ## enable repositories
+      ## enable repositories
     - import_tasks: tasks/system_setup/repositories.yml
 
       # Software installation
     - import_tasks: tasks/software/codecs.yml
     - import_tasks: tasks/software/package_utilities.yml
+    - import_tasks: tasks/software/vscode.yml
 
       ## add flatpak support and flathub remote
     - import_tasks: tasks/software/flatpak.yml

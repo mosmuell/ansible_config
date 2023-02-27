@@ -23,6 +23,12 @@
         - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm
       when: ansible_distribution == 'Fedora'
 
+    - name: system setup | repositories | enable VSCode repository on Fedora
+      tags: repository,vscode
+      rpm_key:
+        key: "https://packages.microsoft.com/keys/microsoft.asc"
+      when: ansible_distribution == 'Fedora' and vscode is defined and vscode == true
+
     - name: TLP repo
       block:
         - name: system setup | repositories | Importing TLP GPG key

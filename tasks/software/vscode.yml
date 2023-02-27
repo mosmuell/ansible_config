@@ -1,0 +1,36 @@
+# installing vscode
+  - name: software | vscode
+    tags: vscode
+    block:
+      - name: software | vscode | Installing base package
+        package:
+          name:
+            - code
+          state: latest
+
+      - name: software | code | create config directory
+        tags: dotfiles,dotfiles-mose,code
+        file:
+          path: /home/mose/.config/{{ item.dir }}
+          state: directory
+          owner: mose
+          group: mose
+          mode: 0700
+        with_items:
+          - { dir: Code}
+
+      - name: software | vscode | copy config file
+        copy:
+          src: users/mose/vscode/{{ item.src }}
+          dest: /home/mose/.config/Code/User/{{ item.dest }}
+          owner: mose
+          group: mose
+          mode: 0600
+        with_items:
+          - { src: 'keybindings.json', dest: 'keybindings.json'}
+          - { src: 'settings.json', dest: 'settings.json'}
+          - { src: 'extensions.txt', dest: 'extensions.txt'}
+
+      - name: software | vscode | installing extensions
+        shell: while read p; do code --install-extension "${p}" </home/mose/.config/Code/User/extensions.txt
+    when: vscode is defined and vscode == true
