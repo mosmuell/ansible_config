@@ -1,0 +1,11 @@
+# installing alacritty
+  - name: Installing and configuring virtualbox
+    tags: virtualbox
+    block:
+      - name: software | virtualbox | Installing package
+        package:
+          name:
+            - VirtualBox
+            - akmod-VirtualBox
+          state: latest
+    when: virtualbox is defined and virtualbox == true
