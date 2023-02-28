@@ -21,7 +21,7 @@ zoom: true
 
 alacritty: true
 cpp_tools: true
-moneydance: true
+notion: true
 nvim: true
 polybar: false
 rambox: true

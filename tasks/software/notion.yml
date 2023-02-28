@@ -1,0 +1,8 @@
+# installing notion-app
+- name: software | notion | Installing package
+  tags: notion
+  package:
+    name: https://github.com/notion-enhancer/notion-repackaged/releases/download/v2.0.18-1/notion-app-2.0.18-1.x86_64.rpm 
+    state: latest
+    disable_gpg_check: true
+  when: notion is defined and notion == true

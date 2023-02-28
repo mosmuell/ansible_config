@@ -107,6 +107,7 @@
 
       # Software installation
     - import_tasks: tasks/software/codecs.yml
+    - import_tasks: tasks/software/notion.yml
     - import_tasks: tasks/software/package_utilities.yml
     - import_tasks: tasks/software/virtualbox.yml
     - import_tasks: tasks/software/vscode.yml
