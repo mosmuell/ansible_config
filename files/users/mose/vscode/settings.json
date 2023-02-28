@@ -46,5 +46,7 @@
     },
     "jupyter.debugJustMyCode": false,
     "git.confirmSync": false,
-    "git.suggestSmartCommit": false
+    "git.suggestSmartCommit": false,
+    "redhat.telemetry.enabled": false,
+    "terminal.integrated.defaultProfile.linux": "zsh"
 }
