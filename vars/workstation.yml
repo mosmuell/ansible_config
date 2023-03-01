@@ -5,20 +5,24 @@ tuxedo: false
 
 
 # flatpak application selection
-anki: true
-audacity: true
-bitwarden: true
-discord: true
+anki: false
+audacity: false
+bitwarden: false
+discord: false
 ferdi: false
+gnome_power_statistics: true
+pavucontrol: true
+signal: false
 slack: true
 spotify: true
 synology: true
 thunderbird: true
-vlc: true
-zoom: true
+vlc: false
+zoom: false
 
 alacritty: true
 cpp_tools: true
+moneydance: false
 notion: true
 nvim: true
 polybar: false
@@ -26,8 +30,8 @@ rambox: true
 ranger: true
 starship: true
 syncthing: false
-tlp: true
-thunar: true
+tlp: false
+thunar: false
 urxvt: false
 virtualbox: false
 vscode: true
@@ -35,5 +39,5 @@ zsh: true
 
 gnome: false
 i3: false
-sway: true
+sway:  false
 awesome: true
