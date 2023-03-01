@@ -10,9 +10,7 @@ audacity: true
 bitwarden: true
 discord: true
 ferdi: false
-gnome_power_statistics: false
-pavucontrol: false
-signal: true
+slack: true
 spotify: true
 synology: true
 thunderbird: true

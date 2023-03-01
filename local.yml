@@ -123,6 +123,7 @@
     - import_tasks: tasks/software/ferdi.yml
     - import_tasks: tasks/software/gnome_power_statistics.yml
     - import_tasks: tasks/software/pavucontrol.yml
+    - import_tasks: tasks/software/slack.yml
     - import_tasks: tasks/software/signal.yml
     - import_tasks: tasks/software/spotify.yml
     - import_tasks: tasks/software/synology.yml
