@@ -1,0 +1,9 @@
+# installing dbeaver
+- name: software | dbeaver | install package
+  tags: packages,flatpak,dbeaver,workstation-packages
+  become_user: mose
+  flatpak:
+    name: io.dbeaver.DBeaverCommunity
+    method: system
+    state: present
+  when: dbeaver is defined and dbeaver == true

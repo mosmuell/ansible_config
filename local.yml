@@ -119,6 +119,7 @@
     - import_tasks: tasks/software/anki.yml
     - import_tasks: tasks/software/audacity.yml
     - import_tasks: tasks/software/bitwarden.yml
+    - import_tasks: tasks/software/dbeaver.yml
     - import_tasks: tasks/software/discord.yml
     - import_tasks: tasks/software/ferdi.yml
     - import_tasks: tasks/software/gnome_power_statistics.yml

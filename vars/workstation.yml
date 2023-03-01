@@ -9,6 +9,7 @@ anki: false
 audacity: false
 bitwarden: false
 discord: false
+dbeaver: true
 ferdi: false
 gnome_power_statistics: true
 pavucontrol: true
