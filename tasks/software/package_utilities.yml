@@ -53,6 +53,7 @@
             - nodejs # for plugins (includes npm)
             #- clang-tools-extra # for c++ autocompletion -> not really needed with lua
             - ripgrep
+            - python3-ansible-lint
             - python3-flake8
             - python3-black
             - python3-mypy
