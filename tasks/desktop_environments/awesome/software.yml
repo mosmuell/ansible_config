@@ -11,6 +11,7 @@
         - brightnessctl # for adjusting brightness with multimedia keys
         - feh # for background wallpaper
         - lxpolkit # authentification manager
+        - maim # screenshot tool
         - network-manager-applet  # for nm-applet
         - playerctl # keybinding for multimedia
         - xclip # enabling copy on X-server
