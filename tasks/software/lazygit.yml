@@ -1,0 +1,11 @@
+- name: tasks | software | lazygit
+  tags: lazygit
+  when: lazygit is defined and lazygit == 1
+  ansible.builtin.shell: |
+    VER=$(curl -I https://github.com/jesseduffield/lazygit/releases/latest/ | awk -F '/' '/^location/ {print  substr($NF, 1, length($NF)-1)}');
+    wget https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${VER#v}_Linux_x86_64.tar.gz -O lazygit.tar.gz -O lazygit.tar.gz
+    tar xf lazygit.tar.gz lazygit
+    install lazygit /usr/local/bin
+    rm lazygit lazygit.tar.gz
+  args:
+    chdir: /home/mose/Downloads/

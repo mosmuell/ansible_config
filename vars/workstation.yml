@@ -24,6 +24,7 @@ zoom: false
 alacritty: true
 cpp_tools: true
 moneydance: false
+lazygit: true
 notion: true
 nvim: true
 polybar: false
