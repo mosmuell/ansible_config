@@ -17,7 +17,7 @@
        mode: 0755
        group: mose
        owner: mose
-       checksum: sha512:d0260b3eecf665c2bf90d30d1ac7046f4e36091271f0fb34fa76211f312f1f4bacfeeb6371903579e2f50a8613a8166228f2910d70db6b2c7a5566423f7529e9
+       checksum: sha512:8325b075c517185d5b8e929e0ff292a5056f9edf3a5038347ce0e40ec512193c321661aad2e4ca2e0449686fd0ec22d1bf3ea7e6327faaf825451bf1c3ddc1d6
    - name: Install moneydance
      shell:
        cmd: bash moneydance_linux_amd64.sh
