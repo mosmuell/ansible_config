@@ -24,16 +24,6 @@
           with_items:
             - { src: 'tmux/tmux.conf', dest: '.tmux.conf'}
 
-        - name: users | mose | tmux | copy executable files
-          copy:
-            src: users/mose/{{ item.src }}
-            dest: /home/mose/{{ item.dest }}
-            owner: mose
-            group: mose
-            mode: a+x
-          with_items:
-            - { src: 'tmux/tmux-first-unattached-session', dest: '.tmux/'}
-
         - name: users | mose | tmux | clone tmux plugin manager repository
           git:
             repo: https://github.com/tmux-plugins/tpm.git
@@ -89,9 +79,7 @@
         group: mose
         mode: 0600
       with_items:
-        - { src: 'git-prompt.sh', dest: '.git-prompt.sh'}
         - { src: 'bashrc', dest: '.bashrc'}
-        - { src: 'vimrc', dest: '.vimrc' }
         - { src: 'gitconfig', dest: '.gitconfig' }
 
     - name: users | root | link nvim config directory
@@ -115,7 +103,6 @@
           state: link
           force: yes
         with_items:
-          # - { src: '.vimrc', dest: '.config/nvim/init.vim'}
           - { src: '.config/nvim', dest: '.config/nvim'}
 
   when: personal_config is defined and personal_config == true
