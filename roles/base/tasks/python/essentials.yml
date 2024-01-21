@@ -1,8 +1,10 @@
-- name: Python | Install pipx
-  tags: pipx
+- name: Python | Install essential packages
+  tags: python
   become: true
+  become_user: root
   ansible.builtin.package:
     name:
+      - python3-pip
       - pipx
     state: present
 # vim: ft=yaml.ansible

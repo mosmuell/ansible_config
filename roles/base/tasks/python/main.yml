@@ -1,3 +1,6 @@
+- name: Python | Include essentials task
+  ansible.builtin.import_tasks: essentials.yml
+
 - name: Python | Include poetry task
   ansible.builtin.import_tasks: poetry.yml
 

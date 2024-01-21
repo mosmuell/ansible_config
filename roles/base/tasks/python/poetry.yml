@@ -1,9 +1,6 @@
 - name: Python | Poetry
   tags: poetry
   block:
-    - name: Python | Poetry | Make sure pipx is installed
-      ansible.builtin.import_tasks: pipx.yml
-
     - name: Python | Poetry | Install poetry with pipx
       become: true
       become_user: mose

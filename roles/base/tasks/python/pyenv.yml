@@ -3,6 +3,8 @@
   block:
     - name: Python | Pyenv | Install dependencies
       when: ansible_distribution == "Fedora"
+      become: true
+      become_user: root
       ansible.builtin.package:
         name:
           - make
@@ -24,6 +26,8 @@
 
     - name: Python | Pyenv | Install dependencies
       when: ansible_distribution in ["Debian", "Ubuntu"]
+      become: true
+      become_user: root
       ansible.builtin.package:
         name:
           - build-essential
