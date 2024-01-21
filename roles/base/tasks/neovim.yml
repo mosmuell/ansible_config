@@ -82,6 +82,11 @@
               with_items:
                 - { dir: .virtualenvs }
 
+            - name: Software | neovim | Configuration | virtualenv | Installing virtualenv
+              community.general.pipx:
+                name: virtualenv
+                state: present
+
             - name: Software | neovim | Configuration | virtualenv | creating virtual env pynvim
               ansible.builtin.pip:
                 virtualenv: /home/mose/.virtualenvs/pynvim
