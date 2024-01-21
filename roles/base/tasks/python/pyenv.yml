@@ -1,7 +1,7 @@
 - name: Python | Pyenv
   tags: pyenv
   block:
-    - name: Python | Pyenv | Install dependencies
+    - name: Python | Pyenv | Install dependencies (Fedora)
       when: ansible_distribution == "Fedora"
       become: true
       become_user: root
@@ -24,7 +24,7 @@
           - gdbm-libs
           - libnsl2
 
-    - name: Python | Pyenv | Install dependencies
+    - name: Python | Pyenv | Install dependencies (Ubuntu)
       when: ansible_distribution in ["Debian", "Ubuntu"]
       become: true
       become_user: root
