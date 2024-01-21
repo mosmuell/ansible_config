@@ -1,0 +1,26 @@
+- name: Include zsh task
+  tags: node
+  ansible.builtin.import_tasks: zsh.yml
+
+- name: Node.js
+  become: true
+  become_user: mose
+  tags: node
+  block:
+    - name: Node.js | Install NVM
+      tags: nvm
+      ansible.builtin.shell: "curl -o- https://raw.githubusercontent.com/creationix/nvm/v{{ nvm_version }}/install.sh | bash"
+      register: nvm_result
+      changed_when: "'already installed' not in nvm_result.stdout"
+
+    - name: Node.js | Install Node
+      ansible.builtin.shell: "{{ 'bash -ic \"nvm install --lts\"' }}"
+      register: mg_node_version_response
+      changed_when: "'already installed' not in mg_node_version_response.stderr"
+
+    - name: Node.js | Use Node
+      ansible.builtin.shell: "{{ 'bash -ic \"nvm use --lts\"' }}"
+
+    - name: Node.js | Set default version of Node LTS
+      ansible.builtin.shell: "{{ 'bash -ic \"nvm alias default lts/*\"' }}"
+# vim: ft=yaml.ansible

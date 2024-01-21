@@ -20,6 +20,9 @@
 - name: Include neovim task
   ansible.builtin.import_tasks: neovim.yml
 
+- name: Include node task
+  ansible.builtin.import_tasks: node.yml
+
 - name: Include python task
   ansible.builtin.import_tasks: python/main.yml
 
