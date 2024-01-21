@@ -94,7 +94,6 @@
               ansible.builtin.pip:
                 virtualenv: /home/mose/.virtualenvs/pynvim
                 requirements: /home/mose/.config/nvim/pynvim_requirements.txt
-                virtualenv_python: python3.12
 
         - name: Software | neovim | Configuration | Link root config directory
           block:
