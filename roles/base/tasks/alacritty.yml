@@ -3,6 +3,11 @@
   tags: alacritty
   when: alacritty is defined and alacritty is true
   block:
+    - name: Software | alacritty | Adding PPA (Ubuntu)
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+      ansible.builtin.apt_repository:
+        repo: ppa:aslatter/ppa
+
     - name: Software | alacritty | Installing base package
       ansible.builtin.package:
         name:
@@ -29,4 +34,12 @@
         mode: "0600"
       with_items:
         - { src: "alacritty.yml", dest: "alacritty.yml" }
+        - { src: "alacritty.info", dest: "alacritty.info" }
+
+    - name: Software | alacritty | Adding terminfo (Ubuntu)
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+      become: true
+      ansible.builtin.command:
+        cmd: tic -xe alacritty,alacritty-direct /home/mose/.config/alacritty/alacritty.info
+
 # vim: ft=yaml.ansible
