@@ -82,6 +82,9 @@
               with_items:
                 - { dir: .virtualenvs }
 
+            - name: Include python essentials task
+              ansible.builtin.import_tasks: python/essentials.yml
+
             - name: Software | neovim | Configuration | virtualenv | Installing virtualenv
               community.general.pipx:
                 name: virtualenv
@@ -91,10 +94,21 @@
               ansible.builtin.pip:
                 virtualenv: /home/mose/.virtualenvs/pynvim
                 requirements: /home/mose/.config/nvim/pynvim_requirements.txt
+                virtualenv_python: python3.12
 
-        - name: Software | neovim | Configuration | link root nvim config directory
+        - name: Software | neovim | Configuration | Link root config directory
           block:
-            - name: Software | neovim | create root symbolic link
+            - name: Software | neovim | Configuration | Link root config directory | Create config folder
+              ansible.builtin.file:
+                path: /root/{{ item.dir }}
+                state: directory
+                owner: root
+                group: root
+                mode: "0700"
+              with_items:
+                - { dir: .config }
+
+            - name: Software | neovim | Configuration | Link root config directory | Create symbolic link
               ansible.builtin.file:
                 src: /home/mose/.config/nvim
                 dest: /root/.config/nvim
