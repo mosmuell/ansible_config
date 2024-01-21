@@ -1,0 +1,13 @@
+- name: Git
+  tags: git
+  block:
+    - name: Git | Copy git config
+      ansible.builtin.copy:
+        src: "{{ item.src }}"
+        dest: /home/mose/{{ item.dest }}
+        owner: mose
+        group: mose
+        mode: "0600"
+      with_items:
+        - { src: "gitconfig", dest: ".gitconfig" }
+# vim: ft=yaml.ansible

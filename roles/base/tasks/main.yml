@@ -14,6 +14,9 @@
 - name: Include fonts task
   ansible.builtin.import_tasks: fonts.yml
 
+- name: Include git task
+  ansible.builtin.import_tasks: git.yml
+
 - name: Include neovim task
   ansible.builtin.import_tasks: neovim.yml
 
