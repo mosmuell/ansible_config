@@ -46,6 +46,8 @@
           - liblzma-dev
 
     - name: Python | Pyenv | Clone pyenv
+      become: true
+      become_user: mose
       ansible.builtin.git:
         repo: https://github.com/pyenv/pyenv.git
         dest: /home/mose/.pyenv
