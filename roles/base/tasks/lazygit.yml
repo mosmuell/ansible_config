@@ -10,7 +10,7 @@
 
     - name: Set lazygit installed flag
       ansible.builtin.set_fact:
-        lazygit_installed: "{{ 'version' in lazygit_version_check.stdout }}"
+        lazygit_installed: "{{ lazygit_version_check.rc == 0 }}"
 
     - name: Install lazygit
       when: not lazygit_installed

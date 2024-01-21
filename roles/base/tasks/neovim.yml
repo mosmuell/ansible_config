@@ -23,7 +23,7 @@
 
     - name: Software | neovim | Set Neovim installed flag
       ansible.builtin.set_fact:
-        nvim_installed: "{{ 'NVIM' in nvim_version_check.stdout }}"
+        nvim_installed: "{{ nvim_version_check.rc == 0 }}"
 
     - name: Software | neovim | Set Neovim installed version
       when: nvim_installed is true
