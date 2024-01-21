@@ -1,0 +1,6 @@
+- name: Python | Include poetry task
+  ansible.builtin.import_tasks: poetry.yml
+
+- name: Python | Include pyenv task
+  ansible.builtin.import_tasks: pyenv.yml
+# vim: ft=yaml.ansible

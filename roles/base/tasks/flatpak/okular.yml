@@ -1,0 +1,10 @@
+- name: Software | Okular | Install package
+  tags: okular
+  when: okular is defined and okular is true
+  become: true
+  become_user: mose
+  ansible.builtin.flatpak:
+    name: org.kde.okular
+    method: system
+    state: present
+# vim: ft=yaml.ansible

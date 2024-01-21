@@ -1,0 +1,31 @@
+# This task is included in the personal and work roles, but not the base role.
+- name: Software | Autrandr
+  tags: autorandr,awesome
+  when: awesome is defined and awesome is true
+  block:
+    - name: Software | Autorandr | Install autorandr
+      ansible.builtin.package:
+        name: autorandr
+        state: present
+
+    - name: Software | Autorandr | Create config directory
+      ansible.builtin.file:
+        path: /home/mose/{{ item.dir }}
+        state: directory
+        owner: mose
+        group: mose
+        mode: "0700"
+      with_items:
+        - { dir: .config }
+        - { dir: .config/autorandr }
+
+    - name: Software | Autorandr | Copy config files
+      ansible.builtin.copy:
+        src: "{{ item.src }}"
+        dest: /home/mose/{{ item.dest }}
+        owner: mose
+        group: mose
+        mode: "0600"
+      with_items:
+        - { src: "autorandr/", dest: ".config/autorandr/" }
+# vim: ft=yaml.ansible

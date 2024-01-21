@@ -1,0 +1,10 @@
+- name: Software | Inkscape | Install package
+  tags: inkscape
+  when: inkscape is defined and inkscape is true
+  become: true
+  become_user: mose
+  ansible.builtin.flatpak:
+    name: org.inkscape.Inkscape
+    method: system
+    state: present
+# vim: ft=yaml.ansible

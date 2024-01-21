@@ -1,0 +1,38 @@
+- name: Software | tmux | Install package
+  tags: tmux
+  when: tmux is defined and tmux is true
+  block:
+    - name: Software | tmux | Install tmux
+      ansible.builtin.package:
+        name: tmux
+        state: present
+
+    - name: Software | tmux | Create config folder
+      ansible.builtin.file:
+        path: /home/mose/{{ item.dir }}
+        state: directory
+        owner: mose
+        group: mose
+        mode: "0700"
+      with_items:
+        - { dir: .tmux }
+
+    - name: Software | tmux | Copy config file
+      ansible.builtin.copy:
+        src: users/mose/{{ item.src }}
+        dest: /home/mose/{{ item.dest }}
+        owner: mose
+        group: mose
+        mode: "0600"
+      with_items:
+        - { src: 'tmux/tmux.conf', dest: '.tmux.conf'}
+
+    - name: Software | tmux | Clone tmux plugin manager repository
+      ansible.builtin.git:
+        repo: https://github.com/tmux-plugins/tpm.git
+        dest: /home/mose/.tmux/plugins/tpm
+        force: true
+      become: true
+      become_user: mose
+
+# vim: ft=yaml.ansible

@@ -1,0 +1,40 @@
+- name: Software | zsh
+  tags: zsh
+  when: zsh is defined and zsh is true
+  block:
+    - name: Software | zsh | Installing base packages
+      ansible.builtin.package:
+        name:
+          - zsh
+        state: present
+
+    - name: Software | zsh | Cloning plugins from github
+      become: true
+      become_user: mose
+      ansible.builtin.git:
+        repo: "{{ item.repo }}"
+        dest: /home/mose/.zsh/{{ item.dest }}
+        force: true
+      with_items:
+        - {
+            repo: "https://github.com/zsh-users/zsh-autosuggestions.git",
+            dest: "zsh-autosuggestions",
+          }
+        - {
+            repo: "https://github.com/zsh-users/zsh-syntax-highlighting.git",
+            dest: "zsh-syntax-highlighting",
+          }
+
+    - name: Software | zsh | copy config file
+      ansible.builtin.copy:
+        src: zsh/{{ item.src }}
+        dest: /home/mose/{{ item.dest }}
+        owner: mose
+        group: mose
+        mode: "0600"
+      with_items:
+        - { src: "zshrc", dest: ".zshrc" }
+
+    - name: Software | zsh | Import starship task
+      ansible.builtin.import_tasks: starship.yml
+# vim: ft=yaml.ansible

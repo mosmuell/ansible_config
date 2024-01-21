@@ -1,0 +1,20 @@
+- name: Software | Signal | install package
+  tags: signal
+  when: signal is defined and signal is true
+  become: true
+  become_user: mose
+  ansible.builtin.flatpak:
+    name: org.signal.Signal
+    method: system
+    state: present
+
+- name: Software | Signal | Enable autostart
+  tags: signal
+  ansible.builtin.file:
+    src: /home/mose/.local/share/flatpak/exports/share/applications/org.signal.Signal.desktop
+    dest: /home/mose/.config/autostart/org.signal.Signal.desktop
+    owner: mose
+    group: mose
+    state: link
+  when: signal_autostart is defined and signal_autostart is true
+# vim: ft=yaml.ansible

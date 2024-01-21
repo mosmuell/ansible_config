@@ -1,0 +1,87 @@
+- name: System
+  tags: system
+  block:
+    - name: System | Multimedia codecs
+      tags: codecs
+      when: codecs is defined and codecs is true
+      ansible.builtin.package:
+        name:
+          - "{{ gstreamer_libav_package }}"
+          - "{{ gstreamer_plugins_bad_package }}"
+
+    - name: System | Language packs
+      tags: language-packs
+      block:
+        - name: System | Language packs | Install language packs
+          ansible.builtin.package:
+            name:
+              - langpacks-de # german language pack for libreoffice
+              - langpacks-en_GB # british "
+            state: present
+
+        - name: System | Language packs | Remove language packs
+          ansible.builtin.package:
+            name:
+              - langpacks-en # american english
+            state: absent
+
+    - name: System | Repositories
+      tags: repositories
+      block:
+        - name: System | Repositories | Importing rpm-fusion (free/non-free) key
+          tags: rpm-fusion
+          when: ansible_distribution == 'Fedora'
+          ansible.builtin.rpm_key:
+            key: "{{ item }}"
+            state: present
+          loop:
+            - /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-free-fedora-{{ ansible_distribution_major_version }}
+            - /usr/share/distribution-gpg-keys/rpmfusion/RPM-GPG-KEY-rpmfusion-nonfree-fedora-{{ ansible_distribution_major_version }}
+
+        - name: System | Repositories | Enable RPM Fusion repository on Fedora
+          tags: rpm-fusion
+          when: ansible_distribution == 'Fedora'
+          ansible.builtin.dnf:
+            name: "{{ item }}"
+            state: present
+          loop:
+            - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm
+            - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm
+
+    - name: System | Package utilities
+      tags: system-packages
+      block:
+        - name: System | Package utilities | Install C/C++ tools
+          ansible.builtin.package:
+            name:
+              - lapack-devel
+              - gsl-devel
+              - make
+              - cmake
+              - automake
+              - gcc
+              - gcc-c++
+              - kernel-devel
+              - ninja-build
+              # - libstdc++ # already installed
+              # - glibc # already installed
+            state: present
+          when: cpp_tools is defined and cpp_tools is true
+
+        - name: System | Package utilities | Install tools
+          ansible.builtin.package:
+            name:
+              - htop
+              - cronie # for crontabs
+              - libnsl # needed for some legacy programms?
+              - curl
+              - rsync
+              - screen
+              - wget
+              - fzf # fuzzy search
+              - git
+              # - wl-clipboard # needed for copy/paste to the system clipboard with wayland
+              # - libusb # needed for USB devices
+              # - gnome-tweaks
+            state: present
+# vim: ft=yaml.ansible

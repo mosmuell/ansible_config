@@ -1,0 +1,97 @@
+- name: Software | neovim
+  tags: neovim
+  when: neovim is defined and neovim is true
+  block:
+    - name: Software | neovim | Install required packages
+      ansible.builtin.package:
+        name:
+          - cmake
+          - gettext
+          - make
+          - nodejs
+          - ripgrep
+          - unzip
+        state: present
+
+    - name: Software | neovim | Check if Neovim is installed and get its version
+      ansible.builtin.command:
+        cmd: nvim --version
+      register: nvim_version_check
+      changed_when: false
+      ignore_errors: true
+
+    - name: Software | neovim | Set Neovim installed flag
+      ansible.builtin.set_fact:
+        nvim_installed: "{{ 'NVIM' in nvim_version_check.stdout }}"
+
+    - name: Software | neovim | Set Neovim installed version
+      when: nvim_installed is true
+      ansible.builtin.set_fact:
+        nvim_installed_version: "{{ nvim_version_check.stdout_lines[0] | regex_search('(\\d+\\.\\d+\\.\\d+)') }}"
+
+    - name: Software | neovim | Check if installed version starts with the specified nvim_version
+      ansible.builtin.set_fact:
+        nvim_version_matches: "{{ nvim_installed_version.startswith(nvim_version) }}"
+      when: nvim_installed_version is defined
+
+    - name: Software | neovim | Install neovim
+      when: not nvim_installed or nvim_version_matches is false
+      block:
+        - name: Software | neovim | Install neovim | Include lazygit task
+          ansible.builtin.import_tasks: lazygit.yml
+
+        - name: Software | neovim | Install neovim | Clone neovim repository
+          ansible.builtin.git:
+            repo: https://github.com/neovim/neovim.git
+            dest: /tmp/neovim
+            version: "release-{{ nvim_version }}"
+            depth: 1
+
+        - name: Software | neovim | Install neovim | Build and install neovim
+          become: true
+          ansible.builtin.command:
+            cmd: "{{ item }}"
+            chdir: /tmp/neovim
+            creates: /usr/bin/nvim
+          loop:
+            - "make CMAKE_BUILD_TYPE=Release"
+            - "make install"
+
+    - name: Software | neovim | Configuration
+      block:
+        - name: Software | neovim | Configuration | Cloning config repo
+          become: true
+          become_user: mose
+          ansible.builtin.git:
+            repo: https://github.com/mosmuell/nvim_config.git
+            dest: /home/mose/.config/nvim
+            update: false
+
+        - name: Software | neovim | Configuration | virtualenv
+          become: true
+          become_user: mose
+          block:
+            - name: Software | neovim | Configuration | virtualenv | creating virtualenv folder
+              ansible.builtin.file:
+                path: /home/mose/{{ item.dir }}
+                state: directory
+                owner: mose
+                group: mose
+                mode: "0700"
+              with_items:
+                - { dir: .virtualenvs }
+
+            - name: Software | neovim | Configuration | virtualenv | creating virtual env pynvim
+              ansible.builtin.pip:
+                virtualenv: /home/mose/.virtualenvs/pynvim
+                requirements: /home/mose/.config/nvim/pynvim_requirements.txt
+
+        - name: Software | neovim | Configuration | link root nvim config directory
+          block:
+            - name: Software | neovim | create root symbolic link
+              ansible.builtin.file:
+                src: /home/mose/.config/nvim
+                dest: /root/.config/nvim
+                state: link
+                force: true
+# vim: ft=yaml.ansible

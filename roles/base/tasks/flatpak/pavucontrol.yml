@@ -1,0 +1,10 @@
+- name: Software | pavucontrol | install package
+  tags: pavucontrol
+  when: pavucontrol is defined and pavucontrol is true
+  become: true
+  become_user: mose
+  ansible.builtin.flatpak:
+    name: org.pulseaudio.pavucontrol
+    method: system
+    state: present
+# vim: ft=yaml.ansible

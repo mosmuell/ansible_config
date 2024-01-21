@@ -1,0 +1,33 @@
+---
+alacritty: true
+neovim: true
+nvim_version: "0.9"
+rambox: true
+tmux: true
+zsh: true
+
+# flatpak packages
+anki: false
+audacity: false
+bitwarden: false
+ferdi: false
+gimp: true
+gnome_power_statistics: true
+inkscape: true
+okular: true
+pavucontrol: true
+signal: false
+signal_autostart: false
+slack: true
+spotify: true
+synology: true
+thunderbird: true
+vlc: false
+
+# desktop environments / window manager
+awesome: true
+gnome: false
+
+# system related
+codecs: true
+cpp_tools: true

@@ -1,0 +1,11 @@
+- name: Software | dbeaver | install package
+  tags: dbeaver
+  become: true
+  become_user: mose
+  ansible.builtin.flatpak:
+    name: io.dbeaver.DBeaverCommunity
+    method: system
+    state: present
+  when: dbeaver is defined and dbeaver is true
+
+# vim: ft=yaml.ansible

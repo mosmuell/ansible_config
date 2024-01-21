@@ -1,0 +1,48 @@
+- name: Python | Pyenv
+  tags: pyenv
+  block:
+    - name: Python | Pyenv | Install dependencies
+      when: ansible_distribution == "Fedora"
+      ansible.builtin.package:
+        name:
+          - make
+          - gcc
+          - patch
+          - zlib-devel
+          - bzip2
+          - bzip2-devel
+          - readline-devel
+          - sqlite
+          - sqlite-devel
+          - openssl-devel
+          - tk-devel
+          - libffi-devel
+          - xz-devel
+          - libuuid-devel
+          - gdbm-libs
+          - libnsl2
+
+    - name: Python | Pyenv | Install dependencies
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+      ansible.builtin.package:
+        name:
+          - build-essential
+          - libssl-dev
+          - zlib1g-dev
+          - libbz2-dev
+          - libreadline-dev
+          - libsqlite3-dev
+          - curl
+          - libncursesw5-dev
+          - xz-utils
+          - tk-dev
+          - libxml2-dev
+          - libxmlsec1-dev
+          - libffi-dev
+          - liblzma-dev
+
+    - name: Python | Pyenv | Clone pyenv
+      ansible.builtin.git:
+        repo: https://github.com/pyenv/pyenv.git
+        dest: /home/mose/.pyenv
+# vim: ft=yaml.ansible

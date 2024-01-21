@@ -1,0 +1,10 @@
+- name: Software | Spotify | install package
+  tags: spotify
+  when: spotify is defined and spotify is true
+  become: true
+  become_user: mose
+  ansible.builtin.flatpak:
+    name: com.spotify.Client
+    method: system
+    state: present
+# vim: ft=yaml.ansible

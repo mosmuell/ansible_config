@@ -1,0 +1,40 @@
+- name: Desktop environments | awesome | Configure awesome
+  tags: desktop-environments,awesome
+  block:
+    - name: Desktop environments | awesome | create awesome config directories
+      tags: dotfiles,dotfiles-mose
+      ansible.builtin.file:
+        path: /home/mose/{{ item.dir }}
+        state: directory
+        owner: mose
+        group: mose
+        mode: "0700"
+      with_items:
+        - { dir: .config }
+        - { dir: .config/awesome }
+
+    - name: Desktop environments | awesome | copy awesome config files
+      become: true
+      become_user: mose
+      ansible.builtin.git:
+        repo: https://github.com/mosmuell/awesome_config.git
+        dest: /home/mose/.config/awesome
+
+    - name: Desktop environments | awesome | Enabling touchpad tapping on X11
+      ansible.builtin.copy:
+        dest: "/etc/X11/xorg.conf.d/90-touchpad.conf"
+        content: |
+          Section "InputClass"
+                 Identifier "touchpad"
+                 MatchIsTouchpad "on"
+                 Driver "libinput"
+                 Option "Tapping" "on"
+          EndSection
+
+- name: Desktop environments | awesome | Adding wallpaper
+  ansible.builtin.copy:
+    src: files/wallpaper/wallpaper.jpg
+    dest: /usr/share/backgrounds/wallpaper.jpg
+    owner: root
+    group: root
+# vim: ft=yaml.ansible

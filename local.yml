@@ -1,0 +1,51 @@
+---
+- hosts: all
+  tags: always
+  become: true
+  pre_tasks:
+    - name: pre-run | update package cache (arch)
+      tags: always
+      pacman: update_cache=yes
+      changed_when: False
+      when: ansible_distribution == "Archlinux"
+
+    - name: pre-run | update package cache (fedora)
+      tags: always
+      dnf: update_cache=yes
+      changed_when: False
+      when: ansible_distribution == "Fedora"
+
+    - name: pre-run | update package cache (debian, etc)
+      tags: always
+      apt: update_cache=yes
+      changed_when: False
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+
+# run roles
+- hosts: all
+  become: true
+  tasks:
+    - name: Including work role
+      tags: base,always
+      ansible.builtin.include_role:
+        name: base
+
+- hosts: all
+  tasks:
+    - name: Print computer type
+      when: computer_type is defined
+      debug:
+        msg: "The computer type is '{{ computer_type }}'"
+
+    - name: Including work role
+      tags: work,always
+      when: computer_type is defined and computer_type == 'work'
+      ansible.builtin.include_role:
+        name: work
+
+    - name: Include personal role
+      tags: personal,always
+      when: computer_type is defined and computer_type == 'personal'
+      ansible.builtin.include_role:
+        name: personal
+# vim: ft=yaml.ansible

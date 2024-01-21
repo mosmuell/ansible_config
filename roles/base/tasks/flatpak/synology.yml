@@ -1,0 +1,10 @@
+- name: Software | Synology | install package
+  tags: synology
+  when: synology is defined and synology is true
+  become: true
+  become_user: mose
+  ansible.builtin.flatpak:
+    name: com.synology.SynologyDrive
+    method: system
+    state: present
+# vim: ft=yaml.ansible

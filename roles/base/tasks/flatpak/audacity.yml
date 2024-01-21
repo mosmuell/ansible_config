@@ -1,0 +1,10 @@
+- name: Software | Audacity | install package
+  tags: audacity
+  when: audacity is defined and audacity is true
+  become: true
+  become_user: mose
+  ansible.builtin.flatpak:
+    name: org.audacityteam.Audacity
+    method: system
+    state: present
+# vim: ft=yaml.ansible

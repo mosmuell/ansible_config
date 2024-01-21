@@ -1,0 +1,10 @@
+- name: Software | Anki | install package
+  tags: anki
+  when: anki is defined and anki is true
+  become: true
+  become_user: mose
+  ansible.builtin.flatpak:
+    name: net.ankiweb.Anki
+    method: system
+    state: present
+# vim: ft=yaml.ansible

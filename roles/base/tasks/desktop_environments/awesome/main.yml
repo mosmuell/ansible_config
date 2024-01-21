@@ -1,0 +1,11 @@
+- name: Desktop environments | awesome | Configure awesome
+  tags: desktop-environments,awesome
+  when: awesome is defined and awesome is true
+  ansible.builtin.include_tasks: desktop_environments/awesome/config.yml
+
+- name: Desktop environments | awesome | Install awesome
+  tags: desktop-environments,awesome
+  when: awesome is defined and awesome is true
+  ansible.builtin.include_tasks: desktop_environments/awesome/software.yml
+
+# vim: ft=yaml.ansible

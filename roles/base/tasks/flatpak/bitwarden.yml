@@ -1,0 +1,10 @@
+- name: Software | bitwarden | install package
+  tags: bitwarden
+  when: bitwarden is defined and bitwarden is true
+  become: true
+  become_user: mose
+  ansible.builtin.flatpak:
+    name: com.bitwarden.desktop
+    method: system
+    state: present
+# vim: ft=yaml.ansible

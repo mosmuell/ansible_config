@@ -1,0 +1,8 @@
+- name: Python | Install pipx
+  tags: pipx
+  become: true
+  ansible.builtin.package:
+    name:
+      - pipx
+    state: present
+# vim: ft=yaml.ansible

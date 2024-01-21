@@ -1,0 +1,10 @@
+- name: Software | Gnome Power Statistics | install package
+  tags: gnome_power_statistics
+  when: gnome_power_statistics is defined and gnome_power_statistics is true
+  become: true
+  become_user: mose
+  ansible.builtin.flatpak:
+    name: org.gnome.PowerStats
+    method: system
+    state: present
+# vim: ft=yaml.ansible

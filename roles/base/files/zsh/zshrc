@@ -1,0 +1,134 @@
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
+
+# Function to check if SSH keys are stored in the authentication agent and add them if needed
+function check_and_add_ssh_keys() {
+  # Check if any key is already added
+  if ! ssh-add -l >/dev/null 2>&1; then
+    # If no keys are added, execute ssh-add
+    ssh-add ~/.ssh/id_ed25519
+    ssh-add ~/.ssh/id_ed25519_ethz
+    ssh-add ~/.ssh/id_github_rsa
+  fi
+}
+
+# Call the function when the shell starts
+check_and_add_ssh_keys
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+### Preserve zsh history
+HISTFILE=~/.zsh/zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+
+setopt autocd
+unsetopt beep
+bindkey -e
+
+
+# aliases
+alias vim="nvim"
+alias ans_config="sudo ansible-pull -U https://github.com/mosmuell/ansible_config.git"
+alias gl="git log --graph --all --oneline --decorate"
+
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+### KEYBINDINGS ###
+# create a zkbd compatible hash;
+# to add other keys to this hash, see: man 5 terminfo
+typeset -g -A key
+
+#key[Home]="${terminfo[khome]}"
+key[Home]="^[[1~"
+#key[End]="${terminfo[kend]}"
+key[End]="^[[4~"
+key[Insert]="${terminfo[kich1]}"
+key[Backspace]="${terminfo[kbs]}"
+key[Delete]="${terminfo[kdch1]}"
+key[Up]="${terminfo[kcuu1]}"
+key[Down]="${terminfo[kcud1]}"
+key[PageUp]="${terminfo[kpp]}"
+key[PageDown]="${terminfo[knp]}"
+key[Shift-Tab]="${terminfo[kcbt]}"
+key[Control-Left]="${terminfo[kLFT5]}"
+key[Control-Right]="${terminfo[kRIT5]}"
+
+# setup key accordingly
+[[ -n "${key[Home]}"      ]] && bindkey -- "${key[Home]}"       beginning-of-line
+[[ -n "${key[End]}"       ]] && bindkey -- "${key[End]}"        end-of-line
+[[ -n "${key[Insert]}"    ]] && bindkey -- "${key[Insert]}"     overwrite-mode
+[[ -n "${key[Backspace]}" ]] && bindkey -- "${key[Backspace]}"  backward-delete-char
+[[ -n "${key[Delete]}"    ]] && bindkey -- "${key[Delete]}"     delete-char
+[[ -n "${key[PageUp]}"    ]] && bindkey -- "${key[PageUp]}"     beginning-of-buffer-or-history
+[[ -n "${key[PageDown]}"  ]] && bindkey -- "${key[PageDown]}"   end-of-buffer-or-history
+[[ -n "${key[Shift-Tab]}" ]] && bindkey -- "${key[Shift-Tab]}"  reverse-menu-complete
+[[ -n "${key[Control-Left]}"  ]] && bindkey -- "${key[Control-Left]}"  backward-word
+[[ -n "${key[Control-Right]}" ]] && bindkey -- "${key[Control-Right]}" forward-word
+[[ -n "^[[1;5D"  ]] && bindkey -- "^[[1;5D"  backward-word
+[[ -n "^[[1;5C"  ]] && bindkey -- "^[[1;5C"  forward-word
+# bindkey "^[[1~" beginning-of-line
+# bindkey "^[[4~" end-of-line
+
+# Finally, make sure the terminal is in application mode, when zle is
+# active. Only then are the values from $terminfo valid.
+if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
+	autoload -Uz add-zle-hook-widget
+	function zle_application_mode_start { echoti smkx }
+	function zle_application_mode_stop { echoti rmkx }
+	add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
+	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
+fi
+
+### Command completion ###
+
+# case insensitive path-completion 
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+# zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 
+zstyle ':completion:*' menu select
+
+autoload -Uz compinit && compinit
+
+# past commands matching the current line up to the current cursor position will be shown when Up or Down keys are pressed.
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+[[ -n "${key[Up]}"        ]] && bindkey -- "${key[Up]}"         history-beginning-search-backward
+[[ -n "${key[Down]}"      ]] && bindkey -- "${key[Down]}"       history-beginning-search-forward
+#bindkey "^[[A" history-beginning-search-backward
+#bindkey "^[[B" history-beginning-search-forward
+autoload -U history-search-end
+
+
+##############
+### Prompt ###
+##############
+
+# # using vcs_info (for git)
+# zstyle ':vcs_info:*' actionformats  '(%b|%a) '
+# zstyle ':vcs_info:*' formats          '(%b) '
+# zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+# precmd () { vcs_info }
+# setopt prompt_subst
+# autoload -Uz vcs_info
+# 
+# PROMPT=$'%B%F{green}%n@%m%f:%b%F{blue}%~%f %F{#FFB52E}${vcs_info_msg_0_}%f\n$ '
+
+export TERM="xterm-256color"
+eval "$(starship init zsh)"
+
+if [ -e /home/mose/.nix-profile/etc/profile.d/nix.sh ]; then . /home/mose/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"

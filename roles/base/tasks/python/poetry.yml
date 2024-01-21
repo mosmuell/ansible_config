@@ -1,0 +1,37 @@
+- name: Python | Poetry
+  tags: poetry
+  block:
+    - name: Python | Poetry | Make sure pipx is installed
+      ansible.builtin.import_tasks: pipx.yml
+
+    - name: Python | Poetry | Install poetry with pipx
+      become: true
+      become_user: mose
+      community.general.pipx:
+        name: poetry
+        state: present
+
+    - name: Python | Poetry | Configuration
+      block:
+        - name: Python | Poetry | Configuration | Create config directory
+          ansible.builtin.file:
+            path: /home/mose/{{ item.dir }}
+            state: directory
+            owner: mose
+            group: mose
+            mode: "0700"
+          with_items:
+            - { dir: .config }
+            - { dir: .config/pypoetry }
+
+        - name: Python | Poetry | Configuration | Copy config files
+          ansible.builtin.copy:
+            src: "{{ item.src }}"
+            dest: /home/mose/{{ item.dest }}
+            owner: mose
+            group: mose
+            mode: "0600"
+          with_items:
+            - { src: "pypoetry/", dest: ".config/pypoetry/" }
+
+# vim: ft=yaml.ansible

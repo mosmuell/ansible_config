@@ -1,0 +1,26 @@
+- name: Software | rambox
+  tags: rambox
+  when: rambox is defined and rambox is true
+  block:
+    - name: Software | rambox | Install (Fedora)
+      when: ansible_distribution == "Fedora"
+      block:
+        - name: Software | rambox | Download rambox
+          become_user: mose
+          become: true
+          ansible.builtin.get_url:
+            url: "{{ rambox_url }}"
+            dest: /home/mose/Downloads/Rambox.rpm
+
+        - name: Software | rambox | Install rambox
+          ansible.builtin.yum:
+            name: /home/mose/Downloads/Rambox.rpm
+            state: present
+            disable_gpg_check: true
+
+    - name: Software | rambox | Install (Debian based)
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+      ansible.builtin.apt:
+        deb: "{{ rambox_url }}"
+
+# vim: ft=yaml.ansible

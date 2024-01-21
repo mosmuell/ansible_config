@@ -1,0 +1,22 @@
+- name: Software | tlp
+  tags: tlp
+  when: tlp is defined and tlp is true
+  block:
+    - name: Software | tlp | Installing TLP
+      tags: tlp
+      ansible.builtin.package:
+        name:
+          - tlp
+          - tlp-rdw
+        state: present
+
+    - name: Software | tlp | Copy over configuration file
+      tags: dotfiles,dotfiles-mose,tlp
+      ansible.builtin.copy:
+        src: tlp.conf
+        dest: /etc/tlp.conf
+        owner: mose
+        group: mose
+        mode: "0600"
+
+# vim: ft=yaml.ansible

@@ -1,0 +1,13 @@
+---
+- name: Include discord task
+  ansible.builtin.import_tasks: discord.yml
+
+- name: Include tlp task
+  ansible.builtin.import_tasks: tlp.yml
+
+- name: Include autorandr task
+  tags: autorandr,awesome # need tags as we do not import the role
+  ansible.builtin.include_role:
+    name: base
+    tasks_from: autorandr
+# vim: ft=yaml.ansible

@@ -1,0 +1,11 @@
+- name: Software | Zoom | install package
+  tags: zoom
+  become: true
+  become_user: mose
+  ansible.builtin.flatpak:
+    name: us.zoom.Zoom
+    method: system
+    state: present
+  when: zoom is defined and zoom is true
+
+# vim: ft=yaml.ansible

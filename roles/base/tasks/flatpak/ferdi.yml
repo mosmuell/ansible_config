@@ -1,0 +1,10 @@
+- name: Software | ferdi | install package
+  tags: ferdi
+  when: ferdi is defined and ferdi is true
+  become: true
+  become_user: mose
+  ansible.builtin.flatpak:
+    name: com.getferdi.Ferdi
+    method: system
+    state: present
+# vim: ft=yaml.ansible

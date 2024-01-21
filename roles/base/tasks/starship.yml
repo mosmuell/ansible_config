@@ -1,0 +1,6 @@
+- name: Software | Install starship
+  tags: starship
+  ansible.builtin.shell: curl -fsSL https://starship.rs/install.sh | sh -s -- -y
+  args:
+    creates: /usr/local/bin/starship
+# vim: ft=yaml.ansible

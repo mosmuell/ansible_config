@@ -1,0 +1,10 @@
+- name: Software | Gimp | Install package
+  tags: gimp
+  when: gimp is defined and gimp is true
+  become: true
+  become_user: mose
+  ansible.builtin.flatpak:
+    name: org.gimp.GIMP
+    method: system
+    state: present
+# vim: ft=yaml.ansible

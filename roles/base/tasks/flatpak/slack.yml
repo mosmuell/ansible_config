@@ -1,0 +1,10 @@
+- name: Software | Slack | install package
+  tags: slack
+  when: slack is defined and slack is true
+  become: true
+  become_user: mose
+  ansible.builtin.flatpak:
+    name: com.slack.Slack
+    method: system
+    state: present
+# vim: ft=yaml.ansible

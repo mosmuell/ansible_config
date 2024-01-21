@@ -1,0 +1,23 @@
+- name: Fonts
+  tags: fonts
+  block:
+    - name: Fonts | Create fonts directory
+      ansible.builtin.file:
+        path: /home/mose/{{ item.dir }}
+        state: directory
+        owner: mose
+        group: mose
+        mode: "0700"
+      with_items:
+        - { dir: .local/share/fonts }
+
+    - name: Fonts | Copy fonts
+      ansible.builtin.copy:
+        src: "{{ item.src }}"
+        dest: /home/mose/{{ item.dest }}
+        owner: mose
+        group: mose
+        mode: "0600"
+      with_items:
+        - { src: "fonts/", dest: ".local/share/fonts/" }
+# vim: ft=yaml.ansible

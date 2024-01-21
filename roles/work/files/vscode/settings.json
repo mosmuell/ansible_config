@@ -1,0 +1,165 @@
+{
+    "workbench.colorTheme": "Default Dark+",
+    "vim.digraphs": {},
+    "editor.minimap.enabled": false,
+    "editor.lineNumbers": "relative",
+    "editor.renderWhitespace": "all",
+    "git.autofetch": true,
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [
+                "u"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "undo",
+                    "args": []
+                }
+            ]
+        },
+        {
+            "before": [
+                "<C-r>"
+            ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "redo",
+                    "args": []
+                }
+            ]
+        }
+    ],
+    "[vue]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "editor.formatOnSave": true,
+    "html.format.wrapAttributes": "force-expand-multiline",
+    "[typescript]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+        "editor.formatOnType": true
+    },
+    "jupyter.debugJustMyCode": false,
+    "git.confirmSync": false,
+    "git.suggestSmartCommit": false,
+    "redhat.telemetry.enabled": false,
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<space>"
+            ],
+            "commands": [
+                "whichkey.show"
+            ]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<space>"
+            ],
+            "commands": [
+                "whichkey.show"
+            ]
+        }
+    ],
+    "whichkey.bindings": [
+        {
+            "key": "e",
+            "name": "Explorer",
+            "type": "command",
+            "command": "workbench.action.toggleSidebarVisibility"
+        },
+        {
+            "key": "f",
+            "name": "Find files",
+            "type": "command",
+            "command": "workbench.action.quickOpen"
+        },
+        {
+            "key": "F",
+            "name": "Find text",
+            "type": "command",
+            "command": "workbench.action.findInFiles"
+        },
+        {
+            "key": "P",
+            "name": "Projects",
+            "type": "command",
+            "command": "workbench.action.openRecent"
+        },
+        {
+            "key": "g",
+            "name": "Git",
+            "type": "bindings",
+            "bindings": [
+                {
+                    "key": "b",
+                    "name": "Checkout branch ...",
+                    "type": "command",
+                    "command": "git.checkout"
+                },
+                // {
+                //     "key": "c",
+                //     "name": "Checkout detached ...",
+                //     "type": "command",
+                //     "command": "git.checkoutDetached"
+                // },
+                {
+                    "key": "j",
+                    "name": "Next hunk",
+                    "type": "command",
+                    "command": "workbench.action.editor.nextChange"
+                },
+                {
+                    "key": "k",
+                    "name": "Next hunk",
+                    "type": "command",
+                    "command": "workbench.action.editor.previousChange"
+                },
+                {
+                    "key": "l",
+                    "name": "Blame",
+                    "type": "command",
+                    "command": "gitlens.toggleLineBlame"
+                },
+                // {
+                //     "key": "p",
+                //     "name": "Preview hunk",
+                //     "type": "command",
+                //     "command": "gitlens.toggleFileChanges"
+                // },
+                {
+                    "key": "r",
+                    "name": "Reset hunk",
+                    "type": "command",
+                    "command": "git.revertSelectedRanges"
+                },
+                {
+                    "key": "s",
+                    "name": "Stage hunk",
+                    "type": "command",
+                    "command": "git.stageSelectedRanges"
+                },
+            ]
+        },
+    ],
+    "notebook.diff.ignoreMetadata": true,
+    "workbench.editor.enablePreview": false,
+    "remote.SSH.remotePlatform": {
+        "coder-vscode--muellem--test": "linux",
+        "coder-vscode--muellem--exampleexperiment": "linux"
+    },
+    "jupyter.logging.level": "error",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "C_Cpp.default.compilerPath": "/usr/bin/gcc",
+    "cmake.generator": "Unix Makefiles"
+}

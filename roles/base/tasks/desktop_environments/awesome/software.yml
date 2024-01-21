@@ -1,0 +1,21 @@
+- name: Desktop environments | awesome | Install awesome-specific software
+  tags: desktop-environments,awesome
+  ansible.builtin.package:
+    name:
+      - awesome
+      - acpi # power management tool
+      - arandr # monitor settings
+      - autorandr
+      - blueman # bluetooth
+      - brightnessctl # for adjusting brightness with multimedia keys
+      - feh # for background wallpaper
+      - lxpolkit # authentification manager
+      - maim # screenshot tool
+      - network-manager-applet  # for nm-applet
+      - playerctl # keybinding for multimedia
+      - xclip # enabling copy on X-server
+      - xcompmgr # compositor for transparency
+      - xprop # used to identify class of programs
+    state: present
+
+# vim: ft=yaml.ansible

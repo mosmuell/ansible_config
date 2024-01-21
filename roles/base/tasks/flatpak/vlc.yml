@@ -1,0 +1,10 @@
+- name: Software | VLC | install package
+  tags: vlc
+  when: vlc is defined and vlc is true
+  become: true
+  become_user: mose
+  ansible.builtin.flatpak:
+    name: org.videolan.VLC
+    method: system
+    state: present
+# vim: ft=yaml.ansible

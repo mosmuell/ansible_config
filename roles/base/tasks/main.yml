@@ -1,0 +1,38 @@
+---
+# Load distro-specific variables
+- name: Including distribution specific variables
+  tags: always
+  ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
+
+# tasks file for base
+- name: Include alacritty task
+  ansible.builtin.import_tasks: alacritty.yml
+
+- name: Include flatpak task
+  ansible.builtin.import_tasks: flatpak/main.yml
+
+- name: Include fonts task
+  ansible.builtin.import_tasks: fonts.yml
+
+- name: Include neovim task
+  ansible.builtin.import_tasks: neovim.yml
+
+- name: Include python task
+  ansible.builtin.import_tasks: python/main.yml
+
+- name: Include rambox task
+  ansible.builtin.import_tasks: rambox.yml
+
+- name: Include multimedia system task
+  ansible.builtin.import_tasks: system.yml
+
+- name: Include tmux task
+  ansible.builtin.import_tasks: tmux.yml
+
+- name: Include zsh task
+  ansible.builtin.import_tasks: zsh.yml
+
+  ### awesome WM
+- name: Include awesome window manager task
+  ansible.builtin.import_tasks: desktop_environments/awesome/main.yml
+# vim: ft=yaml.ansible

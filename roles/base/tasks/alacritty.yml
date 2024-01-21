@@ -1,0 +1,32 @@
+# installing alacritty
+- name: Installing and configuring alacritty
+  tags: alacritty
+  when: alacritty is defined and alacritty is true
+  block:
+    - name: Software | alacritty | Installing base package
+      ansible.builtin.package:
+        name:
+          - alacritty
+        state: present
+
+    - name: Software | alacritty | create config directory
+      tags: dotfiles,dotfiles-mose,alacritty
+      ansible.builtin.file:
+        path: /home/mose/.config/{{ item.dir }}
+        state: directory
+        owner: mose
+        group: mose
+        mode: "0700"
+      with_items:
+        - { dir: alacritty }
+
+    - name: Software | alacritty | copy config file
+      ansible.builtin.copy:
+        src: alacritty/{{ item.src }}
+        dest: /home/mose/.config/alacritty/{{ item.dest }}
+        owner: mose
+        group: mose
+        mode: "0600"
+      with_items:
+        - { src: "alacritty.yml", dest: "alacritty.yml" }
+# vim: ft=yaml.ansible
