@@ -19,7 +19,7 @@
 
     - name: Software | tmux | Copy config file
       ansible.builtin.copy:
-        src: users/mose/{{ item.src }}
+        src: "{{ item.src }}"
         dest: /home/mose/{{ item.dest }}
         owner: mose
         group: mose
