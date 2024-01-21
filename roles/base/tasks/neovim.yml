@@ -86,6 +86,8 @@
               ansible.builtin.import_tasks: python/essentials.yml
 
             - name: Software | neovim | Configuration | virtualenv | Installing virtualenv
+              become: true
+              become_user: mose
               community.general.pipx:
                 name: virtualenv
                 state: present
