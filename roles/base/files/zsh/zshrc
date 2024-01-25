@@ -51,6 +51,7 @@ fi
 alias vim="nvim"
 alias ans_config="sudo ansible-pull -U https://github.com/mosmuell/ansible_config.git"
 alias gl="git log --graph --all --oneline --decorate"
+alias ssh="TERM=xterm-256color ssh"
 
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
