@@ -3,7 +3,7 @@
   when: synology is defined and synology is true
   become: true
   become_user: mose
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: com.synology.SynologyDrive
     method: system
     state: present

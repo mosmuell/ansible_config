@@ -3,7 +3,7 @@
   when: gnome_power_statistics is defined and gnome_power_statistics is true
   become: true
   become_user: mose
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: org.gnome.PowerStats
     method: system
     state: present

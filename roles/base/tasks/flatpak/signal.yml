@@ -3,7 +3,7 @@
   when: signal is defined and signal is true
   become: true
   become_user: mose
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: org.signal.Signal
     method: system
     state: present

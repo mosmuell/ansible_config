@@ -3,7 +3,7 @@
   when: pavucontrol is defined and pavucontrol is true
   become: true
   become_user: mose
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: org.pulseaudio.pavucontrol
     method: system
     state: present

@@ -22,6 +22,9 @@
 - name: Include bitwarden task
   ansible.builtin.import_tasks: bitwarden.yml
 
+- name: Include chrome task
+  ansible.builtin.import_tasks: chrome.yml
+
 - name: Include ferdi task
   ansible.builtin.import_tasks: ferdi.yml
 

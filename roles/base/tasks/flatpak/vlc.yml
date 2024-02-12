@@ -3,7 +3,7 @@
   when: vlc is defined and vlc is true
   become: true
   become_user: mose
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: org.videolan.VLC
     method: system
     state: present

@@ -3,7 +3,7 @@
   when: spotify is defined and spotify is true
   become: true
   become_user: mose
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: com.spotify.Client
     method: system
     state: present

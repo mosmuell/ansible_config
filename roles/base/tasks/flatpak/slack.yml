@@ -3,7 +3,7 @@
   when: slack is defined and slack is true
   become: true
   become_user: mose
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: com.slack.Slack
     method: system
     state: present

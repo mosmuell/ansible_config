@@ -3,7 +3,7 @@
   when: okular is defined and okular is true
   become: true
   become_user: mose
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: org.kde.okular
     method: system
     state: present

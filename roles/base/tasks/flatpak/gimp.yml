@@ -3,7 +3,7 @@
   when: gimp is defined and gimp is true
   become: true
   become_user: mose
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: org.gimp.GIMP
     method: system
     state: present

@@ -3,7 +3,7 @@
   when: audacity is defined and audacity is true
   become: true
   become_user: mose
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: org.audacityteam.Audacity
     method: system
     state: present

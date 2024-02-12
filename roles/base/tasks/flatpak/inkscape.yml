@@ -3,7 +3,7 @@
   when: inkscape is defined and inkscape is true
   become: true
   become_user: mose
-  ansible.builtin.flatpak:
+  community.general.flatpak:
     name: org.inkscape.Inkscape
     method: system
     state: present
