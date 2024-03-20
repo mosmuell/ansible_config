@@ -45,22 +45,47 @@
         - name: Software | neovim | Install neovim | Include lazygit task
           ansible.builtin.import_tasks: lazygit.yml
 
-        - name: Software | neovim | Install neovim | Clone neovim repository
-          ansible.builtin.git:
-            repo: https://github.com/neovim/neovim.git
-            dest: /tmp/neovim
-            version: "release-{{ nvim_version }}"
-            depth: 1
+        - name: Software | neovim | Install neovim | Download neovim
+          ansible.builtin.get_url:
+            url: "https://github.com/neovim/neovim/releases/download/v{{ nvim_version }}/nvim-linux64.tar.gz"
+            dest: /tmp/
+            checksum: sha256:https://github.com/neovim/neovim/releases/download/v{{ nvim_version }}/nvim-linux64.tar.gz.sha256sum
+            owner: mose
+            group: mose
+            mode: '0755'
 
-        - name: Software | neovim | Install neovim | Build and install neovim
-          become: true
-          ansible.builtin.command:
-            cmd: "{{ item }}"
-            chdir: /tmp/neovim
-            creates: /usr/bin/nvim
-          loop:
-            - "make CMAKE_BUILD_TYPE=Release"
-            - "make install"
+        - name: Software | neovim | Install neovim | Create opt folder
+          ansible.builtin.file:
+            path: /opt/neovim
+            state: directory
+            owner: mose
+            group: mose
+            mode: "0755"
+
+        - name: Software | neovim | Install neovim | Unarchive
+          ansible.builtin.unarchive:
+            src: /tmp/nvim-linux64.tar.gz
+            dest: /opt/neovim
+            owner: mose
+            group: mose
+            extra_opts:
+              - --strip
+              - 1
+
+        - name: Software | neovim | Install neovim | Download neovim
+          ansible.builtin.file:
+            src: /opt/neovim/bin/nvim
+            dest: /usr/local/bin/nvim
+            state: link
+            force: true
+
+        - name: Software | neovim | Install neovim | Download neovim
+          ansible.builtin.copy:
+            src: /opt/neovim/share/applications/nvim.desktop
+            dest: /usr/local/share/applications/nvim.desktop
+            owner: root
+            group: root
+            mode: '0644'
 
     - name: Software | neovim | Configuration
       block:
@@ -72,9 +97,15 @@
             dest: /home/mose/.config/nvim
             update: false
 
+        - name: Software | neovim | Configuration | Check if pynvim virtualenv exists
+          ansible.builtin.stat:
+            path: /home/mose/.virtualenvs/pynvim
+          register: folder_stat
+
         - name: Software | neovim | Configuration | virtualenv
           become: true
           become_user: mose
+          when: not folder_stat.stat.exists
           block:
             - name: Software | neovim | Configuration | virtualenv | creating virtualenv folder
               ansible.builtin.file:
@@ -96,10 +127,15 @@
                 name: virtualenv
                 state: present
 
-            - name: Software | neovim | Configuration | virtualenv | creating virtual env pynvim
-              ansible.builtin.pip:
-                virtualenv: /home/mose/.virtualenvs/pynvim
-                requirements: /home/mose/.config/nvim/pynvim_requirements.txt
+            - name: Software | neovim | Configuration | virtualenv | Creating virtualenv
+              ansible.builtin.command:
+                cmd: virtualenv /home/mose/.virtualenvs/pynvim/
+                creates: /home/mose/.virtualenvs/pynvim/
+
+
+            - name: Software | neovim | Configuration | virtualenv | Installing requirements
+              ansible.builtin.command:
+                cmd: /home/mose/.virtualenvs/pynvim/bin/pip3 install -r /home/mose/.config/nvim/pynvim_requirements.txt
 
         - name: Software | neovim | Configuration | Link root config directory
           block:

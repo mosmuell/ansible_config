@@ -1,7 +1,7 @@
 ---
 alacritty: true
 neovim: true
-nvim_version: "0.9"
+nvim_version: "0.9.5"
 nvm_version: "0.39.7"
 rambox: true
 tmux: true
