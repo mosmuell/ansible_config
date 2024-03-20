@@ -25,7 +25,7 @@
 - hosts: all
   become: true
   tasks:
-    - name: Including work role
+    - name: Including base role
       tags: base,always
       ansible.builtin.include_role:
         name: base
