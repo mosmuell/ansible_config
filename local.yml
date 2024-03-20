@@ -42,10 +42,15 @@
       when: computer_type is defined and computer_type == 'work'
       ansible.builtin.include_role:
         name: work
+        apply:
+          tags: work
 
     - name: Include personal role
       tags: personal,always
       when: computer_type is defined and computer_type == 'personal'
       ansible.builtin.include_role:
         name: personal
+        apply:
+          tags: personal
+
 # vim: ft=yaml.ansible
