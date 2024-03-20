@@ -2,7 +2,7 @@
   tags: vscode
   when: vscode is defined and vscode is true
   block:
-    - name: Software | vscode | Enable VSCode repository (Fedora)
+    - name: Software | vscode | Install VSCode (Fedora)
       tags: repository,vscode
       when: ansible_distribution == 'Fedora'
       block:
@@ -11,12 +11,19 @@
             key: "https://packages.microsoft.com/keys/microsoft.asc"
         - name: Software | vscode | Enable VSCode repository | adding repository
           ansible.builtin.shell: sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+        - name: Software | vscode | Installing package
+          ansible.builtin.package:
+            name:
+              - code
+            state: present
 
-    - name: Software | vscode | Installing base package
-      ansible.builtin.package:
-        name:
-          - code
-        state: present
+    - name: Software | vscode | Installing package (Ubuntu)
+      tags: repository,vscode
+      become: true
+      become_user: root
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+      ansible.builtin.apt:
+        deb: https://update.code.visualstudio.com/latest/linux-deb-x64/stable
 
     - name: Software | vscode | create config directory
       tags: dotfiles,dotfiles-mose
