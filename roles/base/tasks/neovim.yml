@@ -72,20 +72,40 @@
               - --strip
               - 1
 
-        - name: Software | neovim | Install neovim | Download neovim
-          ansible.builtin.file:
-            src: /opt/neovim/bin/nvim
-            dest: /usr/local/bin/nvim
-            state: link
-            force: true
-
-        - name: Software | neovim | Install neovim | Download neovim
-          ansible.builtin.copy:
-            src: /opt/neovim/share/applications/nvim.desktop
-            dest: /usr/local/share/applications/nvim.desktop
-            owner: root
-            group: root
-            mode: '0644'
+        - name: Software | neovim | Install neovim | Copying files
+          block:
+            - name: Copy executable
+              ansible.builtin.file:
+                src: /opt/neovim/bin/nvim
+                dest: /usr/local/bin/nvim
+                state: link
+                force: true
+            - name: Copy desktop file
+              ansible.builtin.copy:
+                src: /opt/neovim/share/applications/nvim.desktop
+                dest: /usr/local/share/applications/nvim.desktop
+                owner: root
+                group: root
+                mode: '0644'
+            - name: Create icon folder
+              ansible.builtin.file:
+                path: "{{ item }}"
+                state: directory
+                owner: root
+                group: root
+                mode: '0755'
+              with_items:
+                - /usr/local/share/icons/
+                - /usr/local/share/icons/hicolor/
+                - /usr/local/share/icons/hicolor/128x128
+                - /usr/local/share/icons/hicolor/128x128/apps
+            - name: Copy icon
+              ansible.builtin.copy:
+                src: /opt/neovim/share/icons/hicolor/128x128/apps/nvim.png
+                dest: /usr/local/share/icons/hicolor/128x128/apps/nvim.png
+                owner: root
+                group: root
+                mode: '0644'
 
     - name: Software | neovim | Configuration
       block:
