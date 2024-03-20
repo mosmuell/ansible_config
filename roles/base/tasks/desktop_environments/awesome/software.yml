@@ -11,11 +11,11 @@
       - feh # for background wallpaper
       - lxpolkit # authentification manager
       - maim # screenshot tool
-      - network-manager-applet  # for nm-applet
+      - "{{ nm_applet }}"  # network-manager applet
       - playerctl # keybinding for multimedia
       - xclip # enabling copy on X-server
       - xcompmgr # compositor for transparency
-      - xprop # used to identify class of programs
+      - "{{ xprop }}" # used to identify class of programs
     state: present
 
 # vim: ft=yaml.ansible

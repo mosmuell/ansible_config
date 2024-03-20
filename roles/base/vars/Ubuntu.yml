@@ -1,3 +1,12 @@
 gstreamer_libav_package: gstreamer1.0-libav
 gstreamer_plugins_bad_package: gstreamer1.0-plugins-bad
 rambox_url: https://rambox.app/api/download?os=linux&package=deb
+language_pack_de: language-pack-de
+language_pack_en_gb: language-pack-en
+gcc_cpp: g++
+gsl_devel: libgsl-dev
+lapack_devel: liblapack-dev
+cron: cron
+libnsl: libnsl-dev
+nm_applet: network-manager-gnome
+xprop: x11-utils

@@ -15,14 +15,14 @@
         - name: System | Language packs | Install language packs
           ansible.builtin.package:
             name:
-              - langpacks-de # german language pack for libreoffice
-              - langpacks-en_GB # british "
+              - "{{ language_pack_de }}" # german language pack
+              - "{{ language_pack_en_gb }}" # british "
             state: present
 
         - name: System | Language packs | Remove language packs
           ansible.builtin.package:
             name:
-              - langpacks-en # american english
+              - "{{ language_pack_en | default(omit) }}" # american english
             state: absent
 
     - name: System | Repositories
@@ -54,15 +54,15 @@
         - name: System | Package utilities | Install C/C++ tools
           ansible.builtin.package:
             name:
-              - lapack-devel
-              - gsl-devel
               - make
               - cmake
               - automake
               - gcc
-              - gcc-c++
-              - kernel-devel
+              - "{{ gcc_cpp }}"
+              - "{{ gsl_devel }}"
               - ninja-build
+              - "{{ lapack_devel }}"
+              # - kernel-devel
               # - libstdc++ # already installed
               # - glibc # already installed
             state: present
@@ -72,8 +72,8 @@
           ansible.builtin.package:
             name:
               - htop
-              - cronie # for crontabs
-              - libnsl # needed for some legacy programms?
+              - "{{ cron }}" # for crontabs
+              - "{{ libnsl }}" # needed for some legacy programms?
               - curl
               - rsync
               - screen
