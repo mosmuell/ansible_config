@@ -16,6 +16,7 @@
       - xclip # enabling copy on X-server
       - xcompmgr # compositor for transparency
       - "{{ xprop }}" # used to identify class of programs
+      - pulseaudio-utils  # for volume widget
     state: present
 
 # vim: ft=yaml.ansible
