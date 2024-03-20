@@ -11,6 +11,7 @@ zsh: true
 anki: false
 audacity: false
 bitwarden: false
+chrome: false
 ferdi: false
 gimp: true
 gnome_power_statistics: true

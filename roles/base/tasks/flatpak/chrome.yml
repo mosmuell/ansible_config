@@ -1,0 +1,10 @@
+- name: Software | Chrome | Install package
+  tags: chrome
+  when: chrome is defined and chrome is true
+  become: true
+  become_user: mose
+  community.general.flatpak:
+    name: com.google.Chrome
+    method: system
+    state: present
+# vim: ft=yaml.ansible
