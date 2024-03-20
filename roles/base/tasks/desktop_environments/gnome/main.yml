@@ -1,0 +1,18 @@
+- name: Desktop environments | gnome | Install gnome
+  tags: desktop-environments,gnome
+  when: gnome is defined and gnome is true
+  ansible.builtin.include_tasks:
+    file: desktop_environments/gnome/software.yml
+    apply:
+      tags: gnome
+
+- name: Desktop environments | gnome | Configure gnome
+  tags: desktop-environments,gnome
+  when: gnome is defined and gnome is true
+  ansible.builtin.include_tasks:
+    file: desktop_environments/gnome/config.yml
+    apply:
+      tags: gnome
+
+
+# vim: ft=yaml.ansible

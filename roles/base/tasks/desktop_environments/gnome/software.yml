@@ -1,0 +1,6 @@
+- name: Desktop environments | gnome | Install gnome-specific software
+  ansible.builtin.package:
+    name:
+      - python3-psutil
+    state: present
+# vim: ft=yaml.ansible

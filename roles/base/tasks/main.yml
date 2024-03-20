@@ -41,4 +41,7 @@
   ### awesome WM
 - name: Include awesome window manager task
   ansible.builtin.import_tasks: desktop_environments/awesome/main.yml
+  ### gnome
+- name: Include gnome task
+  ansible.builtin.import_tasks: desktop_environments/gnome/main.yml
 # vim: ft=yaml.ansible
