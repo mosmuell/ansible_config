@@ -1,4 +1,5 @@
 - name: Software | flatpak | configure flatpak
+  tags: flatpak
   block:
     - name: Software | flatpak | add flatpak support
       ansible.builtin.package:
@@ -11,4 +12,13 @@
         flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
         method: system
         state: present
+
+- name: Software | flatpak | Including flatpak applications
+  tags: flatpak
+  ansible.builtin.include_tasks:
+    file: "{{ item }}"
+    apply:
+      tags: flatpak
+  with_fileglob:
+    - "flatpak_applications/*.yml"
 # vim: ft=yaml.ansible
