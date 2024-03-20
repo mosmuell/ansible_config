@@ -1,3 +1,7 @@
+- name: Include node task
+  tags: neovim
+  ansible.builtin.import_tasks: node.yml
+
 - name: Software | neovim
   tags: neovim
   when: neovim is defined and neovim is true
