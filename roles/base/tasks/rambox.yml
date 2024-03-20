@@ -11,6 +11,7 @@
           ansible.builtin.get_url:
             url: "{{ rambox_url }}"
             dest: /home/mose/Downloads/Rambox.rpm
+            validate_certs: false
 
         - name: Software | rambox | Install rambox
           ansible.builtin.yum:
