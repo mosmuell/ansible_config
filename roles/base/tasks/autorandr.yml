@@ -4,6 +4,7 @@
   when: awesome is defined and awesome is true
   block:
     - name: Software | Autorandr | Install autorandr
+      become: true
       ansible.builtin.package:
         name: autorandr
         state: present
