@@ -1,5 +1,4 @@
 - name: Software | flatpak | configure flatpak
-  tags: flatpak
   block:
     - name: Software | flatpak | add flatpak support
       ansible.builtin.package:
@@ -12,52 +11,4 @@
         flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
         method: system
         state: present
-
-- name: Include anki task
-  ansible.builtin.import_tasks: anki.yml
-
-- name: Include audacity task
-  ansible.builtin.import_tasks: audacity.yml
-
-- name: Include bitwarden task
-  ansible.builtin.import_tasks: bitwarden.yml
-
-- name: Include chrome task
-  ansible.builtin.import_tasks: chrome.yml
-
-- name: Include ferdi task
-  ansible.builtin.import_tasks: ferdi.yml
-
-- name: Import gimp task
-  ansible.builtin.import_tasks: gimp.yml
-
-- name: Include gnome_power_statistics task
-  ansible.builtin.import_tasks: gnome_power_statistics.yml
-
-- name: Import inkscape task
-  ansible.builtin.import_tasks: inkscape.yml
-
-- name: Import okular task
-  ansible.builtin.import_tasks: okular.yml
-
-- name: Include pavucontrol task
-  ansible.builtin.import_tasks: pavucontrol.yml
-
-- name: Include signal task
-  ansible.builtin.import_tasks: signal.yml
-
-- name: Include slack task
-  ansible.builtin.import_tasks: slack.yml
-
-- name: Include Spotify task
-  ansible.builtin.import_tasks: spotify.yml
-
-- name: Include Synology task
-  ansible.builtin.import_tasks: synology.yml
-
-- name: Include thunderbird task
-  ansible.builtin.import_tasks: thunderbird.yml
-
-- name: Include VLC task
-  ansible.builtin.import_tasks: vlc.yml
 # vim: ft=yaml.ansible

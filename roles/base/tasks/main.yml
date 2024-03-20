@@ -8,8 +8,14 @@
 - name: Include alacritty task
   ansible.builtin.import_tasks: alacritty.yml
 
-- name: Include flatpak task
-  ansible.builtin.import_tasks: flatpak/main.yml
+- name: Import flatpak tasks
+  tags: flatpak
+  ansible.builtin.include_tasks:
+    file: "{{ item }}"
+    apply:
+      tags: flatpak
+  with_fileglob:
+    - "flatpak/*.yml"
 
 - name: Include fonts task
   ansible.builtin.import_tasks: fonts.yml
