@@ -7,6 +7,7 @@
       when: ansible_distribution == 'Fedora'
       block:
         - name: Software | vscode | Enable VSCode repository | adding key
+          become: true
           ansible.builtin.rpm_key:
             key: "https://packages.microsoft.com/keys/microsoft.asc"
         - name: Software | vscode | Enable VSCode repository | adding repository
