@@ -1,0 +1,36 @@
+- name: Desktop environments | gnome | Install software for pop shell
+  when: ansible_distribution == "Fedora"
+  ansible.builtin.package:
+    name:
+      - gnome-shell-extension-pop-shell
+      - xprop
+      - cargo
+      - just
+      - mesa-libGL-devel
+      - libxkbcommon-devel
+
+- name: Desktop environments | gnome | Install pop-launcher
+  block:
+    - name: Pop-launcher | Download pop-launcher
+      ansible.builtin.git:
+        repo: https://github.com/pop-os/launcher.git
+        dest: /tmp/launcher
+        version: "1.2.1"
+        force: false
+
+    - name: Pop-launcher | Install pop-launcher
+      ansible.builtin.command:
+        cmd: "{{ item }}"
+        chdir: /tmp/launcher
+        creates: /home/mose/.local/bin/pop-launcher
+      loop:
+        - "just all"
+        - "HOME=/home/mose/ just install"
+
+    - name: Pop-launcher | Create symbolic link
+      ansible.builtin.file:
+        src: /home/mose/.local/bin/pop-launcher
+        dest: /usr/local/bin/pop-launcher
+        state: link
+        force: true
+# vim: ft=yaml.ansible

@@ -57,14 +57,22 @@
         key: /org/gnome/desktop/interface/{{ item.key }}
         value: "{{ item.value }}"
       with_items:
-        - { key: "clock-show-seconds", value: "false" }
+
         - { key: "clock-show-weekday", value: "true" }
-        - { key: "enable-hot-corners", value: "true" }
+        - { key: "enable-hot-corners", value: "false" }
+        - { key: "toolkit-accessibility", value: "false" }
 
     - name: Desktop environments | gnome | Clock and Calendar | Calendar settings
       community.general.dconf:
         key: /org/gnome/desktop/calendar/show-weekdate
         value: "true"
+
+- name: Desktop environments | gnome | System
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { key: "/system/locale/region", value: "'de_CH.UTF-8'" }
 
 - name: Desktop environments | gnome | Touchpad
   become: true
@@ -74,7 +82,7 @@
     value: "{{ item.value }}"
   with_items:
     - { key: "tap-to-click", value: "true" }
-    - { key: "two-finger-scrolling-enable", value: "true" }
+    - { key: "two-finger-scrolling-enabled", value: "true" }
 
 - name: Desktop environments | gnome | Nautilus
   become: true
@@ -119,6 +127,18 @@
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name", value: "'Terminal'" }
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding", value: "'<Super>Return'" }
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command", value: "'alacritty'" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name", value: "'Spotify'" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding", value: "'<Shift><Super>S'" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command", value: "'flatpak run com.spotify.Client'" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/home", value: "@as []" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/www", value: "['<Shift><Super>f']" }
+    - { key: "/org/gnome/desktop/wm/keybindings/close", value: "['<Shift><Super>q']" }
+    - { key: "/org/gnome/desktop/wm/keybindings/maximize", value: "@as []" }
+    - { key: "/org/gnome/desktop/wm/keybindings/toggle-maximized", value: "['<Super>f']" }
+    - { key: "/org/gnome/desktop/wm/keybindings/move-to-monitor-down", value: "['<Shift><Super>j']" }
+    - { key: "/org/gnome/desktop/wm/keybindings/move-to-monitor-left", value: "['<Shift><Super>h']" }
+    - { key: "/org/gnome/desktop/wm/keybindings/move-to-monitor-right", value: "['<Shift><Super>l']" }
+    - { key: "/org/gnome/desktop/wm/keybindings/move-to-monitor-up", value: "['<Shift><Super>k']" }
 
 - name: Desktop environments | gnome | Workspaces
   tags: keybindings
@@ -159,4 +179,38 @@
     - { key: "/org/gnome/desktop/wm/keybindings/move-to-workspace-9", value: "['<Super><Shift>9']" }
     - { key: "/org/gnome/desktop/wm/keybindings/move-to-workspace-10", value: "['<Super><Shift>0']" }
     - { key: "/org/gnome/mutter/dynamic-workspaces", value: "false" }
+    - { key: "/org/gnome/mutter/edge-tiling", value: "false" }
+    - { key: "/org/gnome/mutter/workspaces-only-on-primary", value: "true" }
+    - { key: "/org/gnome/shell/app-switcher/current-workspace-only", value: "true" }
+    - { key: "/org/gnome/shell/extensions/auto-move-windows/application-list", value: "['com.slack.Slack.desktop:9', 'com.spotify.Client.desktop:10', 'rambox.desktop:9', 'firefox.desktop:1', 'code.desktop:2']" }
+
+- name: Desktop environments | gnome | Pop shell
+  tags: keybindings
+  become: true
+  become_user: mose
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { key: "/org/gnome/shell/enabled-extensions", value: "['pop-shell@system76.com', 'm', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com']" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/activate-launcher", value: "['<Super>d']" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/active-hint", value: "false" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/active-hint-border-radius", value: "uint32 5" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/fullscreen-launcher", value: "true" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/gap-inner", value: "uint32 1" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/gap-outer", value: "uint32 1" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/log-level", value: "uint32 2" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/mouse-cursor-focus-location", value: "uint32 0" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/pop-monitor-down", value: "@as []" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/pop-monitor-left", value: "@as []" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/pop-monitor-right", value: "@as []" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/pop-monitor-up", value: "@as []" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/pop-workspace-down", value: "@as []" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/pop-workspace-up", value: "@as []" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/smart-gaps", value: "false" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/snap-to-grid", value: "true" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/stacking-with-mouse", value: "true" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/tile-by-default", value: "true" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/tile-enter", value: "['<Super>r']" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/toggle-tiling", value: "@as []" }
 # vim: ft=yaml.ansible

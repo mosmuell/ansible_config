@@ -3,4 +3,7 @@
     name:
       - python3-psutil
     state: present
+
+- name: Desktop environments | gnome | Install pop shell
+  ansible.builtin.import_tasks: pop_shell.yml
 # vim: ft=yaml.ansible
