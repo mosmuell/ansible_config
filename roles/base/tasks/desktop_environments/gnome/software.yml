@@ -2,6 +2,7 @@
   ansible.builtin.package:
     name:
       - python3-psutil
+      - gnome-tweaks
     state: present
 
 - name: Desktop environments | gnome | Install pop shell
