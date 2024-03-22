@@ -239,4 +239,15 @@
     - { key: "/org/gnome/shell/extensions/pop-shell/tile-by-default", value: "true" }
     - { key: "/org/gnome/shell/extensions/pop-shell/tile-enter", value: "['<Super>r']" }
     - { key: "/org/gnome/shell/extensions/pop-shell/toggle-tiling", value: "@as []" }
+
+
+- name: Desktop environments | gnome | Config | Displays
+  become: true
+  become_user: mose
+  community.general.dconf:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
+  with_items:
+    - { key: "/org/gnome/mutter/experimental-features", value: "['scale-monitor-framebuffer']" }
+
 # vim: ft=yaml.ansible
