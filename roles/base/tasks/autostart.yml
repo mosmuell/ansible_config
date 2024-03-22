@@ -1,0 +1,11 @@
+- name: Autostart | Copies autostart files
+  tags: autostart
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: /home/mose/{{ item.dest }}
+    owner: mose
+    group: mose
+    mode: "0600"
+  with_items:
+    - { src: "autostart/", dest: ".config/autostart/" }
+# vim: ft=yaml.ansible

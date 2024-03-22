@@ -1,4 +1,10 @@
 ---
+- name: Include autorandr task
+  tags: autostart # need tags as we do not import the role
+  ansible.builtin.include_role:
+    name: base
+    tasks_from: autostart
+
 - name: Include dbeaver task
   ansible.builtin.import_tasks: dbeaver.yml
 
