@@ -7,5 +7,4 @@
     method: system
     state: present
   when: dbeaver is defined and dbeaver is true
-
 # vim: ft=yaml.ansible
