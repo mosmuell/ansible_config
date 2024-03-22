@@ -27,8 +27,8 @@ thunderbird: true
 vlc: false
 
 # desktop environments / window manager
-awesome: true
-gnome: false
+awesome: false
+gnome: true
 
 # system related
 codecs: true
