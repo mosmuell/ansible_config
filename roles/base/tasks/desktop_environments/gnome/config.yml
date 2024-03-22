@@ -1,3 +1,4 @@
+# Wallpaper
 - name: Desktop environments | gnome | Wallpaper
   block:
     - name: Desktop environments | gnome | Adding wallpaper
@@ -46,7 +47,7 @@
         regexp: '^Icon='
         line: 'Icon=/var/lib/AccountsService/icons/mose'
 
-# desktop time and calendar settings
+# Status Bar
 - name: Desktop environments | gnome | Interface
   tags: calendar,time
   become: true
@@ -72,6 +73,23 @@
         value: "{{ item.value }}"
       with_items:
         - { key: "show-battery-percentage", value: "true" }
+
+    - name: Desktop environments | gnome | Interface | Tray Icons
+      community.general.dconf:
+        key: /org/gnome/shell/extensions/trayIconsReloaded/{{ item.key }}
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "icon-brightness", value: "0" }
+        - { key: "icon-contrast", value: "0" }
+        - { key: "icon-margin-horizontal", value: "4" }
+        - { key: "icon-padding-horizontal", value: "0" }
+        - { key: "icon-saturation", value: "0" }
+        - { key: "icon-size", value: "22" }
+        - { key: "icons-limit", value: "6" }
+        - { key: "invoke-to-workspace", value: "false" }
+        - { key: "position-weight", value: "1" }
+        - { key: "tray-margin-left", value: "0" }
+        - { key: "tray-position", value: "'right'" }
 
 - name: Desktop environments | gnome | System
   community.general.dconf:
@@ -200,7 +218,7 @@
     key: "{{ item.key }}"
     value: "{{ item.value }}"
   with_items:
-    - { key: "/org/gnome/shell/enabled-extensions", value: "['pop-shell@system76.com', 'm', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com']" }
+    - { key: "/org/gnome/shell/enabled-extensions", value: "['pop-shell@system76.com', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'trayIconsReloaded@selfmade.pl']" }
     - { key: "/org/gnome/shell/extensions/pop-shell/activate-launcher", value: "['<Super>d']" }
     - { key: "/org/gnome/shell/extensions/pop-shell/active-hint", value: "false" }
     - { key: "/org/gnome/shell/extensions/pop-shell/active-hint-border-radius", value: "uint32 5" }

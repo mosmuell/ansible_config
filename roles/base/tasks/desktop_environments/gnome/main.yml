@@ -6,6 +6,16 @@
     apply:
       tags: gnome
 
+# Extensions
+- name: Desktop environments | gnome | Extensions
+  tags: desktop-environments,gnome
+  when: gnome is defined and gnome is true
+  ansible.builtin.import_tasks: extensions.yml
+  vars:
+    extensions:
+      - { uuid: "trayIconsReloaded@selfmade.pl", src: https://extensions.gnome.org/extension-data/trayIconsReloadedselfmade.pl.v29.shell-extension.zip }
+      - { uuid: "auto-move-windows@gnome-shell-extensions.gcampax.github.com", src: https://extensions.gnome.org/extension-data/auto-move-windowsgnome-shell-extensions.gcampax.github.com.v53.shell-extension.zip }
+
 - name: Desktop environments | gnome | Configure gnome
   tags: desktop-environments,gnome
   when: gnome is defined and gnome is true

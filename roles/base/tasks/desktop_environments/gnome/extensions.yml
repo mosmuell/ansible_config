@@ -1,0 +1,20 @@
+- name: Desktop environments | gnome | Extensions | Create extension directory
+  become: true
+  become_user: mose
+  ansible.builtin.file:
+    dest: "~/.local/share/gnome-shell/extensions/{{ item.uuid }}"
+    state: directory
+    mode: '0755'
+  with_items:
+    - "{{ extensions }}"
+
+- name: Desktop environments | gnome | Extensions | Unarchive package
+  become: true
+  become_user: mose
+  ansible.builtin.unarchive:
+    src: "{{ item.src }}"
+    dest: "~/.local/share/gnome-shell/extensions/{{ item.uuid }}"
+    remote_src: true
+  with_items:
+    - "{{ extensions }}"
+# vim: ft=yaml.ansible
