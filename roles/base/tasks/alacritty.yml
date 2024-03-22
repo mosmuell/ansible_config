@@ -33,7 +33,7 @@
         group: mose
         mode: "0600"
       with_items:
-        - { src: "alacritty.yml", dest: "alacritty.yml" }
+        - { src: "alacritty.toml", dest: "alacritty.toml" }
         - { src: "alacritty.info", dest: "alacritty.info" }
 
     - name: Software | alacritty | Adding terminfo (Ubuntu)

@@ -1,0 +1,61 @@
+[colors.bright]
+black = "#555753"
+blue = "#AAAAFF"
+cyan = "#34E2E2"
+green = "#00FF00"
+magenta = "#AD7FA8"
+red = "#FF0000"
+white = "#EEEEEC"
+yellow = "#FCE94F"
+
+[colors.cursor]
+cursor = "0xd3d7cf"
+text = "0x2e3436"
+
+[colors.normal]
+black = "#171A1B"
+blue = "#8888FF"
+cyan = "#06989A"
+green = "#00DD00"
+magenta = "#75507B"
+red = "#CC0000"
+white = "#D3D7CF"
+yellow = "#DDDD00"
+
+[colors.primary]
+background = "#000000"
+foreground = "#EBEBEB"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 11.0
+
+[font.bold]
+family = "DejaVuSansMNerdFont"
+style = "Bold"
+
+[font.italic]
+family = "DejaVuSansMNerdFont"
+style = "Oblique"
+
+[font.normal]
+family = "DejaVuSansMNerdFont"
+style = "Regular"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Plus"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "NumpadAdd"
+mods = "Control"
+
+[shell]
+program = "/bin/zsh"
+
+[window]
+opacity = 0.8
