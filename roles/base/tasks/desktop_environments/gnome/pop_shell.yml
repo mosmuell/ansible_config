@@ -10,6 +10,8 @@
       - libxkbcommon-devel
 
 - name: Desktop environments | gnome | Install pop-launcher
+  become: true
+  become_user: mose
   block:
     - name: Pop-launcher | Download pop-launcher
       ansible.builtin.git:
@@ -25,7 +27,7 @@
         creates: /home/mose/.local/bin/pop-launcher
       loop:
         - "just all"
-        - "HOME=/home/mose/ just install"
+        - "just install"
 
     - name: Pop-launcher | Create symbolic link
       ansible.builtin.file:
