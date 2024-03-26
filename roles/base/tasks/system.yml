@@ -81,8 +81,6 @@
               - fzf # fuzzy search
               - git
               - xclip # copy/past on xorg
-              # - wl-clipboard # needed for copy/paste to the system clipboard with wayland
               # - libusb # needed for USB devices
-              # - gnome-tweaks
             state: present
 # vim: ft=yaml.ansible

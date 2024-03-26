@@ -3,6 +3,7 @@
     name:
       - python3-psutil
       - gnome-tweaks
+      - wl-clipboard # needed for copy/paste to the system clipboard with wayland
     state: present
 
 - name: Desktop environments | gnome | Install pop shell
