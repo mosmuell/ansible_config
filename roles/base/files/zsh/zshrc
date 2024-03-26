@@ -136,6 +136,7 @@ autoload -U history-search-end
 # 
 # PROMPT=$'%B%F{green}%n@%m%f:%b%F{blue}%~%f %F{#FFB52E}${vcs_info_msg_0_}%f\n$ '
 
+export SHELL="/bin/zsh"
 export TERM="alacritty"
 eval "$(starship init zsh)"
 
@@ -148,3 +149,4 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 if [ -e /home/mose/.nix-profile/etc/profile.d/nix.sh ]; then . /home/mose/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
