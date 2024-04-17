@@ -8,6 +8,9 @@
 - name: Include dbeaver task
   ansible.builtin.import_tasks: dbeaver.yml
 
+- name: Include podman task
+  ansible.builtin.import_tasks: podman.yml
+
 - name: Include vscode task
   ansible.builtin.import_tasks: vscode.yml
 

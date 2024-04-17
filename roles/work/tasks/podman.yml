@@ -1,0 +1,8 @@
+- name: Software | podman | Installing podman-compose
+  tags: podman
+  become: true
+  become_user: mose
+  community.general.pipx:
+    name: podman-compose
+    state: present
+# vim: ft=yaml.ansible
