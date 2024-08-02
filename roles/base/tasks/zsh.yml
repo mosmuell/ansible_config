@@ -37,4 +37,10 @@
 
     - name: Software | zsh | Import starship task
       ansible.builtin.import_tasks: starship.yml
+
+    - name: Software | zsh | Change user shell to zsh
+      become: true
+      ansible.builtin.user:
+        name: mose
+        shell: /bin/zsh
 # vim: ft=yaml.ansible
