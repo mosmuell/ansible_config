@@ -17,6 +17,9 @@
 - name: Include git task
   ansible.builtin.import_tasks: git.yml
 
+- name: Include lazygit task
+  ansible.builtin.import_tasks: lazygit.yml
+
 - name: Include neovim task
   ansible.builtin.import_tasks: neovim.yml
 
