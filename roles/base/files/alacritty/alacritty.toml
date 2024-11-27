@@ -54,8 +54,8 @@ action = "IncreaseFontSize"
 key = "NumpadAdd"
 mods = "Control"
 
-[shell]
-program = "/bin/zsh"
+[terminal]
+shell = "/bin/zsh"
 
 [window]
 opacity = 0.8
