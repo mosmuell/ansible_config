@@ -8,6 +8,9 @@
 - name: Include alacritty task
   ansible.builtin.import_tasks: alacritty.yml
 
+- name: Include bitwarden-cli task
+  ansible.builtin.import_tasks: bitwarden-cli.yml
+
 - name: Include flatpak task
   ansible.builtin.import_tasks: flatpak.yml
 

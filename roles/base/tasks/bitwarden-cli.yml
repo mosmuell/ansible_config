@@ -1,0 +1,9 @@
+# bitwarden-cli.yml
+
+- name: Install bitwarden-cli node.js package globally.
+  tags: bitwarden-cli
+  community.general.npm:
+    name: "@bitwarden/cli"
+    global: true
+
+# vim: ft=yaml.ansible
