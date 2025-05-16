@@ -118,7 +118,7 @@
         key: /org/gnome/nautilus/preferences/{{ item.key }}
         value: "{{ item.value }}"
       with_items:
-        - { key: "default-folder-viewer", value: "'icon-view'" }
+        - { key: "default-folder-viewer", value: "'list-view'" }
         - { key: "migrated-gtk-settings", value: "true" }
         - { key: "search-filter-time-type", value: "'last_modified'" }
         - { key: "show-create-link", value: "true" }
@@ -156,7 +156,8 @@
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name", value: "'Spotify'" }
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding", value: "'<Shift><Super>S'" }
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command", value: "'flatpak run com.spotify.Client'" }
-    - { key: "/org/gnome/settings-daemon/plugins/media-keys/home", value: "@as []" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/home", value: "['<Super>e']" }
+    - { key: "/org/gnome/settings-daemon/plugins/media-keys/email", value: "['<Shift><Super>t']" }
     - { key: "/org/gnome/settings-daemon/plugins/media-keys/www", value: "['<Shift><Super>f']" }
     - { key: "/org/gnome/desktop/wm/keybindings/close", value: "['<Shift><Super>q']" }
     - { key: "/org/gnome/desktop/wm/keybindings/maximize", value: "@as []" }
@@ -183,6 +184,7 @@
     - { key: "/org/gnome/shell/keybindings/switch-to-application-7", value: "@as []" }
     - { key: "/org/gnome/shell/keybindings/switch-to-application-8", value: "@as []" }
     - { key: "/org/gnome/shell/keybindings/switch-to-application-9", value: "@as []" }
+    - { key: "/org/gnome/shell/keybindings/toggle-overview", value: "['<Super>d']" }
     - { key: "/org/gnome/desktop/wm/preferences/num-workspaces", value: "10" }
     - { key: "/org/gnome/desktop/wm/preferences/focus-mode", value: "'sloppy'" }
     - { key: "/org/gnome/desktop/wm/keybindings/switch-to-workspace-1", value: "['<Super>1']" }
@@ -208,7 +210,7 @@
     - { key: "/org/gnome/mutter/dynamic-workspaces", value: "false" }
     - { key: "/org/gnome/mutter/edge-tiling", value: "false" }
     - { key: "/org/gnome/mutter/workspaces-only-on-primary", value: "true" }
-    - { key: "/org/gnome/shell/app-switcher/current-workspace-only", value: "true" }
+    - { key: "/org/gnome/shell/app-switcher/current-workspace-only", value: "false" }
     - { key: "/org/gnome/shell/extensions/auto-move-windows/application-list", value: "['com.slack.Slack.desktop:9', 'com.spotify.Client.desktop:10', 'rambox.desktop:9', 'firefox.desktop:1', 'code.desktop:2', 'org.mozilla.Thunderbird.desktop:8']" }
 
 - name: Desktop environments | gnome | Pop shell
@@ -221,7 +223,7 @@
   with_items:
     - { key: "/org/gnome/shell/disable-user-extensions", value: "false" }
     - { key: "/org/gnome/shell/enabled-extensions", value: "['pop-shell@system76.com', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'auto-move-windows@gnome-shell-extensions.gcampax.github.com', 'trayIconsReloaded@selfmade.pl']" }
-    - { key: "/org/gnome/shell/extensions/pop-shell/activate-launcher", value: "['<Super>d']" }
+    - { key: "/org/gnome/shell/extensions/pop-shell/activate-launcher", value: "@as []" }
     - { key: "/org/gnome/shell/extensions/pop-shell/active-hint", value: "false" }
     - { key: "/org/gnome/shell/extensions/pop-shell/active-hint-border-radius", value: "uint32 5" }
     - { key: "/org/gnome/shell/extensions/pop-shell/fullscreen-launcher", value: "true" }
